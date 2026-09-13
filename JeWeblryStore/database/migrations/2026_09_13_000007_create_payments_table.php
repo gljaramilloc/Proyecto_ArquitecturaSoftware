@@ -12,7 +12,10 @@ return new class extends Migration
             $table->id();
             $table->decimal('amount', 10, 2);
             $table->string('method');
-            $table->string('status');
+            
+            // Reemplazo del string por la llave foránea conectada a statuses
+            $table->foreignId('status_id')->constrained('statuses')->restrictOnDelete();
+            
             $table->date('date');
             $table->foreignId('order_id')->unique()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

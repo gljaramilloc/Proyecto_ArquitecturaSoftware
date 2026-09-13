@@ -13,7 +13,10 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', 10, 2);
             $table->text('description');
-            $table->string('status');
+            
+            // Reemplazo del string por la llave foránea conectada a la tabla statuses
+            $table->foreignId('status_id')->constrained('statuses')->restrictOnDelete();
+            
             $table->unsignedInteger('stock');
             $table->string('material');
             $table->string('image');

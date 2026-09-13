@@ -18,7 +18,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phoneNumber')->nullable();
             $table->text('address')->nullable();
-            $table->string('status')->default('active');
+            
+            // Reemplazo del string por la llave foránea conectada a statuses
+            // Asumimos que el ID 1 corresponde a 'Activo'
+            $table->foreignId('status_id')->default(1)->constrained('statuses')->restrictOnDelete();
+            
             $table->string('role')->default('customer');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

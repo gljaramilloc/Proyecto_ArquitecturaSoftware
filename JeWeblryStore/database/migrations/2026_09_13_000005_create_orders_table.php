@@ -10,9 +10,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
+            
+            // Reemplazo del string por la llave foránea conectada a statuses
+            // Asumimos que el ID 1 podría ser un estado inicial como 'Pendiente'
+            $table->foreignId('status_id')->default(1)->constrained('statuses')->restrictOnDelete();
+            
             $table->decimal('total', 10, 2);
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

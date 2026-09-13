@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property int $id
  * @property string $name
  * @property float $price
  * @property string $description
- * @property string $status
+ * @property int $statusId
  * @property int $stock
  * @property string $material
  * @property string $image
  * @property int $categoryId
- * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
+ * @property string $createdAt
+ * @property string $updatedAt
  */
 class Jewel extends Model
 {
@@ -25,7 +26,7 @@ class Jewel extends Model
         'name',
         'price',
         'description',
-        'status',
+        'status_id', // Cambiado de 'status' a 'status_id'
         'stock',
         'material',
         'image',
@@ -68,14 +69,15 @@ class Jewel extends Model
         $this->description = $description;
     }
 
-    public function getStatus(): string
+    // Nuevo Getter y Setter para la llave foránea status_id
+    public function getStatusId(): int
     {
-        return $this->status;
+        return $this->status_id;
     }
 
-    public function setStatus(string $status): void
+    public function setStatusId(int $statusId): void
     {
-        $this->status = $status;
+        $this->status_id = $statusId;
     }
 
     public function getStock(): int
@@ -118,38 +120,59 @@ class Jewel extends Model
         $this->category_id = $categoryId;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt($createdAt): void
+    // Corregido para herencia de Laravel
+    public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+        return $this;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt($updatedAt): void
+    // Corregido para herencia de Laravel
+    public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+        return $this;
     }
 
     // Relationships
+
+    // Nueva relación con el modelo Status
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): void
+    {
+        $this->status = $status;
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function getCategory()
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): void
+    public function setCategory(Category $category): void
     {
         $this->category = $category;
     }
@@ -159,12 +182,12 @@ class Jewel extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function getOrderItems()
+    public function getOrderItems(): Collection
     {
         return $this->orderItems;
     }
 
-    public function setOrderItems($orderItems): void
+    public function setOrderItems(Collection $orderItems): void
     {
         $this->orderItems = $orderItems;
     }

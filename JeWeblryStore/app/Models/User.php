@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property int $id
@@ -15,10 +17,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $phoneNumber
  * @property string $address
  * @property string $password
- * @property string $status
+ * @property int $statusId
  * @property string $role
- * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
+ * @property string $createdAt
+ * @property string $updatedAt
  */
 class User extends Authenticatable
 {
@@ -36,7 +38,7 @@ class User extends Authenticatable
         'phoneNumber',
         'address',
         'password',
-        'status',
+        'status_id', // Cambiado a llave foránea
         'role',
     ];
 
@@ -66,12 +68,12 @@ class User extends Authenticatable
         $this->name = $name;
     }
 
-    public function getLastNames(): string
+    public function getLastNames(): ?string
     {
         return $this->lastNames;
     }
 
-    public function setLastNames(string $lastNames): void
+    public function setLastNames(?string $lastNames): void
     {
         $this->lastNames = $lastNames;
     }
@@ -86,22 +88,22 @@ class User extends Authenticatable
         $this->email = $email;
     }
 
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(string $phoneNumber): void
+    public function setPhoneNumber(?string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
 
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
 
-    public function setAddress(string $address): void
+    public function setAddress(?string $address): void
     {
         $this->address = $address;
     }
@@ -116,14 +118,15 @@ class User extends Authenticatable
         $this->password = $password;
     }
 
-    public function getStatus(): string
+    // Nuevo Getter y Setter para la llave foránea status_id
+    public function getStatusId(): int
     {
-        return $this->status;
+        return $this->status_id;
     }
 
-    public function setStatus(string $status): void
+    public function setStatusId(int $statusId): void
     {
-        $this->status = $status;
+        $this->status_id = $statusId;
     }
 
     public function getRole(): string
@@ -136,38 +139,59 @@ class User extends Authenticatable
         $this->role = $role;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt($createdAt): void
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+        return $this;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt($updatedAt): void
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+        return $this;
     }
 
     // Relationships
+    
+    // Nueva relación con el modelo Status
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): void
+    {
+        $this->status = $status;
+    }
+
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
-    public function getOrders()
+    public function getOrders(): Collection
     {
         return $this->orders;
     }
 
-    public function setOrders($orders): void
+    public function setOrders(Collection $orders): void
     {
         $this->orders = $orders;
     }

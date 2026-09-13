@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property float $amount
  * @property string $method
- * @property string $status
+ * @property int $statusId
  * @property string $date
  * @property int $orderId
  * @property string $createdAt
@@ -20,7 +20,7 @@ class Payment extends Model
     protected $fillable = [
         'amount',
         'method',
-        'status',
+        'status_id', // Cambiado a llave foránea
         'date',
         'order_id',
     ];
@@ -51,14 +51,15 @@ class Payment extends Model
         $this->method = $method;
     }
 
-    public function getStatus(): string
+    // Nuevo Getter y Setter para la llave foránea status_id
+    public function getStatusId(): int
     {
-        return $this->status;
+        return $this->status_id;
     }
 
-    public function setStatus(string $status): void
+    public function setStatusId(int $statusId): void
     {
-        $this->status = $status;
+        $this->status_id = $statusId;
     }
 
     public function getDate(): string
@@ -119,5 +120,21 @@ class Payment extends Model
     public function setOrder(Order $order): void
     {
         $this->order = $order;
+    }
+
+    // Nueva relación con el modelo Status
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): void
+    {
+        $this->status = $status;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $name
  * @property string $description
  * @property string $slug
- * @property bool $status
+ * @property int $statusId
  * @property string $createdAt
  * @property string $updatedAt
  */
@@ -21,7 +22,7 @@ class Category extends Model
         'name',
         'description',
         'slug',
-        'status',
+        'status_id', // Cambiado de booleano a llave foránea
     ];
 
     // Getters and Setters
@@ -60,14 +61,15 @@ class Category extends Model
         $this->slug = $slug;
     }
 
-    public function getStatus(): bool
+    // Nuevo Getter y Setter para la llave foránea status_id
+    public function getStatusId(): int
     {
-        return $this->status;
+        return $this->status_id;
     }
 
-    public function setStatus(bool $status): void
+    public function setStatusId(int $statusId): void
     {
-        $this->status = $status;
+        $this->status_id = $statusId;
     }
 
     public function getCreatedAt(): ?string
@@ -75,7 +77,7 @@ class Category extends Model
         return $this->created_at;
     }
 
-    // Se quita el tipado estricto y el ': void' para respetar la herencia de Laravel
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
@@ -86,7 +88,8 @@ class Category extends Model
     {
         return $this->updated_at;
     }
-    // Se quita el tipado estricto y el ': void' para respetar la herencia de Laravel
+
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
@@ -94,6 +97,23 @@ class Category extends Model
     }
 
     // Relationships
+    
+    // Nueva relación con el modelo Status
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): void
+    {
+        $this->status = $status;
+    }
+
     public function jewels(): HasMany
     {
         return $this->hasMany(Jewel::class);

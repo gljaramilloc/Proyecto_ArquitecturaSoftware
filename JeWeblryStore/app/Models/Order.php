@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property int $id
- * @property string $status
+ * @property int $statusId
  * @property float $total
  * @property int $userId
  * @property string $createdAt
@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Collection;
 class Order extends Model
 {
     protected $fillable = [
-        'status',
+        'status_id', // Cambiado a llave foránea
         'total',
         'user_id',
     ];
@@ -30,14 +30,15 @@ class Order extends Model
         return $this->id;
     }
 
-    public function getStatus(): string
+    // Nuevo Getter y Setter para la llave foránea status_id
+    public function getStatusId(): int
     {
-        return $this->status;
+        return $this->status_id;
     }
 
-    public function setStatus(string $status): void
+    public function setStatusId(int $statusId): void
     {
-        $this->status = $status;
+        $this->status_id = $statusId;
     }
 
     public function getTotal(): float
@@ -85,6 +86,23 @@ class Order extends Model
     }
 
     // Relationships
+
+    // Nueva relación con el modelo Status
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): void
+    {
+        $this->status = $status;
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
