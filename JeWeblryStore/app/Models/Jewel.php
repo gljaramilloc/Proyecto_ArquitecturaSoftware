@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
+ * @property string $name
  * @property float $price
  * @property string $description
  * @property string $status
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Jewel extends Model
 {
     protected $fillable = [
+        'name',
         'price',
         'description',
         'status',
@@ -34,6 +36,16 @@ class Jewel extends Model
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     public function getPrice(): float
@@ -137,7 +149,7 @@ class Jewel extends Model
         return $this->category;
     }
 
-    public function setCategory($category): void
+    public function setCategory(string $category): void
     {
         $this->category = $category;
     }
