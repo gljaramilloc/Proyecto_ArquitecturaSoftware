@@ -21,7 +21,7 @@ class Payment extends Model
     protected $fillable = [
         'amount',
         'method',
-        'status_id', // Cambiado a llave foránea
+        'status_id',
         'date',
         'order_id',
     ];
@@ -52,7 +52,6 @@ class Payment extends Model
         $this->method = $method;
     }
 
-    // Nuevo Getter y Setter para la llave foránea status_id
     public function getStatusId(): int
     {
         return $this->status_id;
@@ -122,9 +121,7 @@ class Payment extends Model
     {
         $this->order = $order;
     }
-<<<<<<< HEAD
 
-    // Nueva relación con el modelo Status
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
@@ -140,6 +137,3 @@ class Payment extends Model
         $this->status = $status;
     }
 }
-=======
-}
->>>>>>> f878abbd5d1234f3474909515ca46ee6cba8ea4c

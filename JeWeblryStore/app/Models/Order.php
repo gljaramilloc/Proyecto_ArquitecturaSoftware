@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Collection;
+use App\Models\User; 
 
 /**
  * @property int $id
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Collection;
 class Order extends Model
 {
     protected $fillable = [
-        'status_id', // Cambiado a llave foránea
+        'status_id',
         'total',
         'user_id',
     ];
@@ -31,7 +32,6 @@ class Order extends Model
         return $this->id;
     }
 
-    // Nuevo Getter y Setter para la llave foránea status_id
     public function getStatusId(): int
     {
         return $this->status_id;
@@ -87,8 +87,6 @@ class Order extends Model
     }
 
     // Relationships
-
-    // Nueva relación con el modelo Status
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);

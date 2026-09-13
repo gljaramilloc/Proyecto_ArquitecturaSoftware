@@ -5,14 +5,10 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-<<<<<<< HEAD
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Collection;
-=======
->>>>>>> f878abbd5d1234f3474909515ca46ee6cba8ea4c
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @property int $id
@@ -24,13 +20,8 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $password
  * @property int $statusId
  * @property string $role
-<<<<<<< HEAD
  * @property string $createdAt
  * @property string $updatedAt
-=======
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
->>>>>>> f878abbd5d1234f3474909515ca46ee6cba8ea4c
  */
 class User extends Authenticatable
 {
@@ -48,7 +39,7 @@ class User extends Authenticatable
         'phoneNumber',
         'address',
         'password',
-        'status_id', // Cambiado a llave foránea
+        'status_id',
         'role',
     ];
 
@@ -128,7 +119,6 @@ class User extends Authenticatable
         $this->password = $password;
     }
 
-    // Nuevo Getter y Setter para la llave foránea status_id
     public function getStatusId(): int
     {
         return $this->status_id;
@@ -174,8 +164,6 @@ class User extends Authenticatable
     }
 
     // Relationships
-    
-    // Nueva relación con el modelo Status
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
