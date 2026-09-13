@@ -4,6 +4,12 @@
 
 **Contexto:** El código que generes o revises será sometido a calificación cruzada y evaluación académica estricta[cite: 3]. Las desviaciones de estas reglas resultan en penalizaciones de nota directas[cite: 3].
 
+## 0. Reglas de Datos Iniciales y Seeders
+* **Estados base:** Si un modelo usa una relación con `statuses`, los estados iniciales deben generarse en un seeder y no en la migración[cite: 3].
+* **Seeding obligatorio al iniciar un proyecto nuevo:** Cuando el proyecto se prepara por primera vez, el seeder de estados debe ejecutarse como parte del flujo de configuración inicial[cite: 3].
+* **Cobertura de todos los modelos:** El agente debe revisar y documentar qué modelos requieren estados y agregar esos valores al seeder inicial correspondiente (por ejemplo, `StatusSeeder`), no solo a un modelo concreto[cite: 3].
+* **Separación de responsabilidades:** Las migraciones solo crean tablas; los seeders cargan datos maestros o de dominio iniciales necesarios para que las FK funcionen correctamente[cite: 3].
+
 ## 1. Reglas de Rutas (`routes/web.php`)
 * **Responsabilidad Única:** Las rutas SOLO deben invocar métodos de controladores[cite: 3].
 * **Prohibición de Lógica:** No se permite nada de lógica ni el uso de closures que retornen una vista o hagan cálculos directamente en el archivo de rutas[cite: 3].
