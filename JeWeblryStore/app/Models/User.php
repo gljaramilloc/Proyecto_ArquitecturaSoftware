@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -17,8 +18,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $password
  * @property string $status
  * @property string $role
- * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
+ * @property Carbon $createdAt
+ * @property Carbon $updatedAt
  */
 class User extends Authenticatable
 {
