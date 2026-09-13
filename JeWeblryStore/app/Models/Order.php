@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property int $id
  * @property string $status
  * @property float $total
  * @property int $userId
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
+ * @property string $createdAt
+ * @property string $updatedAt
  */
 class Order extends Model
 {
@@ -60,24 +61,28 @@ class Order extends Model
         $this->user_id = $userId;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt($createdAt): void
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+        return $this;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt($updatedAt): void
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+        return $this;
     }
 
     // Relationships
@@ -86,12 +91,12 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getUser()
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser($user): void
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
@@ -101,12 +106,12 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function getItems()
+    public function getItems(): Collection
     {
         return $this->items;
     }
 
-    public function setItems($items): void
+    public function setItems(Collection $items): void
     {
         $this->items = $items;
     }
@@ -116,12 +121,12 @@ class Order extends Model
         return $this->hasOne(Payment::class);
     }
 
-    public function getPayment()
+    public function getPayment(): ?Payment
     {
         return $this->payment;
     }
 
-    public function setPayment($payment): void
+    public function setPayment(Payment $payment): void
     {
         $this->payment = $payment;
     }

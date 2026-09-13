@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $status
  * @property string $date
  * @property int $orderId
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
+ * @property string $createdAt
+ * @property string $updatedAt
  */
 class Payment extends Model
 {
@@ -82,24 +82,28 @@ class Payment extends Model
         $this->order_id = $orderId;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt($createdAt): void
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+        return $this;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt($updatedAt): void
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+        return $this;
     }
 
     // Relationships
@@ -108,12 +112,12 @@ class Payment extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function getOrder()
+    public function getOrder(): ?Order
     {
         return $this->order;
     }
 
-    public function setOrder($order): void
+    public function setOrder(Order $order): void
     {
         $this->order = $order;
     }

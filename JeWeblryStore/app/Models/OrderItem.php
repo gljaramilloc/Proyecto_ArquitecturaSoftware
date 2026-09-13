@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property float $unitPrice
  * @property int $jewelId
  * @property int $orderId
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
+ * @property string $createdAt
+ * @property string $updatedAt
  */
 class OrderItem extends Model
 {
@@ -70,24 +70,28 @@ class OrderItem extends Model
         $this->order_id = $orderId;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt($createdAt): void
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+        return $this;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt($updatedAt): void
+    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+        return $this;
     }
 
     // Relationships
@@ -96,12 +100,12 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function getOrder()
+    public function getOrder(): ?Order
     {
         return $this->order;
     }
 
-    public function setOrder($order): void
+    public function setOrder(Order $order): void
     {
         $this->order = $order;
     }
@@ -111,12 +115,12 @@ class OrderItem extends Model
         return $this->belongsTo(Jewel::class);
     }
 
-    public function getJewel()
+    public function getJewel(): ?Jewel
     {
         return $this->jewel;
     }
 
-    public function setJewel($jewel): void
+    public function setJewel(Jewel $jewel): void
     {
         $this->jewel = $jewel;
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property int $id
@@ -12,8 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $description
  * @property string $slug
  * @property bool $status
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
+ * @property string $createdAt
+ * @property string $updatedAt
  */
 class Category extends Model
 {
@@ -70,24 +71,27 @@ class Category extends Model
         $this->status = $status;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt($createdAt): void
+    // Se quita el tipado estricto y el ': void' para respetar la herencia de Laravel
+    public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+        return $this;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
-
-    public function setUpdatedAt($updatedAt): void
+    // Se quita el tipado estricto y el ': void' para respetar la herencia de Laravel
+    public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+        return $this;
     }
 
     // Relationships
@@ -96,12 +100,12 @@ class Category extends Model
         return $this->hasMany(Jewel::class);
     }
 
-    public function getJewels()
+    public function getJewels(): Collection
     {
         return $this->jewels;
     }
 
-    public function setJewels($jewels): void
+    public function setJewels(Collection $jewels): void
     {
         $this->jewels = $jewels;
     }
