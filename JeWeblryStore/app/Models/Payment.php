@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -121,6 +122,7 @@ class Payment extends Model
     {
         $this->order = $order;
     }
+<<<<<<< HEAD
 
     // Nueva relación con el modelo Status
     public function status(): BelongsTo
@@ -138,3 +140,6 @@ class Payment extends Model
         $this->status = $status;
     }
 }
+=======
+}
+>>>>>>> f878abbd5d1234f3474909515ca46ee6cba8ea4c
