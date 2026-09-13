@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -11,8 +12,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $description
  * @property string $slug
  * @property bool $status
- * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
+ * @property Carbon $createdAt
+ * @property Carbon $updatedAt
  */
 class Category extends Model
 {

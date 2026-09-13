@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,8 +16,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $material
  * @property string $image
  * @property int $categoryId
- * @property \Carbon\Carbon $createdAt
- * @property \Carbon\Carbon $updatedAt
+ * @property Carbon $createdAt
+ * @property Carbon $updatedAt
  */
 class Jewel extends Model
 {
