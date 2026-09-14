@@ -15,3 +15,15 @@ Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.
 
 // Authentication routes
 Auth::routes();
+
+// Order routes
+Route::middleware('auth')->group(function () {
+Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+Route::get('/orders/{id}', [\App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
+});
+
+// Cart routes
+Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+Route::get('/cart/add/{id}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+Route::get('/cart/removeAll', [\App\Http\Controllers\CartController::class, 'removeAll'])->name('cart.removeAll');
+Route::post('/cart/purchase', [\App\Http\Controllers\CartController::class, 'purchase'])->name('cart.purchase')->middleware('auth');
