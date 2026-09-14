@@ -15,7 +15,11 @@
 
     <!-- Bootstrap 5 CSS & Custom Styles (CDN - No NPM required) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/layout/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/components/language-switch.css') }}" rel="stylesheet">
+
+    <!-- Per-screen stylesheet, pushed from each view -->
+    @stack('styles')
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
@@ -38,7 +42,12 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <!-- Language Switch -->
+                        <li class="nav-item">
+                            <x-language-switch />
+                        </li>
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

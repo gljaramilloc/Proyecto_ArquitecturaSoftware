@@ -1,0 +1,34 @@
+.language-switch__toggle {
+    position: relative;
+    width: 42px;
+    height: 22px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background-color: #adb5bd;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.language-switch__toggle.is-es {
+    background-color: #0d6efd;
+}
+
+.language-switch__knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+.language-switch__toggle.is-es .language-switch__knob {
+    transform: translateX(20px);
+}
+
+.language-switch__label {
+    font-size: 0.85rem;
+}
