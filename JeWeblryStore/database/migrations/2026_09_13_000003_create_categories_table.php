@@ -13,10 +13,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('slug')->unique();
-            
+
             // Reemplazo del booleano por la llave foránea conectada a statuses
             $table->foreignId('status_id')->default(1)->constrained('statuses')->restrictOnDelete();
-            
+
             $table->timestamps();
         });
     }

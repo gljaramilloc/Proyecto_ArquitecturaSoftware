@@ -19,7 +19,7 @@ class CartController extends Controller
 
         $cartSession = $request->session()->get('cart', []);
 
-        if (!empty($cartSession)) {
+        if (! empty($cartSession)) {
             // Get jewels whose IDs match the keys (jewel IDs) in the session
             $jewelsInCart = Jewel::findMany(array_keys($cartSession));
 
@@ -31,7 +31,7 @@ class CartController extends Controller
         }
 
         $viewData = [];
-        $viewData['title'] = __('cart.title') . ' - Online Store';
+        $viewData['title'] = __('cart.title').' - Online Store';
         $viewData['subtitle'] = __('cart.your_cart');
         $viewData['total'] = $total;
         $viewData['jewels'] = $jewelsInCart;
@@ -59,6 +59,7 @@ class CartController extends Controller
     public function removeAll(Request $request): RedirectResponse
     {
         $request->session()->forget('cart');
+
         return back();
     }
 
@@ -79,7 +80,7 @@ class CartController extends Controller
         }
 
         // Create the Order header
-        $order = new Order();
+        $order = new Order;
         $order->setUserId($userId);
         $order->setTotal($total);
         // We set statusId to 1 by default (Pending/Processing depending on StatusSeeder)
@@ -89,7 +90,7 @@ class CartController extends Controller
         // Save each item logically linked to the order
         foreach ($jewelsInSession as $jewel) {
             $quantity = $cartSession[$jewel->getId()];
-            $orderItem = new OrderItem();
+            $orderItem = new OrderItem;
             $orderItem->setQuantity($quantity);
             $orderItem->setUnitPrice($jewel->getPrice());
             $orderItem->setJewelId($jewel->getId());
@@ -101,7 +102,7 @@ class CartController extends Controller
         $request->session()->forget('cart');
 
         $viewData = [];
-        $viewData['title'] = __('cart.purchase_title') . ' - Online Store';
+        $viewData['title'] = __('cart.purchase_title').' - Online Store';
         $viewData['subtitle'] = __('cart.purchase_status');
         $viewData['order'] = $order;
 

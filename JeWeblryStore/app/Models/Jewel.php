@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @property int $id
@@ -18,10 +18,8 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $material
  * @property string $image
  * @property int $categoryId
-<<<<<<< HEAD
  * @property string $createdAt
  * @property string $updatedAt
-=======
  * @property Carbon $createdAt
  * @property Carbon $updatedAt
 >>>>>>> f878abbd5d1234f3474909515ca46ee6cba8ea4c
@@ -135,6 +133,7 @@ class Jewel extends Model
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+
         return $this;
     }
 
@@ -147,6 +146,7 @@ class Jewel extends Model
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+
         return $this;
     }
 

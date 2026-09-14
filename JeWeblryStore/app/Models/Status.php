@@ -41,6 +41,7 @@ class Status extends Model
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+
         return $this;
     }
 
@@ -53,6 +54,7 @@ class Status extends Model
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+
         return $this;
     }
 }

@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Collection;
-use App\Models\User; 
 
 /**
  * @property int $id
@@ -71,6 +69,7 @@ class Order extends Model
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+
         return $this;
     }
 
@@ -83,6 +82,7 @@ class Order extends Model
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+
         return $this;
     }
 
