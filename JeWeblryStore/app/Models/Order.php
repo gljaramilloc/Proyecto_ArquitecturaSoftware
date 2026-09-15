@@ -65,7 +65,7 @@ class Order extends Model
         return $this->created_at;
     }
 
-    // No strict typing or ': void' to respect Laravel inheritance
+    // Without strict typing or ': void' to respect Laravel's inheritance
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
@@ -78,7 +78,7 @@ class Order extends Model
         return $this->updated_at;
     }
 
-    // No strict typing or ': void' to respect Laravel inheritance
+    // Without strict typing or ': void' to respect Laravel's inheritance
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;

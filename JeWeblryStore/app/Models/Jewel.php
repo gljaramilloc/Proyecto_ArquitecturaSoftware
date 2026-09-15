@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasActiveStatus;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,18 +20,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $material
  * @property string $image
  * @property int $categoryId
- * @property string $createdAt
- * @property string $updatedAt
  * @property Carbon $createdAt
  * @property Carbon $updatedAt
  */
 class Jewel extends Model
 {
+    use HasActiveStatus;
+
     protected $fillable = [
         'name',
         'price',
         'description',
-        'status_id', // Changed from 'status' to 'status_id'
+        'status_id',
         'stock',
         'material',
         'image',
@@ -72,7 +74,6 @@ class Jewel extends Model
         $this->description = $description;
     }
 
-    // Nuevo Getter y Setter para la llave foránea status_id
     public function getStatusId(): int
     {
         return $this->status_id;
@@ -128,7 +129,6 @@ class Jewel extends Model
         return $this->created_at;
     }
 
-    // Corrected for Laravel inheritance
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
@@ -141,7 +141,6 @@ class Jewel extends Model
         return $this->updated_at;
     }
 
-    // Corrected for Laravel inheritance
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
@@ -151,7 +150,6 @@ class Jewel extends Model
 
     // Relationships
 
-    // Nueva relación con el modelo Status
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
@@ -195,5 +193,20 @@ class Jewel extends Model
     public function setOrderItems(Collection $orderItems): void
     {
         $this->orderItems = $orderItems;
+    }
+
+    // ==========================================================
+    // Jewel search feature: Eloquent scope that filters the public
+    // catalog by name and/or category using LIKE.
+    // ==========================================================
+    public function scopeSearch(Builder $query, ?string $name, ?int $categoryId): Builder
+    {
+        return $query
+            ->when($name, function (Builder $nameQuery) use ($name) {
+                $nameQuery->where('name', 'LIKE', '%'.$name.'%');
+            })
+            ->when($categoryId, function (Builder $categoryQuery) use ($categoryId) {
+                $categoryQuery->where('category_id', $categoryId);
+            });
     }
 }

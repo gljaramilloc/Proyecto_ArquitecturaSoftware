@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminJewelController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JewelController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
@@ -44,3 +48,30 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart/removeAll', [CartController::class, 'removeAll'])->name('cart.removeAll');
 Route::post('/cart/purchase', [CartController::class, 'purchase'])->name('cart.purchase')->middleware('auth');
+
+/*
+|--------------------------------------------------------------------------
+| Storefront (public catalog)
+|--------------------------------------------------------------------------
+*/
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+
+// The listing/search route must come before {jewel} to avoid segment collisions.
+Route::get('/jewels', [JewelController::class, 'index'])->name('jewels.index');
+Route::get('/jewels/{jewel}', [JewelController::class, 'show'])->name('jewels.show');
+
+/*
+|--------------------------------------------------------------------------
+| Administration section (fully separated from the storefront)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('categories', AdminCategoryController::class)->except(['show']);
+    Route::patch('categories/{category}/toggle-status', [AdminCategoryController::class, 'toggleStatus'])
+        ->name('categories.toggleStatus');
+
+    Route::resource('jewels', AdminJewelController::class)->except(['show']);
+    Route::patch('jewels/{jewel}/toggle-status', [AdminJewelController::class, 'toggleStatus'])
+        ->name('jewels.toggleStatus');
+});
