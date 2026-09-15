@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jewel;
+use App\Models\OrderItem;
 use Illuminate\View\View;
 
 class HomeController extends Controller

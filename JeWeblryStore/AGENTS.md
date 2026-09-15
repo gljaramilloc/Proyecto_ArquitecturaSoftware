@@ -43,6 +43,8 @@
 * **Consistencia Visual:** Todas las vistas deben mantener un estilo de diseño y una convención de nombres idénticos[cite: 3].
 * **Internacionalización:** Utiliza siempre archivos de idioma (`Lang`) en vez de dejar textos quemados directamente en el código de las vistas[cite: 3].
 * **Lectura de Modelos:** NUNCA accedas directamente a un atributo en la vista (`$model->atributo`); utiliza siempre su respectivo método getter (`$model->getAtributo()`)[cite: 3].
+* **Selector de Idioma Obligatorio:** El componente `<x-language-switch />` (definido en `resources/views/components/language-switch.blade.php`) debe estar presente en **todas las pantallas** de la aplicación. La forma estándar de garantizar esto es incluirlo una sola vez en el layout principal (`resources/views/layouts/app.blade.php`), ya que todas las vistas deben extender de ese layout. Cualquier vista nueva que no extienda `layouts.app` debe incluir el componente manualmente en su propio encabezado/nav.
+* **Idiomas Soportados:** El proyecto soporta inglés (`lang/en`) y español (`lang/es`). Toda nueva cadena de texto agregada a una vista debe crearse en ambos idiomas (archivo de grupo en `lang/{locale}/*.php` o clave corta en `lang/{locale}.json`), nunca solo en uno.
 
 ## 5. Reglas Generales de Estilo y Convenciones
 * **Idioma Universal:** Todo el código (incluyendo nombres de clases, atributos, métodos y comentarios) debe estar redactado en inglés[cite: 3].
