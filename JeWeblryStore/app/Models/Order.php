@@ -97,9 +97,12 @@ class Order extends Model
         return self::with('items.jewel')->where('user_id', $userId)->findOrFail($orderId);
     }
 
-    // Relationships
     public static function processPurchase(array $cartSession, int $userId): self
     {
+        if (empty($cartSession)) {
+            throw new \Exception(__('cart.empty_cart_error', ['default' => 'Cart is empty']));
+        }
+
         $details = self::calculateCartDetails($cartSession);
         $total = $details['total'];
         $jewelsInSession = $details['jewels'];
@@ -131,12 +134,32 @@ class Order extends Model
         return $order;
     }
 
+    public static function addJewelToCartSession(array $cartSession, string $id): array
+    {
+        $jewel = Jewel::find($id);
+
+        if (!$jewel) {
+            throw new \Exception(__('cart.jewel_not_exist'));
+        }
+
+        $currentQuantity = $cartSession[$id] ?? 0;
+        $requestedQuantity = $currentQuantity + 1;
+
+        if ($requestedQuantity > $jewel->getStock()) {
+            throw new \Exception(__('cart.not_enough_stock'));
+        }
+
+        $cartSession[$id] = $requestedQuantity;
+
+        return $cartSession;
+    }
+
     public static function calculateCartDetails(array $cartSession): array
     {
         $total = 0;
         $jewelsInCart = [];
 
-        if (! empty($cartSession)) {
+        if (!empty($cartSession)) {
             $jewelsInCart = Jewel::findMany(array_keys($cartSession));
 
             foreach ($jewelsInCart as $jewel) {
