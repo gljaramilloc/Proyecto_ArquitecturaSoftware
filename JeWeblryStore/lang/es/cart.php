@@ -18,4 +18,6 @@ return [
     'order_number' => 'Número de Orden',
     'view_my_orders' => 'Ver mis órdenes',
     'continue_shopping' => 'Seguir comprando',
+    'jewel_not_exist' => 'La joya seleccionada no existe.',
+    'not_enough_stock' => 'No hay suficiente stock disponible para esta joya.',
 ];

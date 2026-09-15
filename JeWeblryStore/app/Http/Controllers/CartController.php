@@ -31,16 +31,16 @@ class CartController extends Controller
         $jewel = Jewel::find($id);
 
         if (! $jewel) {
-            return back()->withErrors(['message' => 'The selected jewel does not exist.']);
+            return back()->withErrors(['message' => __('cart.jewel_not_exist')]);
         }
 
         $cartSession = session()->get('cart', []);
 
-        $currentQuantity = array_key_exists($id, $cartSession) ? $cartSession[$id] : 0;
+        $currentQuantity = $cartSession[$id] ?? 0;
         $requestedQuantity = $currentQuantity + 1;
 
         if ($requestedQuantity > $jewel->getStock()) {
-            return back()->withErrors(['message' => 'Not enough stock available for this jewel.']);
+            return back()->withErrors(['message' => __('cart.not_enough_stock')]);
         }
 
         $cartSession[$id] = $requestedQuantity;

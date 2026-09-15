@@ -18,4 +18,6 @@ return [
     'order_number' => 'Order Number',
     'view_my_orders' => 'View My Orders',
     'continue_shopping' => 'Continue Shopping',
+    'jewel_not_exist' => 'The selected jewel does not exist.',
+    'not_enough_stock' => 'Not enough stock available for this jewel.',
 ];
