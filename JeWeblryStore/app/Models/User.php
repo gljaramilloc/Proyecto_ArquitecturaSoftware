@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @property int $id
@@ -148,6 +148,7 @@ class User extends Authenticatable
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+
         return $this;
     }
 
@@ -160,6 +161,7 @@ class User extends Authenticatable
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+
         return $this;
     }
 
@@ -192,5 +194,35 @@ class User extends Authenticatable
     public function setOrders(Collection $orders): void
     {
         $this->orders = $orders;
+    }
+
+    public function updateProfile(string $name, ?string $lastNames, ?string $phoneNumber): void
+    {
+        $this->setName($name);
+        $this->setLastNames($lastNames);
+        $this->setPhoneNumber($phoneNumber);
+        $this->save();
+    }
+
+    public function updateAddress(string $address): void
+    {
+        $this->setAddress($address);
+        $this->save();
+    }
+
+    public function changePassword(string $newPassword): void
+    {
+        $this->setPassword(Hash::make($newPassword));
+        $this->save();
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->getRole() === 'admin';
+    }
+
+    public function isCustomer(): bool
+    {
+        return $this->getRole() === 'customer';
     }
 }
