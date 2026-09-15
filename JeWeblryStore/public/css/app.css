@@ -1,20 +1,339 @@
+/* ==========================================================
+   Google Fonts (Montserrat and Playfair)
+========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* ==========================================================
+   Luxury Palette (Charcoal, Gold, and Ivory)
+========================================================== */
+:root {
+    --brand-primary: #c5a059; /* Soft gold */
+    --brand-primary-hover: #a38243;
+    --brand-dark: #1c1c1c; /* Charcoal Black */
+    --brand-dark-light: #2c2c2c;
+    --brand-light: #fcfbf9; /* Ivory / Alabaster */
+    --brand-gray: #f4f2ec;
+    
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--brand-light);
+    color: var(--brand-dark);
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-display,
+.navbar-brand {
+    font-family: var(--font-display);
+}
+
+/* ==========================================================
+   Overwritten color classes
+========================================================== */
 .bg-secondary {
-    background-color: #2c3e50 !important;
+    background-color: var(--brand-dark) !important;
+}
+
+.text-brand-gold {
+    color: var(--brand-primary) !important;
+}
+
+.bg-primary {
+    background-color: var(--brand-primary) !important;
+}
+
+/* ==========================================================
+   Brand buttons
+========================================================== */
+.btn-brand {
+    background-color: var(--brand-primary);
+    border-color: var(--brand-primary);
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.btn-brand:hover {
+    background-color: var(--brand-primary-hover);
+    border-color: var(--brand-primary-hover);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+}
+
+.btn-brand-outline {
+    background: transparent;
+    border: 1px solid var(--brand-dark);
+    color: var(--brand-dark);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.btn-brand-outline:hover {
+    background-color: var(--brand-dark);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================
+   Jewel cards
+========================================================== */
+.jewel-card {
+    border-radius: 4px !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eaeaea !important;
+}
+
+.jewel-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.img-card {
+    height: 250px;
+    object-fit: cover;
+}
+
+/* ==========================================================
+   Hero carousel (home)
+========================================================== */
+.hero-carousel-wrapper {
+    overflow: hidden;
+}
+
+.hero-slide {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-size: cover !important;
+    background-position: center !important;
+    text-align: center;
+}
+
+.hero-slide__kicker {
+    color: var(--brand-primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.hero-slide__title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+}
+
+.hero-slide__text {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==========================================================
+   Trust strip
+========================================================== */
+.trust-strip {
+    background-color: var(--brand-gray);
+    padding: 3rem 0;
+}
+
+.trust-strip__icon {
+    display: block;
+    font-size: 2rem;
+    color: var(--brand-primary);
+    margin-bottom: 1rem;
+}
+
+.trust-strip__label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--brand-dark);
+    margin: 0;
+}
+
+/* ==========================================================
+   Sections and Titles
+========================================================== */
+.section-block {
+    padding: 6rem 0;
+}
+
+.section-block--alt {
+    background-color: #ffffff;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.section-heading h2 {
+    font-size: 2.5rem;
+    color: var(--brand-dark);
+}
+
+.section-heading p {
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
 }
 
 .copyright {
     background-color: #1a252f;
+    color: rgba(255, 255, 255, 0.75) !important;
 }
 
-.bg-primary {
-    background-color: #1abc9c !important;
+.hero-slide-container {
+    height: 480px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
-nav {
-    font-weight: 700;
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
 }
 
-.img-card {
-    height: 18vw;
+/* Global and Luxe component styles for Categories */
+.tracking-wider {
+    letter-spacing: 0.15em;
+}
+
+.transition-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.transition-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08) !important;
+}
+
+/* High-end typography (if using custom serif fonts) */
+.font-display {
+    font-family: var(--bs-body-font-family, serif);
+}
+
+/* ==========================================================
+   Category cards — /categories listing
+========================================================== */
+.category-card {
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding: 1.75rem;
+    height: 100%;
+    box-shadow: 0 0.2rem 0.6rem rgba(44, 62, 80, 0.06);
+    border-top: 4px solid var(--brand-teal);
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.75rem 1.5rem rgba(44, 62, 80, 0.12);
+}
+
+.category-card--teal {
+    border-top-color: var(--brand-teal);
+}
+
+.category-card--gold {
+    border-top-color: var(--brand-gold);
+}
+
+.category-card--navy {
+    border-top-color: var(--brand-navy);
+}
+
+.category-card__name {
+    font-size: 1.3rem;
+    color: var(--brand-navy-deep);
+    margin-bottom: 0.6rem;
+}
+
+.category-card__description {
+    color: #6b7a8d;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+    min-height: 3.2rem;
+}
+
+/* ==========================================================
+   NEW — only what was missing to replace the inline style=""
+   that were removed from the views. Nothing above was touched.
+========================================================== */
+
+/* Variable aliases: .category-card--teal/gold/navy already existed
+   above but used variables (--brand-teal, --brand-gold, --brand-navy,
+   --brand-navy-deep) that were never defined in :root — that's why the colored border
+   of those cards was never seen. Mapping them to your current palette,
+   without changing any existing rule. */
+:root {
+    --brand-teal: var(--brand-dark-light);
+    --brand-gold: var(--brand-primary);
+    --brand-navy: var(--brand-dark);
+    --brand-navy-deep: var(--brand-dark);
+}
+
+/* Backgrounds for each hero slide (previously went as inline style="background-image:...") */
+.hero-slide-container--1 { background-image: url('/images/jewel3.jpg'); }
+.hero-slide-container--2 { background-image: url('/images/jewel2.jpg'); }
+.hero-slide-container--3 { background-image: url('/images/jewel1.jpg'); }
+
+.about-image {
+    height: 380px;
+    object-fit: cover;
+}
+
+.featured-jewel-image {
+    height: 220px;
+    object-fit: cover;
+}
+
+.jewel-card__image-wrapper {
+    height: 250px;
+}
+
+.jewel-detail__image,
+.jewel-detail__image--placeholder {
+    object-fit: cover;
+    min-height: 320px;
+}
+
+.admin-jewel-thumb-cell {
+    width: 70px;
+}
+
+.admin-jewel-thumb,
+.admin-jewel-thumb--placeholder {
+    width: 50px;
+    height: 50px;
     object-fit: cover;
 }

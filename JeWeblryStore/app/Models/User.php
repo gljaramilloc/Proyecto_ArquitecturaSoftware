@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -144,10 +143,11 @@ class User extends Authenticatable
         return $this->created_at;
     }
 
-    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    // Without strict typing or ': void' to respect Laravel's inheritance
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+
         return $this;
     }
 
@@ -156,10 +156,11 @@ class User extends Authenticatable
         return $this->updated_at;
     }
 
-    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    // Without strict typing or ': void' to respect Laravel's inheritance
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+
         return $this;
     }
 

@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('statuses', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->timestamps();
+        Schema::table('order_items', function (Blueprint $table) {
+            $table->renameColumn('unitPrice', 'unit_price');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('statuses');
+        Schema::table('order_items', function (Blueprint $table) {
+            $table->renameColumn('unit_price', 'unitPrice');
+        });
     }
 };
