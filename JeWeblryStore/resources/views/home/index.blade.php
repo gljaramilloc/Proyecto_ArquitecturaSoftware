@@ -32,7 +32,7 @@
 
                                     <div class="mt-auto">
                                         <span class="badge bg-warning text-dark fs-6 d-block mb-3">
-                                            ⭐ {{ __('home.sold_count') }} {{ $orderItem->total_sold }}
+                                            ⭐ {{ __('home.sold_count') }} {{ $orderItem->getTotalSold() }}
                                         </span>
 
                                         <!-- Botón hacia el detalle del producto (Ruta estática para evitar crash si tus compañeros no la han creado en web.php) -->

@@ -97,6 +97,11 @@ class OrderItem extends Model
         return $this;
     }
 
+    public function getTotalSold(): ?int
+    {
+        return $this->total_sold ?? null;
+    }
+
     public static function getTopSold(int $limit = 3): Collection
     {
         return self::with('jewel')
