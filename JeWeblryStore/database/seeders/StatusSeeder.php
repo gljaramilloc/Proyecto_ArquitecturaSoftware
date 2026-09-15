@@ -13,11 +13,11 @@ class StatusSeeder extends Seeder
     public function run(): void
     {
         $statuses = [
-            'Activo',
-            'Inactivo',
-            'Pendiente',
-            'Aprobado',
-            'Rechazado',
+            'Active',
+            'Inactive',
+            'Pending',
+            'Approved',
+            'Rejected',
         ];
 
         foreach ($statuses as $statusName) {

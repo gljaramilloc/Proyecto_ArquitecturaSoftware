@@ -20,7 +20,7 @@ class OrderItem extends Model
 {
     protected $fillable = [
         'quantity',
-        'unitPrice',
+        'unit_price',
         'jewel_id',
         'order_id',
     ];
@@ -43,12 +43,12 @@ class OrderItem extends Model
 
     public function getUnitPrice(): float
     {
-        return $this->unitPrice;
+        return $this->unit_price;
     }
 
     public function setUnitPrice(float $unitPrice): void
     {
-        $this->unitPrice = $unitPrice;
+        $this->unit_price = $unitPrice;
     }
 
     public function getJewelId(): int
@@ -76,7 +76,7 @@ class OrderItem extends Model
         return $this->created_at;
     }
 
-    // No strict typing or ': void' to respect Laravel inheritance
+    // No strict typing or ': void' to respect Laravel's inheritance
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
@@ -89,7 +89,7 @@ class OrderItem extends Model
         return $this->updated_at;
     }
 
-    // No strict typing or ': void' to respect Laravel inheritance
+    // No strict typing or ': void' to respect Laravel's inheritance
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
