@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -29,4 +30,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders/{orderId}/payment/create', [PaymentController::class, 'create'])->name('payments.create');
     Route::post('/orders/{orderId}/payment', [PaymentController::class, 'store'])->name('payments.store');
     Route::get('/orders/{orderId}/payment', [PaymentController::class, 'show'])->name('payments.show');
+});
+
+// Order history routes (authenticated users)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 });
