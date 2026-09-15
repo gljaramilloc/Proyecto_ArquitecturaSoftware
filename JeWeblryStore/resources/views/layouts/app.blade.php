@@ -103,8 +103,13 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('orders.index') }}">
-                                        📦 {{ __('order.my_orders') }}
+                                        <i class="bi bi-box-seam me-2"></i>{{ __('order.my_orders') }}
                                     </a>
+                                    @if (Auth::user()->isAdmin())
+                                        <a class="dropdown-item" href="{{ route('admin.index') }}">
+                                            <i class="bi bi-speedometer2 me-2"></i>Admin Dashboard
+                                        </a>
+                                    @endif
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">

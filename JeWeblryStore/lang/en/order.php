@@ -18,6 +18,6 @@ return [
     'item_unit_price' => 'Unit Price',
     'item_subtotal' => 'Subtotal',
     'payment_title' => 'Payment',
-    'my_orders'=> 'My orders',
+    'my_orders' => 'My orders',
 
 ];

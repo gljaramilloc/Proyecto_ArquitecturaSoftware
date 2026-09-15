@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminJewelController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -67,7 +69,12 @@ Route::get('/jewels/{jewel}', [JewelController::class, 'show'])->name('jewels.sh
 | Administration section (fully separated from the storefront)
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminHomeController::class, 'index'])->name('index');
+
+    Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::patch('users/{user}/role', [AdminUserController::class, 'updateRole'])->name('users.updateRole');
+
     Route::resource('categories', AdminCategoryController::class)->except(['show']);
     Route::patch('categories/{category}/toggle-status', [AdminCategoryController::class, 'toggleStatus'])
         ->name('categories.toggleStatus');
