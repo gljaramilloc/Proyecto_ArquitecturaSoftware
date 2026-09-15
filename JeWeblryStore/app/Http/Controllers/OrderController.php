@@ -11,7 +11,7 @@ class OrderController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = __('order.title').' - Online Store';
+        $viewData['title'] = __('order.title') . ' - Online Store';
         $viewData['subtitle'] = __('order.my_orders');
 
         $userId = Auth::user()->getId();
@@ -28,8 +28,8 @@ class OrderController extends Controller
         $order = Order::getByIdAndUser($id, $userId);
 
         $viewData = [];
-        $viewData['title'] = __('order.order_details').' - Online Store';
-        $viewData['subtitle'] = __('order.order_id').': '.$order->getId();
+        $viewData['title'] = __('order.order_details') . ' - Online Store';
+        $viewData['subtitle'] = __('order.order_id') . ': ' . $order->getId();
         $viewData['order'] = $order;
 
         return view('order.show')->with('viewData', $viewData);
