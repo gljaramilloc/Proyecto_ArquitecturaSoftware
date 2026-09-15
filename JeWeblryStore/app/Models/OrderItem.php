@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
@@ -96,7 +97,7 @@ class OrderItem extends Model
         return $this;
     }
 
-    public static function getTopSold(int $limit = 3)
+    public static function getTopSold(int $limit = 3): Collection
     {
         return self::with('jewel')
             ->select('jewel_id', DB::raw('SUM(quantity) as total_sold'))

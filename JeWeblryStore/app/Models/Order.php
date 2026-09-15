@@ -86,6 +86,17 @@ class Order extends Model
         return $this;
     }
 
+    // Colecciones aisladas para no ensuciar el Controller con Queries Eloquent puras (Fat Model, Thin Controller)
+    public static function getByUser(int $userId): Collection
+    {
+        return self::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
+    }
+
+    public static function getByIdAndUser(int $orderId, int $userId): self
+    {
+        return self::with('items.jewel')->where('user_id', $userId)->findOrFail($orderId);
+    }
+
     // Relationships
     public function status(): BelongsTo
     {

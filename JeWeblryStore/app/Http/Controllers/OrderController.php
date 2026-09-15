@@ -15,7 +15,7 @@ class OrderController extends Controller
         $viewData['subtitle'] = __('order.my_orders');
 
         $userId = Auth::user()->getId();
-        $viewData['orders'] = Order::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
+        $viewData['orders'] = Order::getByUser($userId);
 
         return view('order.index')->with('viewData', $viewData);
     }
@@ -24,8 +24,8 @@ class OrderController extends Controller
     {
         $userId = Auth::user()->getId();
 
-        // Eager load items and jewels
-        $order = Order::with('items.jewel')->where('user_id', $userId)->findOrFail($id);
+        // Delegamos la consulta Eloquent (Eager Loading y filtros) directamente al Modelo
+        $order = Order::getByIdAndUser($id, $userId);
 
         $viewData = [];
         $viewData['title'] = __('order.order_details').' - Online Store';

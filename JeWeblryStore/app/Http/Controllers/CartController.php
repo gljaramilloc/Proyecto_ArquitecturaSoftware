@@ -6,8 +6,8 @@ use App\Models\Jewel;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class CartController extends Controller
@@ -40,9 +40,9 @@ class CartController extends Controller
         return view('cart.index')->with('viewData', $viewData);
     }
 
-    public function add(string $id, Request $request): RedirectResponse
+    public function add(string $id): RedirectResponse
     {
-        $cartSession = $request->session()->get('cart', []);
+        $cartSession = session()->get('cart', []);
 
         // If jewel is already in the cart, increase quantity; otherwise, set to 1
         if (array_key_exists($id, $cartSession)) {
@@ -51,21 +51,21 @@ class CartController extends Controller
             $cartSession[$id] = 1;
         }
 
-        $request->session()->put('cart', $cartSession);
+        session()->put('cart', $cartSession);
 
         return back();
     }
 
-    public function removeAll(Request $request): RedirectResponse
+    public function removeAll(): RedirectResponse
     {
-        $request->session()->forget('cart');
+        session()->forget('cart');
 
         return back();
     }
 
-    public function purchase(Request $request)
+    public function purchase(): View|RedirectResponse
     {
-        $cartSession = $request->session()->get('cart', []);
+        $cartSession = session()->get('cart', []);
 
         if (empty($cartSession)) {
             return redirect()->route('cart.index');
@@ -79,27 +79,32 @@ class CartController extends Controller
             $total += $jewel->getPrice() * $cartSession[$jewel->getId()];
         }
 
-        // Create the Order header
-        $order = new Order;
-        $order->setUserId($userId);
-        $order->setTotal($total);
-        // We set statusId to 1 by default (Pending/Processing depending on StatusSeeder)
-        $order->setStatusId(1);
-        $order->save();
+        // Database transaction ensures Atomicity. Either everything is saved, or nothing is.
+        $order = DB::transaction(function () use ($userId, $total, $jewelsInSession, $cartSession) {
+            // Create the Order header
+            $order = new Order;
+            $order->setUserId($userId);
+            $order->setTotal($total);
+            // We set statusId to 1 by default (Pending/Processing depending on StatusSeeder)
+            $order->setStatusId(1);
+            $order->save();
 
-        // Save each item logically linked to the order
-        foreach ($jewelsInSession as $jewel) {
-            $quantity = $cartSession[$jewel->getId()];
-            $orderItem = new OrderItem;
-            $orderItem->setQuantity($quantity);
-            $orderItem->setUnitPrice($jewel->getPrice());
-            $orderItem->setJewelId($jewel->getId());
-            $orderItem->setOrderId($order->getId());
-            $orderItem->save();
-        }
+            // Save each item logically linked to the order
+            foreach ($jewelsInSession as $jewel) {
+                $quantity = $cartSession[$jewel->getId()];
+                $orderItem = new OrderItem;
+                $orderItem->setQuantity($quantity);
+                $orderItem->setUnitPrice($jewel->getPrice());
+                $orderItem->setJewelId($jewel->getId());
+                $orderItem->setOrderId($order->getId());
+                $orderItem->save();
+            }
+
+            return $order;
+        });
 
         // Wipe the cart out of the session
-        $request->session()->forget('cart');
+        session()->forget('cart');
 
         $viewData = [];
         $viewData['title'] = __('cart.purchase_title').' - Online Store';
