@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $updatedAt
  * @property Carbon $createdAt
  * @property Carbon $updatedAt
->>>>>>> f878abbd5d1234f3474909515ca46ee6cba8ea4c
  */
 class Jewel extends Model
 {

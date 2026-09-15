@@ -15,7 +15,7 @@ class DummyDataSeeder extends Seeder
     public function run(): void
     {
         // Ensure there is at least one status (normally created by StatusSeeder)
-        $status = Status::firstOrCreate(['id' => 1], ['name' => 'Pending']);
+        $status = Status::where('name', 'Pendiente')->first() ?? Status::firstOrCreate(['id' => 1], ['name' => 'Pendiente']);
 
         // Pick or create a generic user to attach the mock order to
         $user = User::firstOrCreate([

@@ -89,7 +89,7 @@ class Order extends Model
     // Colecciones aisladas para no ensuciar el Controller con Queries Eloquent puras (Fat Model, Thin Controller)
     public static function getByUser(int $userId): Collection
     {
-        return self::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
+        return self::with('status')->where('user_id', $userId)->orderBy('created_at', 'desc')->get();
     }
 
     public static function getByIdAndUser(int $orderId, int $userId): self
@@ -98,6 +98,59 @@ class Order extends Model
     }
 
     // Relationships
+    public static function processPurchase(array $cartSession, int $userId): self
+    {
+        $details = self::calculateCartDetails($cartSession);
+        $total = $details['total'];
+        $jewelsInSession = $details['jewels'];
+
+        $order = new self;
+        $order->setUserId($userId);
+        $order->setTotal($total);
+
+        $status = Status::where('name', 'Pendiente')->first();
+        $order->setStatusId($status ? $status->getId() : 1);
+        $order->save();
+
+        $orderItems = [];
+        foreach ($jewelsInSession as $jewel) {
+            $quantity = $cartSession[$jewel->getId()];
+
+            $orderItem = new OrderItem;
+            $orderItem->setQuantity($quantity);
+            $orderItem->setUnitPrice($jewel->getPrice());
+            $orderItem->setJewelId($jewel->getId());
+            $orderItems[] = $orderItem;
+
+            $jewel->setStock($jewel->getStock() - $quantity);
+            $jewel->save();
+        }
+
+        $order->items()->saveMany($orderItems);
+
+        return $order;
+    }
+
+    public static function calculateCartDetails(array $cartSession): array
+    {
+        $total = 0;
+        $jewelsInCart = [];
+
+        if (! empty($cartSession)) {
+            $jewelsInCart = Jewel::findMany(array_keys($cartSession));
+
+            foreach ($jewelsInCart as $jewel) {
+                $quantity = $cartSession[$jewel->getId()];
+                $total += $jewel->getPrice() * $quantity;
+            }
+        }
+
+        return [
+            'jewels' => $jewelsInCart,
+            'total' => $total,
+        ];
+    }
+
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
