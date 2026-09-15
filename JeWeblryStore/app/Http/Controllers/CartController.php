@@ -12,12 +12,12 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    public function index(Request $request): View
+    public function index(): View
     {
         $total = 0;
         $jewelsInCart = [];
 
-        $cartSession = $request->session()->get('cart', []);
+        $cartSession = session()->get('cart', []);
 
         if (! empty($cartSession)) {
             // Get jewels whose IDs match the keys (jewel IDs) in the session

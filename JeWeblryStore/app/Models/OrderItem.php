@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property int $id
@@ -74,7 +75,7 @@ class OrderItem extends Model
         return $this->created_at;
     }
 
-    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    // No strict typing or ': void' to respect Laravel inheritance
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
@@ -87,12 +88,22 @@ class OrderItem extends Model
         return $this->updated_at;
     }
 
-    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    // No strict typing or ': void' to respect Laravel inheritance
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
 
         return $this;
+    }
+
+    public static function getTopSold(int $limit = 3)
+    {
+        return self::with('jewel')
+            ->select('jewel_id', DB::raw('SUM(quantity) as total_sold'))
+            ->groupBy('jewel_id')
+            ->orderByDesc('total_sold')
+            ->take($limit)
+            ->get();
     }
 
     // Relationships

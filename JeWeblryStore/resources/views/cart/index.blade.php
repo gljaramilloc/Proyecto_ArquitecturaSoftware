@@ -24,10 +24,6 @@
                                     </thead>
                                     <tbody>
                                         @foreach($viewData['jewels'] as $jewel)
-                                            @php
-                                                $quantity = $viewData['cartSession'][$jewel->getId()];
-                                                $subtotal = $jewel->getPrice() * $quantity;
-                                            @endphp
                                             <tr>
                                                 <td>
                                                     <strong>{{ $jewel->getName() }}</strong>
@@ -35,11 +31,11 @@
                                                 <td>${{ number_format($jewel->getPrice(), 2) }}</td>
                                                 <td class="text-center">
                                                     <span class="badge bg-secondary fs-6 px-3 py-2">
-                                                        {{ $quantity }}
+                                                        {{ $viewData['cartSession'][$jewel->getId()] }}
                                                     </span>
                                                 </td>
                                                 <td class="text-end fw-bold">
-                                                    ${{ number_format($subtotal, 2) }}
+                                                    ${{ number_format($jewel->getPrice() * $viewData['cartSession'][$jewel->getId()], 2) }}
                                                 </td>
                                             </tr>
                                         @endforeach

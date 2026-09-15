@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderItem;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -12,13 +11,7 @@ class HomeController extends Controller
     {
         $viewData = [];
         $viewData['title'] = 'Home Page - Online Store';
-
-        $topOrderItems = OrderItem::with('jewel')
-            ->select('jewel_id', DB::raw('SUM(quantity) as total_sold'))
-            ->groupBy('jewel_id')
-            ->orderByDesc('total_sold')
-            ->take(3)
-            ->get();
+        $topOrderItems = OrderItem::getTopSold(3);
 
         $viewData['topJewels'] = $topOrderItems;
 

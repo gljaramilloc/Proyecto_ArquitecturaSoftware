@@ -86,7 +86,7 @@ class Payment extends Model
         return $this->created_at;
     }
 
-    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    // No strict typing or ': void' to respect Laravel inheritance
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
@@ -99,7 +99,7 @@ class Payment extends Model
         return $this->updated_at;
     }
 
-    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    // No strict typing or ': void' to respect Laravel inheritance
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
