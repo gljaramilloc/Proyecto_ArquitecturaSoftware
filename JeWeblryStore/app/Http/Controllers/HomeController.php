@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderItem;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -10,6 +12,15 @@ class HomeController extends Controller
     {
         $viewData = [];
         $viewData['title'] = 'Home Page - Online Store';
+
+        $topOrderItems = OrderItem::with('jewel')
+            ->select('jewel_id', DB::raw('SUM(quantity) as total_sold'))
+            ->groupBy('jewel_id')
+            ->orderByDesc('total_sold')
+            ->take(3)
+            ->get();
+
+        $viewData['topJewels'] = $topOrderItems;
 
         return view('home.index')->with('viewData', $viewData);
     }
@@ -20,7 +31,7 @@ class HomeController extends Controller
         $viewData['title'] = 'About us - Online Store';
         $viewData['subtitle'] = 'About us';
         $viewData['description'] = 'This is an about page ...';
-        $viewData['author'] = 'Developed by: Gisel Jaramillo';
+        $viewData['author'] = 'Developed by: Gisel Jaramillo\'s team';
 
         return view('home.about')->with('viewData', $viewData);
     }
@@ -32,7 +43,7 @@ class HomeController extends Controller
         $viewData['subtitle'] = 'Contact';
         $viewData['email'] = 'contact@jewelstore.com';
         $viewData['address'] = '355 Medellín, Colombia';
-        $viewData['phone'] = '+49 123 456 789';
+        $viewData['phone'] = '+57 123 456 789';
 
         return view('home.contact')->with('viewData', $viewData);
     }
