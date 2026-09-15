@@ -138,7 +138,7 @@ class Order extends Model
     {
         $jewel = Jewel::find($id);
 
-        if (!$jewel) {
+        if (! $jewel) {
             throw new \Exception(__('cart.jewel_not_exist'));
         }
 
@@ -159,7 +159,7 @@ class Order extends Model
         $total = 0;
         $jewelsInCart = [];
 
-        if (!empty($cartSession)) {
+        if (! empty($cartSession)) {
             $jewelsInCart = Jewel::findMany(array_keys($cartSession));
 
             foreach ($jewelsInCart as $jewel) {

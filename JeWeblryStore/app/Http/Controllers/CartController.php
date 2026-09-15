@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jewel;
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +16,7 @@ class CartController extends Controller
         $details = Order::calculateCartDetails($cartSession);
 
         $viewData = [];
-        $viewData['title'] = __('cart.title') . ' - Online Store';
+        $viewData['title'] = __('cart.title').' - Online Store';
         $viewData['subtitle'] = __('cart.your_cart');
         $viewData['total'] = $details['total'];
         $viewData['jewels'] = $details['jewels'];
@@ -59,7 +58,7 @@ class CartController extends Controller
             session()->forget('cart');
 
             $viewData = [];
-            $viewData['title'] = __('cart.purchase_title') . ' - Online Store';
+            $viewData['title'] = __('cart.purchase_title').' - Online Store';
             $viewData['subtitle'] = __('cart.purchase_status');
             $viewData['order'] = $order;
 
