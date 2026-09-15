@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jewel;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Status;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,11 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(): View
     {
         $total = 0;
@@ -21,7 +27,7 @@ class CartController extends Controller
 
         if (! empty($cartSession)) {
             // Get jewels whose IDs match the keys (jewel IDs) in the session
-            $jewelsInCart = Jewel::findMany(array_keys($cartSession));
+            $jewelsInCart = Jewel::with('category')->findMany(array_keys($cartSession));
 
             foreach ($jewelsInCart as $jewel) {
                 // Determine total by multiplying jewel price by quantity requested
@@ -40,20 +46,38 @@ class CartController extends Controller
         return view('cart.index')->with('viewData', $viewData);
     }
 
-    public function add(string $id): RedirectResponse
+    public function add(int $id): RedirectResponse
     {
-        $cartSession = session()->get('cart', []);
+        $jewel = Jewel::findOrFail($id);
 
-        // If jewel is already in the cart, increase quantity; otherwise, set to 1
-        if (array_key_exists($id, $cartSession)) {
-            $cartSession[$id] = $cartSession[$id] + 1;
-        } else {
-            $cartSession[$id] = 1;
+        if ($jewel->getStock() < 1) {
+            return back()->with('error', __('cart.out_of_stock'));
         }
 
+        $cartSession = session()->get('cart', []);
+        $quantity = (int) ($cartSession[$id] ?? 0);
+
+        if ($quantity >= $jewel->getStock()) {
+            return back()->with('error', __('cart.stock_limit'));
+        }
+
+        $cartSession[$id] = $quantity + 1;
         session()->put('cart', $cartSession);
 
-        return back();
+        return back()->with('success', __('cart.added'));
+    }
+
+    public function buyNow(int $id): RedirectResponse
+    {
+        $jewel = Jewel::findOrFail($id);
+
+        if ($jewel->getStock() < 1) {
+            return back()->with('error', __('cart.out_of_stock'));
+        }
+
+        $order = $this->createOrder([$jewel->getId() => 1]);
+
+        return redirect()->route('payments.create', $order->getId());
     }
 
     public function removeAll(): RedirectResponse
@@ -63,7 +87,7 @@ class CartController extends Controller
         return back();
     }
 
-    public function purchase(): View|RedirectResponse
+    public function purchase(): RedirectResponse
     {
         $cartSession = session()->get('cart', []);
 
@@ -71,29 +95,39 @@ class CartController extends Controller
             return redirect()->route('cart.index');
         }
 
+        $order = $this->createOrder($cartSession);
+
+        session()->forget('cart');
+
+        return redirect()->route('payments.create', $order->getId());
+    }
+
+    private function createOrder(array $cartSession): Order
+    {
         $userId = Auth::user()->getId();
-        $jewelsInSession = Jewel::findMany(array_keys($cartSession));
+        $jewels = Jewel::findMany(array_keys($cartSession));
 
-        $total = 0;
-        foreach ($jewelsInSession as $jewel) {
-            $total += $jewel->getPrice() * $cartSession[$jewel->getId()];
-        }
+        abort_if($jewels->count() !== count($cartSession), 422, __('cart.invalid_items'));
 
-        // Database transaction ensures Atomicity. Either everything is saved, or nothing is.
-        $order = DB::transaction(function () use ($userId, $total, $jewelsInSession, $cartSession) {
-            // Create the Order header
+        return DB::transaction(function () use ($userId, $cartSession, $jewels): Order {
+            $total = 0;
+            foreach ($jewels as $jewel) {
+                $quantity = (int) ($cartSession[$jewel->getId()] ?? 0);
+                abort_if($quantity < 1 || $quantity > $jewel->getStock(), 422, __('cart.stock_limit'));
+                $total += $jewel->getPrice() * $quantity;
+            }
+
+            $pendingStatus = Status::where('name', 'Pending')->firstOrFail();
+
             $order = new Order;
             $order->setUserId($userId);
             $order->setTotal($total);
-            // We set statusId to 1 by default (Pending/Processing depending on StatusSeeder)
-            $order->setStatusId(1);
+            $order->setStatusId($pendingStatus->getId());
             $order->save();
 
-            // Save each item logically linked to the order
-            foreach ($jewelsInSession as $jewel) {
-                $quantity = $cartSession[$jewel->getId()];
+            foreach ($jewels as $jewel) {
                 $orderItem = new OrderItem;
-                $orderItem->setQuantity($quantity);
+                $orderItem->setQuantity((int) $cartSession[$jewel->getId()]);
                 $orderItem->setUnitPrice($jewel->getPrice());
                 $orderItem->setJewelId($jewel->getId());
                 $orderItem->setOrderId($order->getId());
@@ -102,15 +136,5 @@ class CartController extends Controller
 
             return $order;
         });
-
-        // Wipe the cart out of the session
-        session()->forget('cart');
-
-        $viewData = [];
-        $viewData['title'] = __('cart.purchase_title').' - Online Store';
-        $viewData['subtitle'] = __('cart.purchase_status');
-        $viewData['order'] = $order;
-
-        return view('cart.purchase')->with('viewData', $viewData);
     }
 }

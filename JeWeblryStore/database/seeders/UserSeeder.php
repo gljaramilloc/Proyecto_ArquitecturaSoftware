@@ -11,11 +11,13 @@ class UserSeeder extends Seeder
     {
         User::factory()->count(10)->create();
 
-        User::factory()->create([
-            'name' => 'Admin',
-            'lastNames' => 'Test',
-            'email' => 'admin@jeweblrystore.com',
-            'role' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@jeweblrystore.com'],
+            User::factory()->raw([
+                'name' => 'Admin',
+                'lastNames' => 'Test',
+                'role' => 'admin',
+            ])
+        );
     }
 }

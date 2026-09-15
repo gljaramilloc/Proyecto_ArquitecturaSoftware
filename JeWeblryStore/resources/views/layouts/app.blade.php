@@ -62,9 +62,6 @@
                         </li>
                     </ul>
 
-<<<<<<< HEAD
-                    <ul class="navbar-nav ms-auto">
-=======
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto align-items-center">
                         <!-- Language Switch -->
@@ -72,15 +69,19 @@
                             <x-language-switch />
                         </li>
 
-                        <!-- Cart Link -->
-                        <li class="nav-item me-2">
-                            <a class="nav-link" href="{{ route('cart.index') }}">
-                                🛒 {{ __('cart.title') }}
-                            </a>
-                        </li>
+                        @auth
+                            <!-- Cart Link -->
+                            <li class="nav-item me-2">
+                                <a class="nav-link" href="{{ route('cart.index') }}">
+                                    <i class="bi bi-cart3 me-1"></i>{{ __('cart.title') }}
+                                    @if (array_sum(session('cart', [])) > 0)
+                                        <span class="badge rounded-pill bg-danger">{{ array_sum(session('cart', [])) }}</span>
+                                    @endif
+                                </a>
+                            </li>
+                        @endauth
 
                         <!-- Authentication Links -->
->>>>>>> origin/main
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -122,6 +123,16 @@
         </nav>
 
         <main>
+            @if (session('success'))
+                <div class="container mt-4">
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="container mt-4">
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                </div>
+            @endif
             @if (session('status'))
                 <div class="container mt-4">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">

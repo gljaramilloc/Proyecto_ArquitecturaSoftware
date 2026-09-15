@@ -18,4 +18,10 @@ return [
     'order_number' => 'Order Number',
     'view_my_orders' => 'View My Orders',
     'continue_shopping' => 'Continue Shopping',
+    'add_to_cart' => 'Add to Cart',
+    'buy_now' => 'Buy Now',
+    'added' => 'Jewel added to your cart.',
+    'out_of_stock' => 'This jewel is out of stock.',
+    'stock_limit' => 'The requested quantity is not available.',
+    'invalid_items' => 'Some items in your cart are no longer available.',
 ];

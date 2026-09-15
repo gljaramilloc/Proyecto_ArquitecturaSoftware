@@ -28,7 +28,7 @@
 
                 <div class="mb-3">
                     <label>{{ __('payment.amount') }}</label>
-                    <input type="number" step="0.01" name="amount" class="form-control" value="{{ old('amount', $viewData['order']->getTotal()) }}">
+                    <input type="number" step="0.01" name="amount" class="form-control" value="{{ old('amount', $viewData['order']->getTotal()) }}" readonly>
                 </div>
 
                 <div class="mb-3">

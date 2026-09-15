@@ -59,6 +59,25 @@
                             </li>
                         </ul>
 
+                        @auth
+                            @if ($viewData['jewel']->getStock() > 0)
+                            <div class="d-flex flex-wrap gap-2 mt-4">
+                                <form method="POST" action="{{ route('cart.add', $viewData['jewel']->getId()) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-brand-outline">
+                                        <i class="bi bi-cart-plus me-1"></i>{{ __('cart.add_to_cart') }}
+                                    </button>
+                                </form>
+                                <form method="POST" action="{{ route('cart.buyNow', $viewData['jewel']->getId()) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-brand">
+                                        <i class="bi bi-bag-check me-1"></i>{{ __('cart.buy_now') }}
+                                    </button>
+                                </form>
+                            </div>
+                            @endif
+                        @endauth
+
                         <a href="{{ route('jewels.index') }}" class="btn btn-outline-dark mt-4 align-self-start">
                             &larr; Back to catalog
                         </a>

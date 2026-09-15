@@ -18,4 +18,10 @@ return [
     'order_number' => 'Número de Orden',
     'view_my_orders' => 'Ver mis órdenes',
     'continue_shopping' => 'Seguir comprando',
+    'add_to_cart' => 'Añadir al carrito',
+    'buy_now' => 'Comprar ahora',
+    'added' => 'La joya se añadió a tu carrito.',
+    'out_of_stock' => 'Esta joya no está disponible.',
+    'stock_limit' => 'La cantidad solicitada no está disponible.',
+    'invalid_items' => 'Algunos productos de tu carrito ya no están disponibles.',
 ];

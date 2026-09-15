@@ -13,10 +13,10 @@ class OrderItemFactory extends Factory
         $jewel = Jewel::inRandomOrder()->first();
 
         return [
-            'order_id' => Order::inRandomOrder()->first()->id,
-            'jewel_id' => $jewel->id,
+            'order_id' => Order::inRandomOrder()->first()->getId(),
+            'jewel_id' => $jewel->getId(),
             'quantity' => fake()->numberBetween(1, 5),
-            'unitPrice' => $jewel->price,
+            'unit_price' => $jewel->getPrice(),
         ];
     }
 }

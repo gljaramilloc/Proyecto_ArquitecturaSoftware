@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminJewelController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JewelController;
 use App\Http\Controllers\LanguageController;
@@ -41,11 +41,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 });
 
-// Cart routes
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
-Route::get('/cart/removeAll', [CartController::class, 'removeAll'])->name('cart.removeAll');
-Route::post('/cart/purchase', [CartController::class, 'purchase'])->name('cart.purchase')->middleware('auth');
+// Cart routes (authenticated users only)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/buy/{id}', [CartController::class, 'buyNow'])->name('cart.buyNow');
+    Route::get('/cart/removeAll', [CartController::class, 'removeAll'])->name('cart.removeAll');
+    Route::post('/cart/purchase', [CartController::class, 'purchase'])->name('cart.purchase');
+});
 
 /*
 |--------------------------------------------------------------------------
