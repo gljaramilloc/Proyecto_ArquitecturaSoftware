@@ -23,4 +23,8 @@ return [
     'contact_address' => 'Address: 355 Medellín, Colombia',
     'contact_phone' => 'Cellphone +49 123 456 789',
 
+    'top_selling' => 'Top 3 Best Selling Jewels',
+    'sold_count' => 'Units Sold:',
+    'view_product' => 'View Product',
+
 ];

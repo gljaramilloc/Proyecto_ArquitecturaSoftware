@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -78,10 +77,11 @@ class Category extends Model
         return $this->created_at;
     }
 
-    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    // No strict typing or ': void' to respect Laravel inheritance
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
+
         return $this;
     }
 
@@ -90,15 +90,16 @@ class Category extends Model
         return $this->updated_at;
     }
 
-    // Sin tipado estricto ni ': void' para respetar la herencia de Laravel
+    // No strict typing or ': void' to respect Laravel inheritance
     public function setUpdatedAt($updatedAt)
     {
         $this->updated_at = $updatedAt;
+
         return $this;
     }
 
     // Relationships
-    
+
     // Nueva relación con el modelo Status
     public function status(): BelongsTo
     {

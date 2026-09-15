@@ -23,4 +23,8 @@ return [
     'contact_address' => 'Dirección: 355 Medellín, Colombia',
     'contact_phone' => 'Celular +49 123 456 789',
 
+    'top_selling' => 'Top 3 Joyas Más Vendidas',
+    'sold_count' => 'Unidades Vendidas:',
+    'view_product' => 'Ver Producto',
+
 ];
