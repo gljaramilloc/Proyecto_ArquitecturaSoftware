@@ -89,7 +89,7 @@ class Order extends Model
         return $this;
     }
 
-    // Colecciones aisladas para no ensuciar el Controller con Queries Eloquent puras (Fat Model, Thin Controller)
+    // Isolated collections to keep the Controller clean from raw Eloquent queries (Fat Model, Thin Controller)
     public static function getByUser(int $userId): Collection
     {
         return self::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
