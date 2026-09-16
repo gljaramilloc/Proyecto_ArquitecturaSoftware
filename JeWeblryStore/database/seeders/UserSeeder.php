@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
                 'lastNames' => 'Test',
                 'role' => 'admin',
                 'password' => Hash::make('password'),
+                'email' => 'admin@jeweblrystore.com'
             ])
         );
     }
