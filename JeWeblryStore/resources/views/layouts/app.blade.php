@@ -8,7 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} @hasSection('title')— @yield('title')@endif</title>
+    <title>{{ config('app.name', 'Laravel') }} @hasSection('title')
+            — @yield('title')
+        @endif
+    </title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -35,7 +38,8 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-secondary shadow-sm py-3">
             <div class="container">
                 <a class="navbar-brand fw-bold fs-4 font-display text-brand-gold" href="{{ route('home.index') }}">
-                    💎 {{ config('app.name', 'Laravel') }}
+                    <img src="{{ asset('logo.svg') }}" alt="Logo" width="150" height="50">
+                    {{ config('app.name', 'JeWeblryStore') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -46,17 +50,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('home.index') ? 'active fw-bold' : '' }}" href="{{ route('home.index') }}">
+                            <a class="nav-link {{ request()->routeIs('home.index') ? 'active fw-bold' : '' }}"
+                                href="{{ route('home.index') }}">
                                 Home
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('jewels.*') ? 'active fw-bold' : '' }}" href="{{ route('jewels.index') }}">
+                            <a class="nav-link {{ request()->routeIs('jewels.*') ? 'active fw-bold' : '' }}"
+                                href="{{ route('jewels.index') }}">
                                 Catalog
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('categories.*') ? 'active fw-bold' : '' }}" href="{{ route('categories.index') }}">
+                            <a class="nav-link {{ request()->routeIs('categories.*') ? 'active fw-bold' : '' }}"
+                                href="{{ route('categories.index') }}">
                                 Categories
                             </a>
                         </li>
@@ -75,7 +82,8 @@
                                 <a class="nav-link" href="{{ route('cart.index') }}">
                                     <i class="bi bi-cart3 me-1"></i>{{ __('cart.title') }}
                                     @if (array_sum(session('cart', [])) > 0)
-                                        <span class="badge rounded-pill bg-danger">{{ array_sum(session('cart', [])) }}</span>
+                                        <span
+                                            class="badge rounded-pill bg-danger">{{ array_sum(session('cart', [])) }}</span>
                                     @endif
                                 </a>
                             </li>
@@ -111,7 +119,8 @@
                                         </a>
                                     @endif
                                     <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
@@ -155,22 +164,28 @@
             <div class="container text-center text-md-start">
                 <div class="row">
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <h4 class="text-uppercase mb-4 font-display text-brand-gold">{{ config('app.name', 'Laravel') }}</h4>
+                        <h4 class="text-uppercase mb-4 font-display text-brand-gold">
+                            {{ config('app.name', 'Laravel') }}</h4>
                         <p class="text-white-50 footer-tagline">
-                            Creating unforgettable moments through exceptional pieces. Design, quality, and absolute elegance in every detail of our collections.
+                            Creating unforgettable moments through exceptional pieces. Design, quality, and absolute
+                            elegance in every detail of our collections.
                         </p>
                     </div>
 
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <h6 class="text-uppercase mb-4 fw-bold text-brand-gold footer-heading">Collections</h6>
-                        <p><a href="{{ route('jewels.index') }}" class="text-white-50 text-decoration-none">View All</a></p>
-                        <p><a href="{{ route('categories.index') }}" class="text-white-50 text-decoration-none">New Arrivals</a></p>
-                        <p><a href="{{ route('jewels.index') }}" class="text-white-50 text-decoration-none">Best Sellers</a></p>
+                        <p><a href="{{ route('jewels.index') }}" class="text-white-50 text-decoration-none">View
+                                All</a></p>
+                        <p><a href="{{ route('categories.index') }}" class="text-white-50 text-decoration-none">New
+                                Arrivals</a></p>
+                        <p><a href="{{ route('jewels.index') }}" class="text-white-50 text-decoration-none">Best
+                                Sellers</a></p>
                     </div>
 
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <h6 class="text-uppercase mb-4 fw-bold text-brand-gold footer-heading">Contact</h6>
-                        <p class="text-white-50"><i class="bi bi-geo-alt-fill me-2"></i> Bello, Antioquia, Colombia</p>
+                        <p class="text-white-50"><i class="bi bi-geo-alt-fill me-2"></i> Bello, Antioquia, Colombia
+                        </p>
                         <p class="text-white-50"><i class="bi bi-envelope-fill me-2"></i> contact@jewelstore.com</p>
                         <p class="text-white-50"><i class="bi bi-telephone-fill me-2"></i> +57 300 123 4567</p>
                     </div>
@@ -181,15 +196,22 @@
                 <div class="row align-items-center">
                     <div class="col-md-7 col-lg-8">
                         <p class="text-center text-md-start text-white-50 mb-0">
-                            © {{ date('Y') }} All rights reserved. <span class="text-brand-gold">{{ config('app.name', 'Laravel') }}</span>
+                            © {{ date('Y') }} All rights reserved. <span
+                                class="text-brand-gold">{{ config('app.name', 'Laravel') }}</span>
                         </p>
                     </div>
                     <div class="col-md-5 col-lg-4">
                         <div class="text-center text-md-end">
                             <ul class="list-unstyled list-inline mb-0">
-                                <li class="list-inline-item"><a href="#" class="text-white-50 text-decoration-none fs-5 me-2"><i class="bi bi-instagram"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="text-white-50 text-decoration-none fs-5 me-2"><i class="bi bi-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="text-white-50 text-decoration-none fs-5"><i class="bi bi-pinterest"></i></a></li>
+                                <li class="list-inline-item"><a href="#"
+                                        class="text-white-50 text-decoration-none fs-5 me-2"><i
+                                            class="bi bi-instagram"></i></a></li>
+                                <li class="list-inline-item"><a href="#"
+                                        class="text-white-50 text-decoration-none fs-5 me-2"><i
+                                            class="bi bi-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#"
+                                        class="text-white-50 text-decoration-none fs-5"><i
+                                            class="bi bi-pinterest"></i></a></li>
                             </ul>
                         </div>
                     </div>

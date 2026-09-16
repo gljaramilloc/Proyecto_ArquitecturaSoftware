@@ -52,11 +52,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/purchase', [CartController::class, 'purchase'])->name('cart.purchase');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Storefront (public catalog)
-|--------------------------------------------------------------------------
-*/
+// Storefront (public catalog)
+
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
@@ -64,11 +61,7 @@ Route::get('/categories/{category}', [CategoryController::class, 'show'])->name(
 Route::get('/jewels', [JewelController::class, 'index'])->name('jewels.index');
 Route::get('/jewels/{jewel}', [JewelController::class, 'show'])->name('jewels.show');
 
-/*
-|--------------------------------------------------------------------------
-| Administration section (fully separated from the storefront)
-|--------------------------------------------------------------------------
-*/
+// Administration section (fully separated from the storefront)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminHomeController::class, 'index'])->name('index');
 
