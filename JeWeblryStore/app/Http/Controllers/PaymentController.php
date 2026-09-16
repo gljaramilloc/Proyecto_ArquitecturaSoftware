@@ -38,10 +38,10 @@ class PaymentController extends Controller
         abort_if($order->getUser()->getId() !== Auth::id(), 403);
         abort_if($order->getPayment() !== null, 403);
 
-        $pendingStatus = Status::where('name', 'Pendiente')->firstOrFail();
+        $pendingStatus = Status::where('name', 'Pending')->firstOrFail();
 
         $payment = new Payment;
-        $payment->setAmount($request->validated('amount'));
+        $payment->setAmount($order->getTotal());
         $payment->setMethod($request->validated('method'));
         $payment->setDate($request->validated('date'));
         $payment->setStatusId($pendingStatus->getId());

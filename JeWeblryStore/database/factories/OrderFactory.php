@@ -10,7 +10,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::where('role', 'customer')->inRandomOrder()->first()->id,
+            'user_id' => User::where('role', 'customer')->inRandomOrder()->first()->getId(),
             'status_id' => 1,
             'total' => 0,
         ];

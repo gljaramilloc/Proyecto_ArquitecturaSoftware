@@ -17,7 +17,7 @@ class JewelFactory extends Factory
             'stock' => fake()->numberBetween(0, 50),
             'material' => fake()->randomElement(['Gold', 'Silver', 'Platinum', 'Rose Gold']),
             'image' => 'placeholder.jpg',
-            'category_id' => Category::inRandomOrder()->first()->id,
+            'category_id' => Category::inRandomOrder()->first()->getId(),
         ];
     }
 }

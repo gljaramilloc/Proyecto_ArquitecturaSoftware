@@ -20,4 +20,10 @@ return [
     'continue_shopping' => 'Continue Shopping',
     'jewel_not_exist' => 'The selected jewel does not exist.',
     'not_enough_stock' => 'Not enough stock available for this jewel.',
+    'add_to_cart' => 'Add to Cart',
+    'buy_now' => 'Buy Now',
+    'added' => 'Jewel added to your cart.',
+    'out_of_stock' => 'This jewel is out of stock.',
+    'stock_limit' => 'The requested quantity is not available.',
+    'invalid_items' => 'Some items in your cart are no longer available.',
 ];

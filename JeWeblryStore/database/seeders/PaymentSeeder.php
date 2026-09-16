@@ -11,7 +11,10 @@ class PaymentSeeder extends Seeder
     public function run(): void
     {
         // Only about 70% of orders get a payment, to simulate pending orders too
-        $orders = Order::inRandomOrder()->take((int) (Order::count() * 0.7))->get();
+        $orders = Order::whereDoesntHave('payment')
+            ->inRandomOrder()
+            ->take((int) (Order::count() * 0.7))
+            ->get();
 
         foreach ($orders as $order) {
             Payment::factory()->create([

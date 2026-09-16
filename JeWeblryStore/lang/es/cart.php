@@ -20,4 +20,10 @@ return [
     'continue_shopping' => 'Seguir comprando',
     'jewel_not_exist' => 'La joya seleccionada no existe.',
     'not_enough_stock' => 'No hay suficiente stock disponible para esta joya.',
+    'add_to_cart' => 'Añadir al carrito',
+    'buy_now' => 'Comprar ahora',
+    'added' => 'La joya se añadió a tu carrito.',
+    'out_of_stock' => 'Esta joya no está disponible.',
+    'stock_limit' => 'La cantidad solicitada no está disponible.',
+    'invalid_items' => 'Algunos productos de tu carrito ya no están disponibles.',
 ];

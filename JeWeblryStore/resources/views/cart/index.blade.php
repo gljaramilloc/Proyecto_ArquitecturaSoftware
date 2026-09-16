@@ -11,7 +11,7 @@
                             class="btn btn-sm btn-danger">{{ __('cart.remove_all') }}</a>
                     </div>
                     <div class="card-body p-4">
-                        @if(count($viewData['jewels']) > 0)
+                        @if (count($viewData['jewels']) > 0)
                             <div class="table-responsive">
                                 <table class="table table-hover align-middle">
                                     <thead>
@@ -26,7 +26,9 @@
                                         @foreach($viewData['jewels'] as $jewel)
                                             <tr>
                                                 <td>
-                                                    <strong>{{ $jewel->getName() }}</strong>
+                                                    <a href="{{ route('jewels.show', $jewel->getId()) }}" class="fw-bold text-decoration-none">
+                                                        {{ $jewel->getName() }}
+                                                    </a>
                                                 </td>
                                                 <td>${{ number_format($jewel->getPrice(), 2) }}</td>
                                                 <td class="text-center">

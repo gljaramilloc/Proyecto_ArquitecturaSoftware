@@ -42,7 +42,6 @@ class Status extends Model
     {
         $this->created_at = $createdAt;
 
-
         return $this;
     }
 
