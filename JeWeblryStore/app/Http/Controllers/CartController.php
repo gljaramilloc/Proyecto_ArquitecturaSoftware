@@ -105,11 +105,14 @@ class CartController extends Controller
     private function createOrder(array $cartSession): Order
     {
         $userId = Auth::user()->getId();
-        $jewels = Jewel::findMany(array_keys($cartSession));
 
-        abort_if($jewels->count() !== count($cartSession), 422, __('cart.invalid_items'));
+        return DB::transaction(function () use ($userId, $cartSession): Order {
+            $jewels = Jewel::whereIn('id', array_keys($cartSession))
+                ->lockForUpdate()
+                ->get();
 
-        return DB::transaction(function () use ($userId, $cartSession, $jewels): Order {
+            abort_if($jewels->count() !== count($cartSession), 422, __('cart.invalid_items'));
+
             $total = 0;
             foreach ($jewels as $jewel) {
                 $quantity = (int) ($cartSession[$jewel->getId()] ?? 0);
@@ -132,6 +135,9 @@ class CartController extends Controller
                 $orderItem->setJewelId($jewel->getId());
                 $orderItem->setOrderId($order->getId());
                 $orderItem->save();
+
+                $jewel->setStock($jewel->getStock() - $quantity);
+                $jewel->save();
             }
 
             return $order;

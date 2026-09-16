@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             StatusSeeder::class,
             CategorySeeder::class,
+            DefaultJewelSeeder::class,
             JewelSeeder::class,
             UserSeeder::class,
             OrderSeeder::class,
