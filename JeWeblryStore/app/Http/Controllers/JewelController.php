@@ -19,7 +19,7 @@ class JewelController extends Controller
         $searchCategoryId = $request->filled('category_id') ? (int) $request->query('category_id') : null;
 
         $viewData = [];
-        $viewData['title'] = 'Catalog';
+        $viewData['title'] = __('catalog.title');
         $viewData['jewels'] = Jewel::with(['status', 'category'])
             ->search($searchName, $searchCategoryId)
             ->get();
@@ -33,9 +33,9 @@ class JewelController extends Controller
     /**
      * Show a single jewel's detail page.
      */
-    public function show(Jewel $jewel): View
+    public function show(int $id): View
     {
-        $jewel->load(['status', 'category']);
+        $jewel = Jewel::with(['status', 'category'])->findOrFail($id);
 
         $viewData = [];
         $viewData['title'] = $jewel->getName();

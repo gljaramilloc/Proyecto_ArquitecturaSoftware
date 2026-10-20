@@ -197,6 +197,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'lastNames' => 'last name',
+        'phoneNumber' => 'phone number',
+        'status_id' => 'status',
+        'category_id' => 'category',
+        'unit_price' => 'unit price',
+        'order_id' => 'order',
+        'jewel_id' => 'jewel',
+    ],
 
 ];

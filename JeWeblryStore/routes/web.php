@@ -55,24 +55,24 @@ Route::middleware(['auth'])->group(function () {
 // Storefront (public catalog)
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
 
 // The listing/search route must come before {jewel} to avoid segment collisions.
 Route::get('/jewels', [JewelController::class, 'index'])->name('jewels.index');
-Route::get('/jewels/{jewel}', [JewelController::class, 'show'])->name('jewels.show');
+Route::get('/jewels/{id}', [JewelController::class, 'show'])->name('jewels.show');
 
 // Administration section (fully separated from the storefront)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminHomeController::class, 'index'])->name('index');
 
     Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
-    Route::patch('users/{user}/role', [AdminUserController::class, 'updateRole'])->name('users.updateRole');
+    Route::patch('users/{id}/role', [AdminUserController::class, 'updateRole'])->name('users.updateRole');
 
-    Route::resource('categories', AdminCategoryController::class)->except(['show']);
-    Route::patch('categories/{category}/toggle-status', [AdminCategoryController::class, 'toggleStatus'])
+    Route::resource('categories', AdminCategoryController::class)->except(['show'])->parameters(['categories' => 'id']);
+    Route::patch('categories/{id}/toggle-status', [AdminCategoryController::class, 'toggleStatus'])
         ->name('categories.toggleStatus');
 
-    Route::resource('jewels', AdminJewelController::class)->except(['show']);
-    Route::patch('jewels/{jewel}/toggle-status', [AdminJewelController::class, 'toggleStatus'])
+    Route::resource('jewels', AdminJewelController::class)->except(['show'])->parameters(['jewels' => 'id']);
+    Route::patch('jewels/{id}/toggle-status', [AdminJewelController::class, 'toggleStatus'])
         ->name('jewels.toggleStatus');
 });

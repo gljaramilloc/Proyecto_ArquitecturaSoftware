@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', __('cart.purchase_title'))
+
 @section('content')
     <div class="container my-5">
         <div class="row justify-content-center">

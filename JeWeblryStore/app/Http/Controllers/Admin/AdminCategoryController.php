@@ -18,7 +18,7 @@ class AdminCategoryController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Manage Categories - Online Store';
+        $viewData['title'] = __('admin.manage_categories');
         $viewData['categories'] = Category::with('status')->get();
 
         return view('admin.categories.index')->with('viewData', $viewData);
@@ -27,7 +27,7 @@ class AdminCategoryController extends Controller
     public function create(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Create Category - Online Store';
+        $viewData['title'] = __('admin.create_category');
         $viewData['statuses'] = Status::all();
 
         return view('admin.categories.create')->with('viewData', $viewData);
@@ -37,35 +37,41 @@ class AdminCategoryController extends Controller
     {
         Category::create($request->validated());
 
-        return redirect()->route('admin.categories.index')->with('status', 'Category created successfully.');
+        return redirect()->route('admin.categories.index')->with('status', __('admin.category_created'));
     }
 
-    public function edit(Category $category): View
+    public function edit(int $id): View
     {
+        $category = Category::findOrFail($id);
+
         $viewData = [];
-        $viewData['title'] = 'Edit Category - Online Store';
+        $viewData['title'] = __('admin.edit_category');
         $viewData['category'] = $category;
         $viewData['statuses'] = Status::all();
 
         return view('admin.categories.edit')->with('viewData', $viewData);
     }
 
-    public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
+    public function update(UpdateCategoryRequest $request, int $id): RedirectResponse
     {
+        $category = Category::findOrFail($id);
         $category->update($request->validated());
 
-        return redirect()->route('admin.categories.index')->with('status', 'Category updated successfully.');
+        return redirect()->route('admin.categories.index')->with('status', __('admin.category_updated'));
     }
 
-    public function destroy(Category $category): RedirectResponse
+    public function destroy(int $id): RedirectResponse
     {
+        $category = Category::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('admin.categories.index')->with('status', 'Category deleted successfully.');
+        return redirect()->route('admin.categories.index')->with('status', __('admin.category_deleted'));
     }
 
-    public function toggleStatus(Category $category): RedirectResponse
+    public function toggleStatus(int $id): RedirectResponse
     {
+        $category = Category::findOrFail($id);
+
         return $this->toggleModelStatus($category, 'admin.categories.index');
     }
 }

@@ -4,6 +4,8 @@
     <link href="{{ asset('css/pages/auth/register.css') }}" rel="stylesheet">
 @endpush
 
+@section('title', __('Register'))
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

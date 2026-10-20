@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container py-4">
-        <h1 class="h3 mb-4">Edit Jewel</h1>
+        <h1 class="h3 mb-4">{{ __('admin.edit_jewel') }}</h1>
 
         <div class="card border-0 shadow-sm">
             <div class="card-body">
@@ -13,39 +13,39 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label class="form-label">Name</label>
+                        <label class="form-label">{{ __('admin.name') }}</label>
                         <input type="text" name="name" class="form-control" value="{{ old('name', $viewData['jewel']->getName()) }}" required>
                         @error('name') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Price</label>
+                            <label class="form-label">{{ __('admin.price') }}</label>
                             <input type="number" step="0.01" name="price" class="form-control" value="{{ old('price', $viewData['jewel']->getPrice()) }}" required>
                             @error('price') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Stock</label>
+                            <label class="form-label">{{ __('admin.stock') }}</label>
                             <input type="number" name="stock" class="form-control" value="{{ old('stock', $viewData['jewel']->getStock()) }}" required>
                             @error('stock') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Description</label>
+                        <label class="form-label">{{ __('admin.description') }}</label>
                         <textarea name="description" class="form-control" rows="3" required>{{ old('description', $viewData['jewel']->getDescription()) }}</textarea>
                         @error('description') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Material</label>
+                        <label class="form-label">{{ __('admin.material') }}</label>
                         <input type="text" name="material" class="form-control" value="{{ old('material', $viewData['jewel']->getMaterial()) }}" required>
                         @error('material') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Category</label>
+                            <label class="form-label">{{ __('admin.category') }}</label>
                             <select name="category_id" class="form-select" required>
                                 @foreach ($viewData['categories'] as $category)
                                     <option
@@ -59,14 +59,14 @@
                             @error('category_id') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Status</label>
+                            <label class="form-label">{{ __('admin.status') }}</label>
                             <select name="status_id" class="form-select" required>
                                 @foreach ($viewData['statuses'] as $status)
                                     <option
                                         value="{{ $status->getId() }}"
                                         {{ old('status_id', $viewData['jewel']->getStatusId()) == $status->getId() ? 'selected' : '' }}
                                     >
-                                        {{ $status->getName() }}
+                                        {{ __('status.'.$status->getName()) }}
                                     </option>
                                 @endforeach
                             </select>
@@ -81,13 +81,13 @@
                     @endif
 
                     <div class="mb-4">
-                        <label class="form-label">Replace image (optional)</label>
+                        <label class="form-label">{{ __('admin.replace_image') }}</label>
                         <input type="file" name="image" class="form-control" accept="image/*">
                         @error('image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-brand">Update</button>
-                    <a href="{{ route('admin.jewels.index') }}" class="btn btn-link">Cancel</a>
+                    <button type="submit" class="btn btn-brand">{{ __('admin.update') }}</button>
+                    <a href="{{ route('admin.jewels.index') }}" class="btn btn-link">{{ __('admin.cancel') }}</a>
                 </form>
             </div>
         </div>

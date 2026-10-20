@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="container py-5">
-        <nav aria-label="breadcrumb" class="mb-4">
+        <nav aria-label="{{ __('catalog.breadcrumb') }}" class="mb-4">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('jewels.index') }}">Catalog</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('jewels.index') }}">{{ __('catalog.title') }}</a></li>
                 <li class="breadcrumb-item">
                     <a href="{{ route('categories.show', $viewData['jewel']->getCategoryId()) }}">
                         {{ $viewData['jewel']->getCategory()?->getName() }}
@@ -46,15 +46,15 @@
 
                         <ul class="list-group list-group-flush mt-auto">
                             <li class="list-group-item d-flex justify-content-between px-0">
-                                <span class="text-muted">Material</span>
+                                <span class="text-muted">{{ __('catalog.material') }}</span>
                                 <span class="fw-semibold">{{ $viewData['jewel']->getMaterial() }}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between px-0">
-                                <span class="text-muted">Availability</span>
+                                <span class="text-muted">{{ __('catalog.availability') }}</span>
                                 @if ($viewData['jewel']->getStock() > 0)
-                                    <span class="badge bg-success">{{ $viewData['jewel']->getStock() }} in stock</span>
+                                    <span class="badge bg-success">{{ __('catalog.in_stock', ['count' => $viewData['jewel']->getStock()]) }}</span>
                                 @else
-                                    <span class="badge bg-danger">Out of stock</span>
+                                    <span class="badge bg-danger">{{ __('catalog.out_of_stock') }}</span>
                                 @endif
                             </li>
                         </ul>
@@ -79,7 +79,7 @@
                         @endauth
 
                         <a href="{{ route('jewels.index') }}" class="btn btn-outline-dark mt-4 align-self-start">
-                            &larr; Back to catalog
+                            &larr; {{ __('catalog.back_to_catalog') }}
                         </a>
                     </div>
                 </div>

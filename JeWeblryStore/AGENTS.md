@@ -27,6 +27,7 @@
 * **Consistencia Interna:** Todos los métodos dentro de un mismo controlador deben seguir un estilo de codificación idéntico[cite: 3].
 * **Importaciones:** Se deben importar las clases usando `use` en la parte superior del archivo, evitando escribir el namespace completo de forma inline[cite: 3].
 * **Confirmación de Destrucción:** Considera agregar un mensaje de confirmación antes de ejecutar cualquier acción destructiva, como eliminar un registro[cite: 3].
+* **Prohibido Route Model Binding:** No implementes Route Model Binding implícito ni explícito. No tipifiques parámetros de ruta con modelos ni uses `Route::model()` o `Route::bind()`; recibe el ID como escalar (por ejemplo, `int $id`) y busca el modelo explícitamente con Eloquent, como `Model::findOrFail($id)`.
 
 ## 3. Reglas de Modelos (CRÍTICO)
 * **Docblock Obligatorio:** Se debe comentar obligatoriamente al inicio del modelo la lista completa de atributos usando un docblock de tipo `@property`, dado que Eloquent no declara las propiedades explícitamente[cite: 3].

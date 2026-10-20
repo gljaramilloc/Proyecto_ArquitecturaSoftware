@@ -5,9 +5,9 @@
 @section('content')
     <div class="container py-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="h3 mb-0">Manage Jewels</h1>
+            <h1 class="h3 mb-0">{{ __('admin.manage_jewels') }}</h1>
             <a href="{{ route('admin.jewels.create') }}" class="btn btn-brand">
-                <i class="bi bi-plus-lg"></i> New Jewel
+                <i class="bi bi-plus-lg"></i> {{ __('admin.new_jewel') }}
             </a>
         </div>
 
@@ -16,13 +16,13 @@
                 <table class="table table-striped mb-0 align-middle">
                     <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Status</th>
-                            <th class="text-end">Actions</th>
+                            <th>{{ __('admin.image') }}</th>
+                            <th>{{ __('admin.name') }}</th>
+                            <th>{{ __('admin.category') }}</th>
+                            <th>{{ __('admin.price') }}</th>
+                            <th>{{ __('admin.stock') }}</th>
+                            <th>{{ __('admin.status') }}</th>
+                            <th class="text-end">{{ __('admin.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,19 +43,19 @@
                                 <td>{{ $jewel->getStock() }}</td>
                                 <td>
                                     <span class="badge {{ $jewel->isActive() ? 'bg-success' : 'bg-secondary' }}">
-                                        {{ $jewel->getStatus()?->getName() }}
+                                        {{ $jewel->getStatus() ? __('status.'.$jewel->getStatus()->getName()) : __('admin.not_available') }}
                                     </span>
                                 </td>
                                 <td class="text-end">
                                     <a href="{{ route('admin.jewels.edit', $jewel->getId()) }}" class="btn btn-sm btn-outline-secondary">
-                                        <i class="bi bi-pencil"></i> Edit
+                                        <i class="bi bi-pencil"></i> {{ __('admin.edit') }}
                                     </a>
 
                                     <form action="{{ route('admin.jewels.toggleStatus', $jewel->getId()) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-sm btn-outline-warning">
-                                            {{ $jewel->isActive() ? 'Deactivate' : 'Activate' }}
+                                            {{ $jewel->isActive() ? __('admin.deactivate') : __('admin.activate') }}
                                         </button>
                                     </form>
 
@@ -63,11 +63,11 @@
                                         action="{{ route('admin.jewels.destroy', $jewel->getId()) }}"
                                         method="POST"
                                         class="d-inline"
-                                        onsubmit="return confirm('Are you sure you want to delete this jewel? This action cannot be undone.');"
+                                        onsubmit="return confirm(@js(__('admin.confirm_delete_jewel')));"
                                     >
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="{{ __('admin.delete') }}" aria-label="{{ __('admin.delete') }}">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
@@ -75,9 +75,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center text-muted py-4">
-                                    No jewels registered yet.
-                                </td>
+                                <td colspan="7" class="text-center text-muted py-4">{{ __('admin.no_jewels') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

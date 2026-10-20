@@ -24,6 +24,6 @@ trait TogglesActiveStatus
             $model->save();
         }
 
-        return redirect()->route($redirectRoute)->with('status', 'Status updated successfully.');
+        return redirect()->route($redirectRoute)->with('status', __('admin.status_updated'));
     }
 }

@@ -38,7 +38,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-secondary shadow-sm py-3">
             <div class="container">
                 <a class="navbar-brand fw-bold fs-4 font-display text-brand-gold" href="{{ route('home.index') }}">
-                    <img src="{{ asset('logo.svg') }}" alt="Logo" width="150" height="50">
+                    <img src="{{ asset('logo.svg') }}" alt="{{ __('navigation.logo') }}" width="150" height="50">
                     {{ config('app.name', 'JeWeblryStore') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -52,19 +52,19 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('home.index') ? 'active fw-bold' : '' }}"
                                 href="{{ route('home.index') }}">
-                                Home
+                                {{ __('navigation.home') }}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('jewels.*') ? 'active fw-bold' : '' }}"
                                 href="{{ route('jewels.index') }}">
-                                Catalog
+                                {{ __('navigation.catalog') }}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('categories.*') ? 'active fw-bold' : '' }}"
                                 href="{{ route('categories.index') }}">
-                                Categories
+                                {{ __('navigation.categories') }}
                             </a>
                         </li>
                     </ul>
@@ -80,10 +80,10 @@
                             <!-- Cart Link -->
                             <li class="nav-item me-2">
                                 <a class="nav-link" href="{{ route('cart.index') }}">
-                                    <i class="bi bi-cart3 me-1"></i>{{ __('cart.title') }}
+                                    <i class="bi bi-cart3 me-1"></i>{{ __('navigation.cart') }}
                                     @if (array_sum(session('cart', [])) > 0)
-                                        <span
-                                            class="badge rounded-pill bg-danger">{{ array_sum(session('cart', [])) }}</span>
+                                        <span class="badge rounded-pill bg-danger"
+                                            aria-label="{{ trans_choice('cart.item_count', array_sum(session('cart', [])), ['count' => array_sum(session('cart', []))]) }}">{{ array_sum(session('cart', [])) }}</span>
                                     @endif
                                 </a>
                             </li>
@@ -115,14 +115,14 @@
                                     </a>
                                     @if (Auth::user()->isAdmin())
                                         <a class="dropdown-item" href="{{ route('admin.index') }}">
-                                            <i class="bi bi-speedometer2 me-2"></i>Admin Dashboard
+                                            <i class="bi bi-speedometer2 me-2"></i>{{ __('navigation.admin_dashboard') }}
                                         </a>
                                     @endif
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('navigation.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -151,7 +151,8 @@
                 <div class="container mt-4">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('status') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="{{ __('ui.close') }}"></button>
                     </div>
                 </div>
             @endif
@@ -167,25 +168,26 @@
                         <h4 class="text-uppercase mb-4 font-display text-brand-gold">
                             {{ config('app.name', 'Laravel') }}</h4>
                         <p class="text-white-50 footer-tagline">
-                            Creating unforgettable moments through exceptional pieces. Design, quality, and absolute
-                            elegance in every detail of our collections.
+                            {{ __('navigation.footer_tagline') }}
                         </p>
                     </div>
 
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 class="text-uppercase mb-4 fw-bold text-brand-gold footer-heading">Collections</h6>
-                        <p><a href="{{ route('jewels.index') }}" class="text-white-50 text-decoration-none">View
-                                All</a></p>
-                        <p><a href="{{ route('categories.index') }}" class="text-white-50 text-decoration-none">New
-                                Arrivals</a></p>
-                        <p><a href="{{ route('jewels.index') }}" class="text-white-50 text-decoration-none">Best
-                                Sellers</a></p>
+                        <h6 class="text-uppercase mb-4 fw-bold text-brand-gold footer-heading">
+                            {{ __('navigation.collections') }}</h6>
+                        <p><a href="{{ route('jewels.index') }}"
+                                class="text-white-50 text-decoration-none">{{ __('navigation.view_all') }}</a></p>
+                        <p><a href="{{ route('categories.index') }}"
+                                class="text-white-50 text-decoration-none">{{ __('navigation.new_arrivals') }}</a></p>
+                        <p><a href="{{ route('jewels.index') }}"
+                                class="text-white-50 text-decoration-none">{{ __('navigation.best_sellers') }}</a></p>
                     </div>
 
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <h6 class="text-uppercase mb-4 fw-bold text-brand-gold footer-heading">Contact</h6>
-                        <p class="text-white-50"><i class="bi bi-geo-alt-fill me-2"></i> Bello, Antioquia, Colombia
-                        </p>
+                        <h6 class="text-uppercase mb-4 fw-bold text-brand-gold footer-heading">
+                            {{ __('navigation.contact') }}</h6>
+                        <p class="text-white-50"><i
+                                class="bi bi-geo-alt-fill me-2"></i>{{ __('navigation.address') }}</p>
                         <p class="text-white-50"><i class="bi bi-envelope-fill me-2"></i> contact@jewelstore.com</p>
                         <p class="text-white-50"><i class="bi bi-telephone-fill me-2"></i> +57 300 123 4567</p>
                     </div>
@@ -196,21 +198,21 @@
                 <div class="row align-items-center">
                     <div class="col-md-7 col-lg-8">
                         <p class="text-center text-md-start text-white-50 mb-0">
-                            © {{ date('Y') }} All rights reserved. <span
+                            © {{ date('Y') }} {{ __('navigation.copyright') }} <span
                                 class="text-brand-gold">{{ config('app.name', 'Laravel') }}</span>
                         </p>
                     </div>
                     <div class="col-md-5 col-lg-4">
                         <div class="text-center text-md-end">
                             <ul class="list-unstyled list-inline mb-0">
-                                <li class="list-inline-item"><a href="#"
-                                        class="text-white-50 text-decoration-none fs-5 me-2"><i
+                                <li class="list-inline-item"><a href="#" aria-label="{{ __('navigation.instagram') }}"
+                                    class="text-white-50 text-decoration-none fs-5 me-2"><i
                                             class="bi bi-instagram"></i></a></li>
-                                <li class="list-inline-item"><a href="#"
-                                        class="text-white-50 text-decoration-none fs-5 me-2"><i
+                                <li class="list-inline-item"><a href="#" aria-label="{{ __('navigation.facebook') }}"
+                                    class="text-white-50 text-decoration-none fs-5 me-2"><i
                                             class="bi bi-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#"
-                                        class="text-white-50 text-decoration-none fs-5"><i
+                                <li class="list-inline-item"><a href="#" aria-label="{{ __('navigation.pinterest') }}"
+                                    class="text-white-50 text-decoration-none fs-5"><i
                                             class="bi bi-pinterest"></i></a></li>
                             </ul>
                         </div>

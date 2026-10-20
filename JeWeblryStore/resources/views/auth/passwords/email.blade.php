@@ -4,6 +4,8 @@
     <link href="{{ asset('css/pages/auth/passwords/email.css') }}" rel="stylesheet">
 @endpush
 
+@section('title', __('Reset Password'))
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

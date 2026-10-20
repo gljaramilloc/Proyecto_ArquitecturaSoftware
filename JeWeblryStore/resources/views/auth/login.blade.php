@@ -4,6 +4,8 @@
     <link href="{{ asset('css/pages/auth/login.css') }}" rel="stylesheet">
 @endpush
 
+@section('title', __('Login'))
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -62,7 +64,7 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link bg-primary text-white"" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link bg-primary text-white" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif

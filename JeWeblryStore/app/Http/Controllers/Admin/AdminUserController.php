@@ -13,21 +13,22 @@ class AdminUserController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Manage Users - Online Store';
+        $viewData['title'] = __('admin.manage_users');
         $viewData['users'] = User::query()->orderBy('name')->get();
 
         return view('admin.users.index')->with('viewData', $viewData);
     }
 
-    public function updateRole(UpdateUserRoleRequest $request, User $user): RedirectResponse
+    public function updateRole(UpdateUserRoleRequest $request, int $id): RedirectResponse
     {
-        abort_if($request->user()->getId() === $user->getId(), 422, 'You cannot change your own role.');
+        $user = User::findOrFail($id);
+        abort_if($request->user()->getId() === $user->getId(), 422, __('admin.cannot_change_own_role'));
 
         $user->setRole($request->validated('role'));
         $user->save();
 
         return redirect()
             ->route('admin.users.index')
-            ->with('status', 'User role updated successfully.');
+            ->with('status', __('admin.role_updated'));
     }
 }

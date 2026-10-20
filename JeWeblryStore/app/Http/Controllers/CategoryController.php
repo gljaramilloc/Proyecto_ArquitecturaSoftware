@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Categories';
+        $viewData['title'] = __('catalog.categories_title');
         $viewData['categories'] = Category::with('status')->get();
 
         return view('categories.index')->with('viewData', $viewData);
@@ -22,9 +22,9 @@ class CategoryController extends Controller
     /**
      * Show a category and its associated jewels.
      */
-    public function show(Category $category): View
+    public function show(int $id): View
     {
-        $category->load(['status', 'jewels.status']);
+        $category = Category::with(['status', 'jewels.status'])->findOrFail($id);
 
         $viewData = [];
         $viewData['title'] = $category->getName();

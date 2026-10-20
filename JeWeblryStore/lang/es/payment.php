@@ -10,6 +10,7 @@ return [
     'method' => 'Método de Pago',
     'credit_card' => 'Tarjeta de Crédito',
     'debit_card' => 'Tarjeta de Débito',
+    'paypal' => 'PayPal',
     'date' => 'Fecha',
     'status' => 'Estado',
     'save' => 'Registrar Pago',

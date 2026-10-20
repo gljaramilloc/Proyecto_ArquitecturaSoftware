@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Home Page - Online Store';
+        $viewData['title'] = __('home.title');
         $viewData['featuredJewels'] = Jewel::with(['status', 'category'])
             ->active()
             ->latest()

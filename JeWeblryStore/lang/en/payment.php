@@ -10,6 +10,7 @@ return [
     'method' => 'Payment Method',
     'credit_card' => 'Credit Card',
     'debit_card' => 'Debit Card',
+    'paypal' => 'PayPal',
     'date' => 'Date',
     'status' => 'Status',
     'save' => 'Register Payment',

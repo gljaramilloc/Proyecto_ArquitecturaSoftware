@@ -30,10 +30,10 @@
                         <td>#{{ $order->getId() }}</td>
                         <td>{{ $order->getCreatedAt() }}</td>
                         <td>${{ $order->getTotal() }}</td>
-                        <td>{{ $order->getStatus()?->getName() }}</td>
+                        <td>{{ $order->getStatus() ? __('status.'.$order->getStatus()->getName()) : __('admin.not_available') }}</td>
                         <td>
                             @if ($order->getPayment())
-                                {{ $order->getPayment()->getStatus()?->getName() }}
+                                {{ $order->getPayment()->getStatus() ? __('status.'.$order->getPayment()->getStatus()->getName()) : __('admin.not_available') }}
                             @else
                                 {{ __('order.no_payment') }}
                             @endif

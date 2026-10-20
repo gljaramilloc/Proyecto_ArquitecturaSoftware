@@ -36,7 +36,7 @@
                     <select name="method" class="form-control">
                         <option value="credit_card" {{ old('method') === 'credit_card' ? 'selected' : '' }}>{{ __('payment.credit_card') }}</option>
                         <option value="debit_card" {{ old('method') === 'debit_card' ? 'selected' : '' }}>{{ __('payment.debit_card') }}</option>
-                        <option value="paypal" {{ old('method') === 'paypal' ? 'selected' : '' }}>PayPal</option>
+                        <option value="paypal" {{ old('method') === 'paypal' ? 'selected' : '' }}>{{ __('payment.paypal') }}</option>
                     </select>
                 </div>
 

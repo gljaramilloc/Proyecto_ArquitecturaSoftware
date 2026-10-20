@@ -197,6 +197,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'lastNames' => 'apellidos',
+        'phoneNumber' => 'teléfono',
+        'status_id' => 'estado',
+        'category_id' => 'categoría',
+        'unit_price' => 'precio unitario',
+        'order_id' => 'pedido',
+        'jewel_id' => 'joya',
+    ],
 
 ];

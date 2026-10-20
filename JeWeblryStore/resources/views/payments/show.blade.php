@@ -18,9 +18,9 @@
 
             @if ($viewData['payment'])
                 <p><strong>{{ __('payment.amount') }}:</strong> ${{ $viewData['payment']->getAmount() }}</p>
-                <p><strong>{{ __('payment.method') }}:</strong> {{ $viewData['payment']->getMethod() }}</p>
+                <p><strong>{{ __('payment.method') }}:</strong> {{ __('payment.'.$viewData['payment']->getMethod()) }}</p>
                 <p><strong>{{ __('payment.date') }}:</strong> {{ $viewData['payment']->getDate() }}</p>
-                <p><strong>{{ __('payment.status') }}:</strong> {{ $viewData['payment']->getStatus()->getName() }}</p>
+                <p><strong>{{ __('payment.status') }}:</strong> {{ $viewData['payment']->getStatus() ? __('status.'.$viewData['payment']->getStatus()->getName()) : __('admin.not_available') }}</p>
             @else
                 <p>{{ __('payment.no_payment') }}</p>
                 <a href="{{ route('payments.create', $viewData['order']->getId()) }}" class="btn btn-primary">{{ __('payment.register') }}</a>

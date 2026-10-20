@@ -22,7 +22,7 @@ class AdminJewelController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Manage Jewels - Online Store';
+        $viewData['title'] = __('admin.manage_jewels');
         $viewData['jewels'] = Jewel::with(['status', 'category'])->get();
 
         return view('admin.jewels.index')->with('viewData', $viewData);
@@ -31,7 +31,7 @@ class AdminJewelController extends Controller
     public function create(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Create Jewel - Online Store';
+        $viewData['title'] = __('admin.create_jewel');
         $viewData['statuses'] = Status::all();
         $viewData['categories'] = Category::all();
 
@@ -48,13 +48,15 @@ class AdminJewelController extends Controller
 
         Jewel::create($jewelData);
 
-        return redirect()->route('admin.jewels.index')->with('status', 'Jewel created successfully.');
+        return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_created'));
     }
 
-    public function edit(Jewel $jewel): View
+    public function edit(int $id): View
     {
+        $jewel = Jewel::findOrFail($id);
+
         $viewData = [];
-        $viewData['title'] = 'Edit Jewel - Online Store';
+        $viewData['title'] = __('admin.edit_jewel');
         $viewData['jewel'] = $jewel;
         $viewData['statuses'] = Status::all();
         $viewData['categories'] = Category::all();
@@ -62,8 +64,9 @@ class AdminJewelController extends Controller
         return view('admin.jewels.edit')->with('viewData', $viewData);
     }
 
-    public function update(UpdateJewelRequest $request, Jewel $jewel): RedirectResponse
+    public function update(UpdateJewelRequest $request, int $id): RedirectResponse
     {
+        $jewel = Jewel::findOrFail($id);
         $jewelData = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -73,19 +76,22 @@ class AdminJewelController extends Controller
 
         $jewel->update($jewelData);
 
-        return redirect()->route('admin.jewels.index')->with('status', 'Jewel updated successfully.');
+        return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_updated'));
     }
 
-    public function destroy(Jewel $jewel): RedirectResponse
+    public function destroy(int $id): RedirectResponse
     {
+        $jewel = Jewel::findOrFail($id);
         $this->imageUploadService->delete($jewel->getImage());
         $jewel->delete();
 
-        return redirect()->route('admin.jewels.index')->with('status', 'Jewel deleted successfully.');
+        return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_deleted'));
     }
 
-    public function toggleStatus(Jewel $jewel): RedirectResponse
+    public function toggleStatus(int $id): RedirectResponse
     {
+        $jewel = Jewel::findOrFail($id);
+
         return $this->toggleModelStatus($jewel, 'admin.jewels.index');
     }
 }

@@ -3,8 +3,8 @@
     <section class="py-5 bg-white">
         <div class="container py-4">
             <div class="text-center mb-5">
-                <p class="text-muted text-uppercase small mb-1">Exclusive Catalog</p>
-                <h2 class="font-display text-dark display-6">New Arrivals</h2>
+                <p class="text-muted text-uppercase small mb-1">{{ __('home.exclusive_catalog') }}</p>
+                <h2 class="font-display text-dark display-6">{{ __('home.new_arrivals') }}</h2>
             </div>
 
             <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -25,7 +25,7 @@
 
                                 <div class="mt-auto">
                                     <p class="fw-bold fs-5 text-brand-gold mb-3">${{ number_format($jewel->getPrice(), 2) }}</p>
-                                    <a href="{{ route('jewels.show', $jewel->getId()) }}" class="btn btn-brand-outline w-100">View Detail</a>
+                                    <a href="{{ route('jewels.show', $jewel->getId()) }}" class="btn btn-brand-outline w-100">{{ __('home.view_detail') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="text-center mt-5">
-                <a href="{{ route('jewels.index') }}" class="btn btn-brand">View All Jewels</a>
+                <a href="{{ route('jewels.index') }}" class="btn btn-brand">{{ __('home.view_all_jewels') }}</a>
             </div>
         </div>
     </section>

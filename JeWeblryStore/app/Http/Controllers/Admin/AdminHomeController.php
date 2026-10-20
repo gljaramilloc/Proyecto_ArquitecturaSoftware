@@ -14,7 +14,7 @@ class AdminHomeController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Admin Dashboard - Online Store';
+        $viewData['title'] = __('admin.dashboard');
         $viewData['userCount'] = User::count();
         $viewData['jewelCount'] = Jewel::count();
         $viewData['categoryCount'] = Category::count();

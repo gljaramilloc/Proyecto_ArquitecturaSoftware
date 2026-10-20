@@ -11,7 +11,7 @@
     <h1>{{ __('order.details_title') }} #{{ $viewData['order']->getId() }}</h1>
 
     <p><strong>{{ __('order.date') }}:</strong> {{ $viewData['order']->getCreatedAt() }}</p>
-    <p><strong>{{ __('order.status') }}:</strong> {{ $viewData['order']->getStatus()?->getName() }}</p>
+    <p><strong>{{ __('order.status') }}:</strong> {{ $viewData['order']->getStatus() ? __('status.'.$viewData['order']->getStatus()->getName()) : __('admin.not_available') }}</p>
 
     <h2>{{ __('order.items_title') }}</h2>
     <table class="table">
@@ -40,8 +40,8 @@
     <h2>{{ __('order.payment_title') }}</h2>
     @if ($viewData['order']->getPayment())
         <p><strong>{{ __('payment.amount') }}:</strong> ${{ $viewData['order']->getPayment()->getAmount() }}</p>
-        <p><strong>{{ __('payment.method') }}:</strong> {{ $viewData['order']->getPayment()->getMethod() }}</p>
-        <p><strong>{{ __('payment.status') }}:</strong> {{ $viewData['order']->getPayment()->getStatus()?->getName() }}</p>
+        <p><strong>{{ __('payment.method') }}:</strong> {{ __('payment.'.$viewData['order']->getPayment()->getMethod()) }}</p>
+        <p><strong>{{ __('payment.status') }}:</strong> {{ $viewData['order']->getPayment()->getStatus() ? __('status.'.$viewData['order']->getPayment()->getStatus()->getName()) : __('admin.not_available') }}</p>
     @else
         <p>{{ __('order.no_payment') }}</p>
         <a href="{{ route('payments.create', $viewData['order']->getId()) }}" class="btn btn-primary">{{ __('payment.register') }}</a>

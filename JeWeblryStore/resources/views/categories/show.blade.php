@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="container py-5">
-        <nav aria-label="breadcrumb" class="mb-3">
+        <nav aria-label="{{ __('catalog.breadcrumb') }}" class="mb-3">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Categories</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">{{ __('catalog.categories_title') }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $viewData['category']->getName() }}</li>
             </ol>
         </nav>
@@ -16,7 +16,7 @@
             <p>{{ $viewData['category']->getDescription() }}</p>
         </div>
 
-        <h2 class="h4 mb-4">Jewels in this category</h2>
+        <h2 class="h4 mb-4">{{ __('catalog.jewels_in_category') }}</h2>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
             @forelse ($viewData['jewels'] as $jewel)
@@ -32,14 +32,14 @@
 
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title mb-1">{{ $jewel->getName() }}</h5>
-                            <p class="text-muted small mb-3">{{ $jewel->getStock() > 0 ? $jewel->getStock() . ' in stock' : 'Out of stock' }}</p>
+                            <p class="text-muted small mb-3">{{ $jewel->getStock() > 0 ? __('catalog.in_stock', ['count' => $jewel->getStock()]) : __('catalog.out_of_stock') }}</p>
 
                             <div class="mt-auto d-flex justify-content-between align-items-center">
                                 <span class="fw-bold fs-5 text-brand-gold">
                                     ${{ number_format($jewel->getPrice(), 2) }}
                                 </span>
                                 <a href="{{ route('jewels.show', $jewel->getId()) }}" class="btn btn-sm btn-outline-dark">
-                                    View detail
+                                    {{ __('catalog.view_detail') }}
                                 </a>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
             @empty
                 <div class="col-12">
                     <div class="alert alert-light border text-center">
-                        No jewels registered in this category yet.
+                        {{ __('catalog.no_category_jewels') }}
                     </div>
                 </div>
             @endforelse

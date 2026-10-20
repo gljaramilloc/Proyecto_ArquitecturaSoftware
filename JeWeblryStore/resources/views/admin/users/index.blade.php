@@ -6,10 +6,10 @@
     <div class="container py-5">
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
             <div>
-                <p class="text-brand-gold text-uppercase fw-bold small mb-1">Administration</p>
-                <h1 class="h2 font-display text-dark mb-0">Manage Users</h1>
+                <p class="text-brand-gold text-uppercase fw-bold small mb-1">{{ __('admin.administration') }}</p>
+                <h1 class="h2 font-display text-dark mb-0">{{ __('admin.manage_users') }}</h1>
             </div>
-            <a href="{{ route('admin.index') }}" class="btn btn-outline-dark rounded-0">Back to dashboard</a>
+            <a href="{{ route('admin.index') }}" class="btn btn-outline-dark rounded-0">{{ __('admin.back_to_dashboard') }}</a>
         </div>
 
         <div class="card border shadow-sm rounded-0 bg-white">
@@ -18,10 +18,10 @@
                     <table class="table align-middle mb-0">
                         <thead>
                             <tr class="text-uppercase small text-muted">
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th class="text-end">Actions</th>
+                                <th>{{ __('admin.user_name') }}</th>
+                                <th>{{ __('admin.email') }}</th>
+                                <th>{{ __('admin.role') }}</th>
+                                <th class="text-end">{{ __('admin.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,7 +31,7 @@
                                     <td>{{ $user->getEmail() }}</td>
                                     <td>
                                         <span class="badge {{ $user->isAdmin() ? 'bg-dark' : 'bg-secondary' }}">
-                                            {{ ucfirst($user->getRole()) }}
+                                            {{ __('admin.'.$user->getRole()) }}
                                         </span>
                                     </td>
                                     <td class="text-end">
@@ -39,20 +39,20 @@
                                             <form action="{{ route('admin.users.updateRole', $user->getId()) }}" method="POST" class="d-inline-flex align-items-center gap-2">
                                                 @csrf
                                                 @method('PATCH')
-                                                <select name="role" class="form-select form-select-sm" aria-label="Select user role">
-                                                    <option value="customer" {{ $user->isCustomer() ? 'selected' : '' }}>Customer</option>
-                                                    <option value="admin" {{ $user->isAdmin() ? 'selected' : '' }}>Admin</option>
+                                                <select name="role" class="form-select form-select-sm" aria-label="{{ __('admin.select_user_role') }}">
+                                                    <option value="customer" {{ $user->isCustomer() ? 'selected' : '' }}>{{ __('admin.customer') }}</option>
+                                                    <option value="admin" {{ $user->isAdmin() ? 'selected' : '' }}>{{ __('admin.admin') }}</option>
                                                 </select>
-                                                <button type="submit" class="btn btn-sm btn-outline-dark">Save</button>
+                                                <button type="submit" class="btn btn-sm btn-outline-dark">{{ __('admin.save_role') }}</button>
                                             </form>
                                         @else
-                                            <span class="text-muted small">Current account</span>
+                                            <span class="text-muted small">{{ __('admin.current_account') }}</span>
                                         @endif
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center py-4 text-muted">No users registered.</td>
+                                    <td colspan="4" class="text-center py-4 text-muted">{{ __('admin.no_users') }}</td>
                                 </tr>
                             @endforelse
                         </tbody>

@@ -24,4 +24,5 @@ return [
     'out_of_stock' => 'Esta joya no está disponible.',
     'stock_limit' => 'La cantidad solicitada no está disponible.',
     'invalid_items' => 'Algunos productos de tu carrito ya no están disponibles.',
+    'item_count' => '{1}:count producto en tu carrito|[2,*]:count productos en tu carrito',
 ];
