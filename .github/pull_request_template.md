@@ -22,6 +22,7 @@ Closes #
 
 **Estilo y reglas del curso**
 - [ ] Cumple la guía de estilo y las reglas de programación del equipo.
+- [ ] Cumple estrictamente con las reglas de arquitectura definidas en el curso y el proyecto.
 - [ ] Todos los métodos nuevos o modificados tienen comentario con el formato acordado.
 - [ ] No hay texto quemado en vistas ni controladores: todo sale de `lang/` (es y en, mismas claves).
 
@@ -30,6 +31,7 @@ Closes #
 - [ ] Los controladores reciben el objeto Eloquent, no el id.
 - [ ] Ningún controlador crea modelos directamente (se usa una Action).
 - [ ] No se repite `middleware()` en el controlador si la ruta ya lo aplica.
+- [ ] Se cumple estrictamente con todas las reglas de arquitectura definidas en el curso a lo largo del semestre.
 
 **Calidad**
 - [ ] Probé el cambio en local (`php artisan migrate:fresh --seed`) y funciona.
@@ -43,7 +45,7 @@ Closes #
 
 ## Para la arquitecta (Gisel)
 
-- [ ] Revisé el código contra la guía de estilo y las reglas.
+- [ ] Revisé el código contra la guía de estilo y las reglas de arquitectura definidas.
 - [ ] El PR cierra el issue correcto y tiene etiquetas e hito.
 - [ ] Aprobado para integrar a `main`.
 - [ ] Cambios solicitados (ver comentarios).
