@@ -13,8 +13,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $statusId
  * @property string $date
  * @property int $orderId
- * @property string $createdAt
- * @property string $updatedAt
  */
 class Payment extends Model
 {

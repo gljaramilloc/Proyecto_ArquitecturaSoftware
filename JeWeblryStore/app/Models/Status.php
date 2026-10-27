@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property string $name
- * @property string $createdAt
- * @property string $updatedAt
  */
 class Status extends Model
 {

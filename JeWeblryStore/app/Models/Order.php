@@ -14,8 +14,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $statusId
  * @property float $total
  * @property int $userId
- * @property string $createdAt
- * @property string $updatedAt
  */
 class Order extends Model
 {

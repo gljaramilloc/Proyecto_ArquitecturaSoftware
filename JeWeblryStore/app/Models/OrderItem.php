@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\DB;
  * @property int $quantity
  * @property float $unitPrice
  * @property int $jewelId
- * @property int $orderId
- * @property string $createdAt
- * @property string $updatedAt
  */
 class OrderItem extends Model
 {

@@ -20,8 +20,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $material
  * @property string $image
  * @property int $categoryId
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
  * @property OrderItem $orderItems
  * @property Category $category
  */

@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\Hash;
  * @property string $password
  * @property int $statusId
  * @property string $role
- * @property string $createdAt
- * @property string $updatedAt
  */
 class User extends Authenticatable
 {

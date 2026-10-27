@@ -15,8 +15,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $description
  * @property string $slug
  * @property int $statusId
- * @property string $createdAt
- * @property string $updatedAt
  */
 class Category extends Model
 {
