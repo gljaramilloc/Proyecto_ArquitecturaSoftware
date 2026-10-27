@@ -79,25 +79,9 @@ class OrderItem extends Model
         return $this->created_at;
     }
 
-    // No strict typing or ': void' to respect Laravel's inheritance
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
-    }
-
-    // No strict typing or ': void' to respect Laravel's inheritance
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-
-        return $this;
     }
 
     public static function getTopSold(int $limit = 3): Collection
