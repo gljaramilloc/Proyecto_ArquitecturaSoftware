@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
  * @property int $quantity
  * @property float $unitPrice
  * @property int $jewelId
+ * @property Order $order
+ * @property Jewel $jewel
  */
 class OrderItem extends Model
 {

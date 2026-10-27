@@ -14,6 +14,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $statusId
  * @property float $total
  * @property int $userId
+ * @property Status $status
+ * @property User $user
+ * @property Payment $payment
+ * @property Collection $items
  */
 class Order extends Model
 {

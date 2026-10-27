@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $material
  * @property string $image
  * @property int $categoryId
- * @property OrderItem $orderItems
+ * @property Collection $orderItems
  * @property Category $category
  */
 class Jewel extends Model
