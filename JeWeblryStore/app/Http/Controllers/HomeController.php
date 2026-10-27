@@ -7,6 +7,9 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
+    /**
+     * Display the storefront home page with featured jewels.
+     */
     public function index(): View
     {
         $viewData = [];

@@ -10,8 +10,7 @@ use Illuminate\View\View;
 class JewelController extends Controller
 {
     /**
-     * Public jewel catalog. Supports search by name and/or category
-     * through the "name" and "category_id" query parameters.
+     * Display the public jewel catalog with optional name or category filtering.
      */
     public function index(Request $request): View
     {
@@ -31,7 +30,7 @@ class JewelController extends Controller
     }
 
     /**
-     * Show a single jewel's detail page.
+     * Display the details page for a jewel.
      */
     public function show(int $id): View
     {

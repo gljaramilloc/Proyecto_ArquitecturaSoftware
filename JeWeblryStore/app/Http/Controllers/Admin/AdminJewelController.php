@@ -17,8 +17,14 @@ class AdminJewelController extends Controller
 {
     use TogglesActiveStatus;
 
+    /**
+     * Create the controller with its image upload service.
+     */
     public function __construct(private readonly ImageUploadService $imageUploadService) {}
 
+    /**
+     * Display the list of jewels for administration.
+     */
     public function index(): View
     {
         $viewData = [];
@@ -28,6 +34,9 @@ class AdminJewelController extends Controller
         return view('admin.jewels.index')->with('viewData', $viewData);
     }
 
+    /**
+     * Display the form for creating a jewel.
+     */
     public function create(): View
     {
         $viewData = [];
@@ -38,6 +47,9 @@ class AdminJewelController extends Controller
         return view('admin.jewels.create')->with('viewData', $viewData);
     }
 
+    /**
+     * Store a newly created jewel.
+     */
     public function store(StoreJewelRequest $request): RedirectResponse
     {
         $jewelData = $request->validated();
@@ -51,6 +63,9 @@ class AdminJewelController extends Controller
         return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_created'));
     }
 
+    /**
+     * Display the form for editing a jewel.
+     */
     public function edit(int $id): View
     {
         $jewel = Jewel::findOrFail($id);
@@ -64,6 +79,9 @@ class AdminJewelController extends Controller
         return view('admin.jewels.edit')->with('viewData', $viewData);
     }
 
+    /**
+     * Update an existing jewel.
+     */
     public function update(UpdateJewelRequest $request, int $id): RedirectResponse
     {
         $jewel = Jewel::findOrFail($id);
@@ -79,6 +97,9 @@ class AdminJewelController extends Controller
         return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_updated'));
     }
 
+    /**
+     * Delete a jewel.
+     */
     public function destroy(int $id): RedirectResponse
     {
         $jewel = Jewel::findOrFail($id);
@@ -88,6 +109,9 @@ class AdminJewelController extends Controller
         return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_deleted'));
     }
 
+    /**
+     * Toggle the active status of a jewel.
+     */
     public function toggleStatus(int $id): RedirectResponse
     {
         $jewel = Jewel::findOrFail($id);

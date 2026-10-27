@@ -13,11 +13,17 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
+    /**
+     * Require authentication for cart actions.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Display the current cart and its total.
+     */
     public function index(): View
     {
         $total = 0;
@@ -46,6 +52,9 @@ class CartController extends Controller
         return view('cart.index')->with('viewData', $viewData);
     }
 
+    /**
+     * Add one jewel to the cart.
+     */
     public function add(int $id): RedirectResponse
     {
         $jewel = Jewel::findOrFail($id);
@@ -67,6 +76,9 @@ class CartController extends Controller
         return back()->with('success', __('cart.added'));
     }
 
+    /**
+     * Create an order with one jewel and redirect to payment.
+     */
     public function buyNow(int $id): RedirectResponse
     {
         $jewel = Jewel::findOrFail($id);
@@ -80,6 +92,9 @@ class CartController extends Controller
         return redirect()->route('payments.create', $order->getId());
     }
 
+    /**
+     * Remove all items from the cart.
+     */
     public function removeAll(): RedirectResponse
     {
         session()->forget('cart');
@@ -87,6 +102,9 @@ class CartController extends Controller
         return back();
     }
 
+    /**
+     * Create an order from the current cart and redirect to payment.
+     */
     public function purchase(): RedirectResponse
     {
         $cartSession = session()->get('cart', []);
@@ -102,6 +120,9 @@ class CartController extends Controller
         return redirect()->route('payments.create', $order->getId());
     }
 
+    /**
+     * Create an order and its items while locking the selected jewels.
+     */
     private function createOrder(array $cartSession): Order
     {
         $userId = Auth::user()->getId();

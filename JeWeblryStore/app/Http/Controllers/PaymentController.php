@@ -12,11 +12,17 @@ use Illuminate\View\View;
 
 class PaymentController extends Controller
 {
+    /**
+     * Require authentication for payment actions.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Display the payment form for an order owned by the authenticated user.
+     */
     public function create(int $orderId): View
     {
         $order = Order::findOrFail($orderId);
@@ -31,6 +37,9 @@ class PaymentController extends Controller
         return view('payments.create')->with('viewData', $viewData);
     }
 
+    /**
+     * Store a payment for an order owned by the authenticated user.
+     */
     public function store(StorePaymentRequest $request, int $orderId): RedirectResponse
     {
         $order = Order::findOrFail($orderId);
@@ -53,6 +62,9 @@ class PaymentController extends Controller
             ->with('success', __('payment.created'));
     }
 
+    /**
+     * Display payment details for an order owned by the authenticated user.
+     */
     public function show(int $orderId): View
     {
         $order = Order::findOrFail($orderId);

@@ -31,9 +31,7 @@ class RegisterController extends Controller
     protected $redirectTo = '/';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Configure the guest middleware.
      */
     public function __construct()
     {
@@ -41,9 +39,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * Create a validator for the registration data.
      */
     protected function validator(array $data)
     {
@@ -55,9 +51,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @return User
+     * Create a user from validated registration data.
      */
     protected function create(array $data)
     {

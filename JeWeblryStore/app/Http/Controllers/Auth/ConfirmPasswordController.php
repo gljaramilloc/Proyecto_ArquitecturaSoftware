@@ -28,9 +28,7 @@ class ConfirmPasswordController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Configure the authentication middleware.
      */
     public function __construct()
     {

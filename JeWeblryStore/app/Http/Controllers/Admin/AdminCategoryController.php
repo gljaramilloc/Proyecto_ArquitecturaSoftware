@@ -15,6 +15,9 @@ class AdminCategoryController extends Controller
 {
     use TogglesActiveStatus;
 
+    /**
+     * Display the list of categories for administration.
+     */
     public function index(): View
     {
         $viewData = [];
@@ -24,6 +27,9 @@ class AdminCategoryController extends Controller
         return view('admin.categories.index')->with('viewData', $viewData);
     }
 
+    /**
+     * Display the form for creating a category.
+     */
     public function create(): View
     {
         $viewData = [];
@@ -33,6 +39,9 @@ class AdminCategoryController extends Controller
         return view('admin.categories.create')->with('viewData', $viewData);
     }
 
+    /**
+     * Store a newly created category.
+     */
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
         Category::create($request->validated());
@@ -40,6 +49,9 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('status', __('admin.category_created'));
     }
 
+    /**
+     * Display the form for editing a category.
+     */
     public function edit(int $id): View
     {
         $category = Category::findOrFail($id);
@@ -52,6 +64,9 @@ class AdminCategoryController extends Controller
         return view('admin.categories.edit')->with('viewData', $viewData);
     }
 
+    /**
+     * Update an existing category.
+     */
     public function update(UpdateCategoryRequest $request, int $id): RedirectResponse
     {
         $category = Category::findOrFail($id);
@@ -60,6 +75,9 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('status', __('admin.category_updated'));
     }
 
+    /**
+     * Delete a category.
+     */
     public function destroy(int $id): RedirectResponse
     {
         $category = Category::findOrFail($id);
@@ -68,6 +86,9 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('status', __('admin.category_deleted'));
     }
 
+    /**
+     * Toggle the active status of a category.
+     */
     public function toggleStatus(int $id): RedirectResponse
     {
         $category = Category::findOrFail($id);

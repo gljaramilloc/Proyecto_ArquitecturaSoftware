@@ -25,6 +25,13 @@
 * **Validación Delegada:** La validación de formularios no debe hacerse manualmente ni repetirse en el controlador; siempre se debe extraer a una clase `Form Request` reutilizable[cite: 3].
 * **Principio DRY:** Si dos controladores necesitan realizar la misma acción, esa responsabilidad se delega a una clase común en lugar de duplicar el código[cite: 3].
 * **Consistencia Interna:** Todos los métodos dentro de un mismo controlador deben seguir un estilo de codificación idéntico[cite: 3].
+* **Documentación de Métodos:** Cada método declarado en un controlador, incluidos constructores y métodos auxiliares privados o protegidos, debe tener inmediatamente antes un bloque PHPDoc con una sola frase breve en inglés que describa su propósito, usando siempre este formato:
+  ```php
+  /**
+   * Describe the method's purpose.
+   */
+  ```
+  No agregues etiquetas `@param` o `@return` si la firma ya comunica los tipos.
 * **Importaciones:** Se deben importar las clases usando `use` en la parte superior del archivo, evitando escribir el namespace completo de forma inline[cite: 3].
 * **Confirmación de Destrucción:** Considera agregar un mensaje de confirmación antes de ejecutar cualquier acción destructiva, como eliminar un registro[cite: 3].
 * **Prohibido Route Model Binding:** No implementes Route Model Binding implícito ni explícito. No tipifiques parámetros de ruta con modelos ni uses `Route::model()` o `Route::bind()`; recibe el ID como escalar (por ejemplo, `int $id`) y busca el modelo explícitamente con Eloquent, como `Model::findOrFail($id)`.

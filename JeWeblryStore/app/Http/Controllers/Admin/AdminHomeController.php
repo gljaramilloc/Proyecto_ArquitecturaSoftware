@@ -11,6 +11,9 @@ use Illuminate\View\View;
 
 class AdminHomeController extends Controller
 {
+    /**
+     * Display the administration dashboard.
+     */
     public function index(): View
     {
         $viewData = [];

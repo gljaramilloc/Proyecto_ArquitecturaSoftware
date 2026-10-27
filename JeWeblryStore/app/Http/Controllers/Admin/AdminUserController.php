@@ -10,6 +10,9 @@ use Illuminate\View\View;
 
 class AdminUserController extends Controller
 {
+    /**
+     * Display the list of users for administration.
+     */
     public function index(): View
     {
         $viewData = [];
@@ -19,6 +22,9 @@ class AdminUserController extends Controller
         return view('admin.users.index')->with('viewData', $viewData);
     }
 
+    /**
+     * Update a user's role.
+     */
     public function updateRole(UpdateUserRoleRequest $request, int $id): RedirectResponse
     {
         $user = User::findOrFail($id);

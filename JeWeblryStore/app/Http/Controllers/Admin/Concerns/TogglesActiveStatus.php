@@ -8,6 +8,9 @@ use Illuminate\Http\RedirectResponse;
 
 trait TogglesActiveStatus
 {
+    /**
+     * Toggle a model's active status and redirect to the given route.
+     */
     protected function toggleModelStatus(Model $model, string $redirectRoute): RedirectResponse
     {
         $activeStatus = Status::query()->where('name', 'Active')->first();
