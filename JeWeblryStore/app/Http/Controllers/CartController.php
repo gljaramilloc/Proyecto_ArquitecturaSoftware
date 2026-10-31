@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreateOrderAction;
 use App\Models\Jewel;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Status;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class CartController extends Controller
 {
     /**
-     * Require authentication for cart actions.
+     * Require authentication and configure the order action.
      */
-    public function __construct()
+    public function __construct(private readonly CreateOrderAction $createOrderAction)
     {
         $this->middleware('auth');
     }
@@ -87,7 +84,7 @@ class CartController extends Controller
             return back()->with('error', __('cart.out_of_stock'));
         }
 
-        $order = $this->createOrder([$jewel->getId() => 1]);
+        $order = $this->createOrderAction->execute(Auth::user()->getId(), [$jewel->getId() => 1]);
 
         return redirect()->route('payments.create', $order->getId());
     }
@@ -113,55 +110,10 @@ class CartController extends Controller
             return redirect()->route('cart.index');
         }
 
-        $order = $this->createOrder($cartSession);
+        $order = $this->createOrderAction->execute(Auth::user()->getId(), $cartSession);
 
         session()->forget('cart');
 
         return redirect()->route('payments.create', $order->getId());
-    }
-
-    /**
-     * Create an order and its items while locking the selected jewels.
-     */
-    private function createOrder(array $cartSession): Order
-    {
-        $userId = Auth::user()->getId();
-
-        return DB::transaction(function () use ($userId, $cartSession): Order {
-            $jewels = Jewel::whereIn('id', array_keys($cartSession))
-                ->lockForUpdate()
-                ->get();
-
-            abort_if($jewels->count() !== count($cartSession), 422, __('cart.invalid_items'));
-
-            $total = 0;
-            foreach ($jewels as $jewel) {
-                $quantity = (int) ($cartSession[$jewel->getId()] ?? 0);
-                abort_if($quantity < 1 || $quantity > $jewel->getStock(), 422, __('cart.stock_limit'));
-                $total += $jewel->getPrice() * $quantity;
-            }
-
-            $pendingStatus = Status::where('name', 'Pending')->firstOrFail();
-
-            $order = new Order;
-            $order->setUserId($userId);
-            $order->setTotal($total);
-            $order->setStatusId($pendingStatus->getId());
-            $order->save();
-
-            foreach ($jewels as $jewel) {
-                $orderItem = new OrderItem;
-                $orderItem->setQuantity((int) $cartSession[$jewel->getId()]);
-                $orderItem->setUnitPrice($jewel->getPrice());
-                $orderItem->setJewelId($jewel->getId());
-                $orderItem->setOrderId($order->getId());
-                $orderItem->save();
-
-                $jewel->setStock($jewel->getStock() - $quantity);
-                $jewel->save();
-            }
-
-            return $order;
-        });
     }
 }

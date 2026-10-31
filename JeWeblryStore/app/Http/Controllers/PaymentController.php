@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreatePaymentAction;
 use App\Http\Requests\StorePaymentRequest;
 use App\Models\Order;
-use App\Models\Payment;
-use App\Models\Status;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -13,9 +12,9 @@ use Illuminate\View\View;
 class PaymentController extends Controller
 {
     /**
-     * Require authentication for payment actions.
+     * Require authentication and configure the payment action.
      */
-    public function __construct()
+    public function __construct(private readonly CreatePaymentAction $createPaymentAction)
     {
         $this->middleware('auth');
     }
@@ -47,15 +46,11 @@ class PaymentController extends Controller
         abort_if($order->getUser()->getId() !== Auth::id(), 403);
         abort_if($order->getPayment() !== null, 403);
 
-        $pendingStatus = Status::where('name', 'Pending')->firstOrFail();
-
-        $payment = new Payment;
-        $payment->setAmount($order->getTotal());
-        $payment->setMethod($request->validated('method'));
-        $payment->setDate($request->validated('date'));
-        $payment->setStatusId($pendingStatus->getId());
-        $payment->setOrderId($order->getId());
-        $payment->save();
+        $this->createPaymentAction->execute(
+            $order,
+            $request->validated('method'),
+            $request->validated('date'),
+        );
 
         return redirect()
             ->route('payments.show', $order->getId())

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\CreateCategoryAction;
+use App\Actions\UpdateCategoryAction;
 use App\Http\Controllers\Admin\Concerns\TogglesActiveStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
@@ -14,6 +16,11 @@ use Illuminate\View\View;
 class AdminCategoryController extends Controller
 {
     use TogglesActiveStatus;
+
+    public function __construct(
+        private readonly CreateCategoryAction $createCategoryAction,
+        private readonly UpdateCategoryAction $updateCategoryAction,
+    ) {}
 
     /**
      * Display the list of categories for administration.
@@ -44,7 +51,7 @@ class AdminCategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
-        Category::create($request->validated());
+        $this->createCategoryAction->execute($request->validated());
 
         return redirect()->route('admin.categories.index')->with('status', __('admin.category_created'));
     }
@@ -70,7 +77,7 @@ class AdminCategoryController extends Controller
     public function update(UpdateCategoryRequest $request, int $id): RedirectResponse
     {
         $category = Category::findOrFail($id);
-        $category->update($request->validated());
+        $this->updateCategoryAction->execute($category, $request->validated());
 
         return redirect()->route('admin.categories.index')->with('status', __('admin.category_updated'));
     }

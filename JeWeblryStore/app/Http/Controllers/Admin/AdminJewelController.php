@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\CreateJewelAction;
+use App\Actions\UpdateJewelAction;
 use App\Http\Controllers\Admin\Concerns\TogglesActiveStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJewelRequest;
@@ -18,9 +20,13 @@ class AdminJewelController extends Controller
     use TogglesActiveStatus;
 
     /**
-     * Create the controller with its image upload service.
+     * Create the controller with its jewel actions and image upload service.
      */
-    public function __construct(private readonly ImageUploadService $imageUploadService) {}
+    public function __construct(
+        private readonly ImageUploadService $imageUploadService,
+        private readonly CreateJewelAction $createJewelAction,
+        private readonly UpdateJewelAction $updateJewelAction,
+    ) {}
 
     /**
      * Display the list of jewels for administration.
@@ -58,7 +64,7 @@ class AdminJewelController extends Controller
             $jewelData['image'] = $this->imageUploadService->upload($request->file('image'), 'jewels');
         }
 
-        Jewel::create($jewelData);
+        $this->createJewelAction->execute($jewelData);
 
         return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_created'));
     }
@@ -92,7 +98,7 @@ class AdminJewelController extends Controller
             $jewelData['image'] = $this->imageUploadService->upload($request->file('image'), 'jewels');
         }
 
-        $jewel->update($jewelData);
+        $this->updateJewelAction->execute($jewel, $jewelData);
 
         return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_updated'));
     }
