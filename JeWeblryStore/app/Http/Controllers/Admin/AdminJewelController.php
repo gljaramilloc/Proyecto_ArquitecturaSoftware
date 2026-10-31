@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Actions\CreateJewelAction;
+use App\Actions\ToggleActiveStatusAction;
 use App\Actions\UpdateJewelAction;
-use App\Http\Controllers\Admin\Concerns\TogglesActiveStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJewelRequest;
 use App\Http\Requests\UpdateJewelRequest;
@@ -17,8 +17,6 @@ use Illuminate\View\View;
 
 class AdminJewelController extends Controller
 {
-    use TogglesActiveStatus;
-
     /**
      * Create the controller with its jewel actions and image upload service.
      */
@@ -26,6 +24,7 @@ class AdminJewelController extends Controller
         private readonly ImageUploadService $imageUploadService,
         private readonly CreateJewelAction $createJewelAction,
         private readonly UpdateJewelAction $updateJewelAction,
+        private readonly ToggleActiveStatusAction $toggleActiveStatusAction,
     ) {}
 
     /**
@@ -121,7 +120,8 @@ class AdminJewelController extends Controller
     public function toggleStatus(int $id): RedirectResponse
     {
         $jewel = Jewel::findOrFail($id);
+        $this->toggleActiveStatusAction->execute($jewel);
 
-        return $this->toggleModelStatus($jewel, 'admin.jewels.index');
+        return redirect()->route('admin.jewels.index')->with('status', __('admin.status_updated'));
     }
 }
