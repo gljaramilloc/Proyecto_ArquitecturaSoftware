@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Hash;
  * @property string $password
  * @property int $statusId
  * @property string $role
- * @property string $createdAt
- * @property string $updatedAt
+ * @property Status $status
+ * @property Order $order
  */
 class User extends Authenticatable
 {
@@ -144,25 +144,9 @@ class User extends Authenticatable
         return $this->created_at;
     }
 
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
-    }
-
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-
-        return $this;
     }
 
     // Relationships

@@ -28,9 +28,7 @@ class VerificationController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Configure the email verification middleware.
      */
     public function __construct()
     {
