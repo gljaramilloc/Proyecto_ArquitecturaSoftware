@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminJewelController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\AlliedProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -35,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders/{orderId}/payment/create', [PaymentController::class, 'create'])->name('payments.create');
     Route::post('/orders/{orderId}/payment', [PaymentController::class, 'store'])->name('payments.store');
     Route::get('/orders/{orderId}/payment', [PaymentController::class, 'show'])->name('payments.show');
+    Route::get('/orders/{orderId}/payment/cheque', [PaymentController::class, 'downloadCheque'])->name('payments.cheque');
 });
 
 // Order history routes (authenticated users)
@@ -60,6 +62,9 @@ Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categ
 // The listing/search route must come before {jewel} to avoid segment collisions.
 Route::get('/jewels', [JewelController::class, 'index'])->name('jewels.index');
 Route::get('/jewels/{id}', [JewelController::class, 'show'])->name('jewels.show');
+
+// Products consumed from the allied team's JSON service
+Route::get('/productos-aliados', [AlliedProductController::class, 'index'])->name('alliedProducts.index');
 
 // Administration section (fully separated from the storefront)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

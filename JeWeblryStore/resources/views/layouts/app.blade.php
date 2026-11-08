@@ -67,6 +67,12 @@
                                 {{ __('navigation.categories') }}
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('alliedProducts.*') ? 'active fw-bold' : '' }}"
+                                href="{{ route('alliedProducts.index') }}">
+                                {{ __('navigation.allied_products') }}
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -110,6 +116,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                        <i class="bi bi-person me-2"></i>{{ __('navigation.profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('orders.index') }}">
                                         <i class="bi bi-box-seam me-2"></i>{{ __('order.my_orders') }}
                                     </a>

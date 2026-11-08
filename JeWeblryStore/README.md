@@ -70,6 +70,53 @@ Cuando un modelo tenga una relación con `statuses`, los valores base deben agre
 - Los datos iniciales, como estados, roles o categorías base, van en seeders.
 - El script `composer run setup` debe dejar el proyecto listo para desarrollo sin pasos extra.
 
+## Servicio JSON para el equipo aliado
+
+Exponemos las joyas activas y con stock disponible para que otro equipo las consuma.
+
+- **Método y URL:** `GET {APP_URL}/api/jewels` (en local: `http://localhost:8000/api/jewels`)
+- **Autenticación:** no requiere.
+- **Respuesta:** `200 OK` con un arreglo JSON (vacío `[]` si no hay joyas disponibles).
+
+### Campos de cada joya
+
+| Campo      | Tipo    | Descripción                                   |
+|------------|---------|-----------------------------------------------|
+| `id`       | integer | Identificador de la joya                      |
+| `name`     | string  | Nombre de la joya                             |
+| `price`    | number  | Precio en pesos                               |
+| `material` | string  | Material principal                            |
+| `stock`    | integer | Unidades disponibles (siempre mayor que 0)    |
+| `image`    | string  | URL absoluta de la imagen                     |
+| `link`     | string  | Enlace directo a la vista de detalle de la joya |
+
+### Ejemplo de respuesta
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Pulsera de plata refinada.",
+        "price": 1250,
+        "material": "Oro Blanco",
+        "stock": 15,
+        "image": "http://localhost:8000/storage/jewels/jewel-seed-1.jpg",
+        "link": "http://localhost:8000/jewels/1"
+    }
+]
+```
+
+## Productos aliados (servicio que consumimos)
+
+La ruta `/productos-aliados` muestra los productos del servicio JSON del equipo aliado. Configura su URL en el `.env`:
+
+```bash
+ALLIED_SERVICE_URL=https://url-del-equipo-aliado/api/productos
+ALLIED_SERVICE_TIMEOUT=5
+```
+
+Si la URL no está configurada o el servicio no responde, la vista muestra un mensaje de "servicio no disponible" en lugar de fallar.
+
 ## Licencia
 
 Este proyecto se distribuye bajo la licencia MIT.
