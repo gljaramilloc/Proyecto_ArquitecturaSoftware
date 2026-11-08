@@ -20,4 +20,5 @@ return [
     'instagram' => 'Instagram',
     'facebook' => 'Facebook',
     'pinterest' => 'Pinterest',
+    'profile' => 'My profile',
 ];

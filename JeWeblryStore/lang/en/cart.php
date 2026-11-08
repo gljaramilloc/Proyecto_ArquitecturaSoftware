@@ -25,4 +25,5 @@ return [
     'stock_limit' => 'The requested quantity is not available.',
     'invalid_items' => 'Some items in your cart are no longer available.',
     'item_count' => '{1}:count item in your cart|[2,*]:count items in your cart',
+    'confirm_remove_all' => 'Are you sure you want to remove all items from your cart?',
 ];

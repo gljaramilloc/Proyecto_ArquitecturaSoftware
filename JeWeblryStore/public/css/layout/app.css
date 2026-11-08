@@ -337,3 +337,35 @@ h1, h2, h3, h4, h5, h6,
     height: 50px;
     object-fit: cover;
 }
+
+/* ==========================================================
+   Admin Sub-Navigation & Consistent Form Cards
+========================================================== */
+.admin-subnav {
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+}
+
+.admin-subnav__link {
+    color: var(--brand-dark);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.admin-subnav__link:hover {
+    background-color: var(--brand-gray);
+    color: var(--brand-dark);
+}
+
+.admin-subnav__link--active {
+    background-color: var(--brand-dark);
+    color: var(--brand-primary) !important;
+    font-weight: 600;
+}

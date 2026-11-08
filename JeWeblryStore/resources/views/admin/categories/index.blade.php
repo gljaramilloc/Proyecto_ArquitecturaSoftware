@@ -4,9 +4,19 @@
 
 @section('content')
     <div class="container py-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="h3 font-display text-dark mb-0">{{ __('admin.manage_categories') }}</h1>
-            <a href="{{ route('admin.categories.create') }}" class="btn btn-brand rounded-0 px-4 py-2 text-uppercase small fw-bold">{{ __('admin.new_category') }}</a>
+        @include('admin.partials.nav')
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+            <div>
+                <p class="text-brand-gold text-uppercase fw-bold small mb-1">{{ __('admin.administration') }}</p>
+                <h1 class="h2 font-display text-dark mb-0">{{ __('admin.manage_categories') }}</h1>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ route('admin.index') }}" class="btn btn-brand-outline">{{ __('admin.back_to_dashboard') }}</a>
+                <a href="{{ route('admin.categories.create') }}" class="btn btn-brand">
+                    <i class="bi bi-plus-lg me-1"></i>{{ __('admin.new_category') }}
+                </a>
+            </div>
         </div>
 
         <div class="card border shadow-sm rounded-0 bg-white">

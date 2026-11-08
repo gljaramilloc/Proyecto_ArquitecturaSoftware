@@ -79,7 +79,7 @@
                         @auth
                             <!-- Cart Link -->
                             <li class="nav-item me-2">
-                                <a class="nav-link" href="{{ route('cart.index') }}">
+                                <a class="nav-link {{ request()->routeIs('cart.*') ? 'active fw-bold' : '' }}" href="{{ route('cart.index') }}">
                                     <i class="bi bi-cart3 me-1"></i>{{ __('navigation.cart') }}
                                     @if (array_sum(session('cart', [])) > 0)
                                         <span class="badge rounded-pill bg-danger"
@@ -93,23 +93,26 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link {{ request()->routeIs('login') ? 'active fw-bold' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link {{ request()->routeIs('register') ? 'active fw-bold' : '' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle {{ request()->routeIs('profile.*', 'orders.*', 'admin.*') ? 'active fw-bold' : '' }}" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->getName() }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                        <i class="bi bi-person me-2"></i>{{ __('navigation.profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('orders.index') }}">
                                         <i class="bi bi-box-seam me-2"></i>{{ __('order.my_orders') }}
                                     </a>

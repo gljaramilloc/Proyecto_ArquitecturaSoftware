@@ -16,5 +16,9 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'no_account' => 'Don\'t have an account yet?',
+    'already_registered' => 'Already have an account?',
+    'back_to_login' => 'Back to login',
+    'password_min_hint' => 'Minimum 8 characters.',
 
 ];

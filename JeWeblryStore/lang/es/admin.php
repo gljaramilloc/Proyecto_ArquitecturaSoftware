@@ -2,6 +2,7 @@
 
 return [
     'administration' => 'Administración',
+    'navigation_label' => 'Navegación de administración',
     'dashboard' => 'Panel de administración',
     'back_to_store' => 'Volver a la tienda',
     'back_to_dashboard' => 'Volver al panel',
@@ -32,7 +33,10 @@ return [
     'stock' => 'Existencias',
     'material' => 'Material',
     'image' => 'Imagen',
+    'current_image' => 'Imagen actual',
     'replace_image' => 'Reemplazar imagen (opcional)',
+    'image_hint' => 'Formatos permitidos: JPG, PNG o WEBP (máximo 2 MB).',
+    'slug_placeholder' => 'ej. anillos-de-compromiso',
     'save' => 'Guardar',
     'update' => 'Actualizar',
     'cancel' => 'Cancelar',

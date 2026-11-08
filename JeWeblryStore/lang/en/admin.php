@@ -2,6 +2,7 @@
 
 return [
     'administration' => 'Administration',
+    'navigation_label' => 'Administration navigation',
     'dashboard' => 'Admin Dashboard',
     'back_to_store' => 'Back to store',
     'back_to_dashboard' => 'Back to dashboard',
@@ -32,7 +33,10 @@ return [
     'stock' => 'Stock',
     'material' => 'Material',
     'image' => 'Image',
+    'current_image' => 'Current image',
     'replace_image' => 'Replace image (optional)',
+    'image_hint' => 'Allowed formats: JPG, PNG, or WEBP (maximum 2 MB).',
+    'slug_placeholder' => 'e.g. engagement-rings',
     'save' => 'Save',
     'update' => 'Update',
     'cancel' => 'Cancel',
