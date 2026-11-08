@@ -28,7 +28,7 @@ class AdminCategoryController extends Controller
     {
         $viewData = [];
         $viewData['title'] = __('admin.manage_categories');
-        $viewData['categories'] = Category::with('status')->get();
+        $viewData['categories'] = Category::with('status')->orderBy('name')->paginate(10);
 
         return view('admin.categories.index')->with('viewData', $viewData);
     }

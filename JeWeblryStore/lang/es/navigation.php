@@ -20,4 +20,6 @@ return [
     'instagram' => 'Instagram',
     'facebook' => 'Facebook',
     'pinterest' => 'Pinterest',
+    'allied_products' => 'Productos aliados',
+    'profile' => 'Mi perfil',
 ];

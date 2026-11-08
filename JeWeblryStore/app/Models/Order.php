@@ -75,6 +75,14 @@ class Order extends Model
         return $this->updated_at;
     }
 
+    // Sum of every item's subtotal (quantity x unit price)
+    public function calculateTotal(): float
+    {
+        return $this->getItems()->sum(function (OrderItem $item): float {
+            return $item->getSubtotal();
+        });
+    }
+
     // Isolated collections to keep the Controller clean from raw Eloquent queries (Fat Model, Thin Controller)
     public static function getByUser(int $userId): Collection
     {

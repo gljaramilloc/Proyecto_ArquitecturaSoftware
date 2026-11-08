@@ -20,4 +20,9 @@ return [
     'availability' => 'Availability',
     'back_to_catalog' => 'Back to catalog',
     'breadcrumb' => 'Breadcrumb',
+    'clear_filters' => 'Clear filters',
+    'results_count' => '{0} No jewels found|{1} :count jewel found|[2,*] :count jewels found',
+    'login_to_buy' => 'Log in to buy',
+    'back_to_categories' => 'Back to categories',
+    'no_categories' => 'There are no categories available yet.',
 ];

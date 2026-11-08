@@ -34,7 +34,7 @@ class AdminJewelController extends Controller
     {
         $viewData = [];
         $viewData['title'] = __('admin.manage_jewels');
-        $viewData['jewels'] = Jewel::with(['status', 'category'])->get();
+        $viewData['jewels'] = Jewel::with(['status', 'category'])->latest()->paginate(10);
 
         return view('admin.jewels.index')->with('viewData', $viewData);
     }

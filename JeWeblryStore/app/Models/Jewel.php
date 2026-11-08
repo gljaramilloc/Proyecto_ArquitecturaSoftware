@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -183,12 +182,14 @@ class Jewel extends Model
 
     public function scopeActive(Builder $query): Builder
     {
-        return $query->where('is_active', true);
+        return $query->whereHas('status', function (Builder $statusQuery) {
+            $statusQuery->where('name', 'Active');
+        });
     }
 
     public function isActive(): bool
     {
-        return (bool) $this->is_active;
+        return $this->getStatus()?->getName() === 'Active';
     }
 
     // ==========================================================

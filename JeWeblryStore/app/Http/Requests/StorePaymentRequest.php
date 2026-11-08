@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Payment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePaymentRequest extends FormRequest
@@ -14,9 +15,7 @@ class StorePaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'amount' => 'required|numeric|min:0',
-            'method' => 'required|string|max:255',
-            'date' => 'required|date',
+            'method' => 'required|in:'.Payment::METHOD_CHEQUE.','.Payment::METHOD_BALANCE,
         ];
     }
 }

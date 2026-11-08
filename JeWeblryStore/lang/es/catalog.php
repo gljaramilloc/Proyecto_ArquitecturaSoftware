@@ -20,4 +20,9 @@ return [
     'availability' => 'Disponibilidad',
     'back_to_catalog' => 'Volver al catálogo',
     'breadcrumb' => 'Ruta de navegación',
+    'clear_filters' => 'Limpiar filtros',
+    'results_count' => '{0} No se encontraron joyas|{1} :count joya encontrada|[2,*] :count joyas encontradas',
+    'login_to_buy' => 'Inicia sesión para comprar',
+    'back_to_categories' => 'Volver a categorías',
+    'no_categories' => 'Aún no hay categorías disponibles.',
 ];

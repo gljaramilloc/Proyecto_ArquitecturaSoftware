@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Hash;
  * @property string $password
  * @property int $statusId
  * @property string $role
+ * @property float $balance
  * @property Status $status
  * @property Order $order
  */
@@ -41,6 +42,7 @@ class User extends Authenticatable
         'password',
         'status_id',
         'role',
+        'balance',
     ];
 
     /**
@@ -139,6 +141,16 @@ class User extends Authenticatable
         $this->role = $role;
     }
 
+    public function getBalance(): float
+    {
+        return (float) $this->balance;
+    }
+
+    public function setBalance(float $balance): void
+    {
+        $this->balance = $balance;
+    }
+
     public function getCreatedAt(): ?string
     {
         return $this->created_at;
@@ -198,6 +210,11 @@ class User extends Authenticatable
     {
         $this->setPassword(Hash::make($newPassword));
         $this->save();
+    }
+
+    public function hasEnoughBalance(float $amount): bool
+    {
+        return $this->getBalance() >= $amount;
     }
 
     public function isAdmin(): bool

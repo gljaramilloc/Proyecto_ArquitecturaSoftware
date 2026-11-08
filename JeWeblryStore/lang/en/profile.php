@@ -9,5 +9,6 @@ return [
     'address' => 'Address',
     'save' => 'Save Changes',
     'updated' => 'Your profile has been updated successfully.',
-
+    'email' => 'Email',
+    'balance' => 'Available balance',
 ];

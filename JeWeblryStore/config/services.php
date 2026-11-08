@@ -28,6 +28,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // JSON service published by the allied team (consumed in /productos-aliados)
+    'allied_store' => [
+        'url' => env('ALLIED_SERVICE_URL'),
+        'timeout' => env('ALLIED_SERVICE_TIMEOUT', 5),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

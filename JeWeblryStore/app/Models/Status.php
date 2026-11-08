@@ -39,4 +39,10 @@ class Status extends Model
     {
         return $this->updated_at;
     }
+
+    // Single lookup point for the base statuses created by StatusSeeder
+    public static function findByName(string $name): self
+    {
+        return self::where('name', $name)->firstOrFail();
+    }
 }

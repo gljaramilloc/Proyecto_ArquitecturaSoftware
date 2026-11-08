@@ -76,6 +76,10 @@
                                 </form>
                             </div>
                             @endif
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-brand mt-4 align-self-start">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>{{ __('catalog.login_to_buy') }}
+                            </a>
                         @endauth
 
                         <a href="{{ route('jewels.index') }}" class="btn btn-outline-dark mt-4 align-self-start">

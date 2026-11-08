@@ -21,37 +21,23 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
             @forelse ($viewData['jewels'] as $jewel)
                 <div class="col">
-                    <div class="card h-100 border-0 shadow-sm jewel-card">
-                        @if ($jewel->getImage())
-                            <img src="{{ Storage::url($jewel->getImage()) }}" alt="{{ $jewel->getName() }}" class="img-card w-100 rounded-top">
-                        @else
-                            <div class="img-card img-card--placeholder w-100 rounded-top d-flex align-items-center justify-content-center bg-light text-muted">
-                                <i class="bi bi-image fs-1"></i>
-                            </div>
-                        @endif
-
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title mb-1">{{ $jewel->getName() }}</h5>
-                            <p class="text-muted small mb-3">{{ $jewel->getStock() > 0 ? __('catalog.in_stock', ['count' => $jewel->getStock()]) : __('catalog.out_of_stock') }}</p>
-
-                            <div class="mt-auto d-flex justify-content-between align-items-center">
-                                <span class="fw-bold fs-5 text-brand-gold">
-                                    ${{ number_format($jewel->getPrice(), 2) }}
-                                </span>
-                                <a href="{{ route('jewels.show', $jewel->getId()) }}" class="btn btn-sm btn-outline-dark">
-                                    {{ __('catalog.view_detail') }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <x-jewel-card :jewel="$jewel" />
                 </div>
             @empty
-                <div class="col-12">
+                <div class="col-12 w-100">
                     <div class="alert alert-light border text-center">
                         {{ __('catalog.no_category_jewels') }}
                     </div>
                 </div>
             @endforelse
         </div>
+
+        <div class="d-flex justify-content-center mt-5">
+            {{ $viewData['jewels']->links() }}
+        </div>
+
+        <a href="{{ route('categories.index') }}" class="btn btn-outline-dark mt-4">
+            &larr; {{ __('catalog.back_to_categories') }}
+        </a>
     </div>
 @endsection
