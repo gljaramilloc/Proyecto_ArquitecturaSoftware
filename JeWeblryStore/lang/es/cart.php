@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Carrito de Compras',
+    'title' => 'Carrito de Compras - Tienda en Línea',
     'your_cart' => 'Tu Carrito',
     'jewel' => 'Joya',
     'price' => 'Precio',
