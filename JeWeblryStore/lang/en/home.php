@@ -68,5 +68,11 @@ return [
     'previous_slide' => 'Previous slide',
     'next_slide' => 'Next slide',
     'go_to_slide' => 'Go to slide :number',
+    'top_banner_message' => 'Free insured shipping on all nationwide orders • Certified fine jewelry',
+    'promo_banner_kicker' => 'Seasonal Limited Edition',
+    'promo_banner_title' => 'Shine with Your Own Light on Every Occasion',
+    'promo_banner_subtitle' => 'Discover our special selection of signature pieces crafted in 18k gold and natural gemstones with a certificate of authenticity.',
+    'promo_banner_cta' => 'View Special Collection',
+    'promo_banner_secondary_cta' => 'Explore Categories',
 
 ];

@@ -1,1 +1,51 @@
 /* Styles specific to the home page (resources/views/home/index.blade.php) */
+
+.top-promo-bar {
+    background-color: var(--brand-dark);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.35);
+    color: var(--brand-gray);
+}
+
+.top-promo-bar__text {
+    letter-spacing: 0.08em;
+}
+
+.promo-banner {
+    background: linear-gradient(135deg, #1c1c1c 0%, #2c261e 50%, #1c1c1c 100%);
+    position: relative;
+}
+
+.promo-banner__card {
+    max-width: 820px;
+    background-color: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(197, 160, 89, 0.35);
+    border-radius: 6px;
+}
+
+.promo-banner__kicker {
+    letter-spacing: 0.15em;
+}
+
+.promo-banner__subtitle {
+    max-width: 640px;
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+.btn-promo-outline {
+    background: transparent;
+    border: 1px solid var(--brand-primary);
+    color: var(--brand-primary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.btn-promo-outline:hover {
+    background-color: var(--brand-primary);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
