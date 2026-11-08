@@ -10,17 +10,21 @@
         </div>
 
         <div class="row g-4">
-            @foreach ($viewData['categories'] as $category)
+            @forelse ($viewData['categories'] as $category)
                 <div class="col-md-6 col-lg-4">
                     <div class="category-card category-card--{{ ['teal', 'gold', 'navy'][$loop->index % 3] }}">
-                        <h3 class="category-card__name">{{ $category->getName() }}</h3>
+                        <h2 class="h3 category-card__name">{{ $category->getName() }}</h2>
                         <p class="category-card__description">{{ $category->getDescription() }}</p>
                         <a href="{{ route('categories.show', $category->getId()) }}" class="btn btn-brand-outline btn-sm">
                             {{ __('catalog.view_jewels') }} <i class="bi bi-arrow-right-short"></i>
                         </a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-12">
+                    <div class="alert alert-light border text-center">{{ __('catalog.no_categories') }}</div>
+                </div>
+            @endforelse
         </div>
     </div>
 @endsection

@@ -10,7 +10,7 @@ use Illuminate\View\View;
 class JewelController extends Controller
 {
     /**
-     * Display the public jewel catalog with optional name or category filtering.
+     * Display the public catalog of active jewels with optional name or category filtering.
      */
     public function index(Request $request): View
     {
@@ -20,21 +20,24 @@ class JewelController extends Controller
         $viewData = [];
         $viewData['title'] = __('catalog.title');
         $viewData['jewels'] = Jewel::with(['status', 'category'])
+            ->active()
             ->search($searchName, $searchCategoryId)
-            ->get();
-        $viewData['categories'] = Category::all();
+            ->paginate(9)
+            ->withQueryString();
+        $viewData['categories'] = Category::active()->orderBy('name')->get();
         $viewData['searchName'] = $searchName;
         $viewData['searchCategoryId'] = $searchCategoryId;
+        $viewData['isFiltered'] = $searchName !== null || $searchCategoryId !== null;
 
         return view('jewels.index')->with('viewData', $viewData);
     }
 
     /**
-     * Display the details page for a jewel.
+     * Display the details page for an active jewel.
      */
     public function show(int $id): View
     {
-        $jewel = Jewel::with(['status', 'category'])->findOrFail($id);
+        $jewel = Jewel::with(['status', 'category'])->active()->findOrFail($id);
 
         $viewData = [];
         $viewData['title'] = $jewel->getName();

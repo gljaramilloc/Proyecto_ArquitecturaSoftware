@@ -17,7 +17,7 @@ class AdminUserController extends Controller
     {
         $viewData = [];
         $viewData['title'] = __('admin.manage_users');
-        $viewData['users'] = User::query()->orderBy('name')->get();
+        $viewData['users'] = User::query()->orderBy('name')->paginate(10);
 
         return view('admin.users.index')->with('viewData', $viewData);
     }

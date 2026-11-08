@@ -9,5 +9,6 @@ return [
     'address' => 'Dirección',
     'save' => 'Guardar Cambios',
     'updated' => 'Tu perfil se ha actualizado correctamente.',
-
+    'email' => 'Correo electrónico',
+    'balance' => 'Saldo disponible',
 ];
