@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property string $name
- * @property string $createdAt
- * @property string $updatedAt
  */
 class Status extends Model
 {
@@ -37,24 +35,14 @@ class Status extends Model
         return $this->created_at;
     }
 
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
 
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setUpdatedAt($updatedAt)
+    // Single lookup point for the base statuses created by StatusSeeder
+    public static function findByName(string $name): self
     {
-        $this->updated_at = $updatedAt;
-
-        return $this;
+        return self::where('name', $name)->firstOrFail();
     }
 }

@@ -20,8 +20,9 @@ use Illuminate\Support\Facades\Hash;
  * @property string $password
  * @property int $statusId
  * @property string $role
- * @property string $createdAt
- * @property string $updatedAt
+ * @property float $balance
+ * @property Status $status
+ * @property Order $order
  */
 class User extends Authenticatable
 {
@@ -41,6 +42,7 @@ class User extends Authenticatable
         'password',
         'status_id',
         'role',
+        'balance',
     ];
 
     /**
@@ -139,30 +141,24 @@ class User extends Authenticatable
         $this->role = $role;
     }
 
+    public function getBalance(): float
+    {
+        return (float) $this->balance;
+    }
+
+    public function setBalance(float $balance): void
+    {
+        $this->balance = $balance;
+    }
+
     public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }
 
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
-    }
-
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-
-        return $this;
     }
 
     // Relationships
@@ -214,6 +210,11 @@ class User extends Authenticatable
     {
         $this->setPassword(Hash::make($newPassword));
         $this->save();
+    }
+
+    public function hasEnoughBalance(float $amount): bool
+    {
+        return $this->getBalance() >= $amount;
     }
 
     public function isAdmin(): bool

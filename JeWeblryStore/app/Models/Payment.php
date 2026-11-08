@@ -13,12 +13,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $statusId
  * @property string $date
  * @property int $orderId
- * @property string $createdAt
- * @property string $updatedAt
+ * @property Order $order
+ * @property Status $status
  */
 class Payment extends Model
 {
     use HasFactory;
+
+    public const METHOD_CHEQUE = 'cheque';
+
+    public const METHOD_BALANCE = 'balance';
 
     protected $fillable = [
         'amount',
@@ -89,25 +93,20 @@ class Payment extends Model
         return $this->created_at;
     }
 
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
 
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setUpdatedAt($updatedAt)
+    public function isCheque(): bool
     {
-        $this->updated_at = $updatedAt;
+        return $this->getMethod() === self::METHOD_CHEQUE;
+    }
 
-        return $this;
+    // Storage path (local disk) of the PDF cheque generated for this payment's order
+    public function getChequePath(): string
+    {
+        return 'cheques/order-'.$this->getOrderId().'.pdf';
     }
 
     // Relationships

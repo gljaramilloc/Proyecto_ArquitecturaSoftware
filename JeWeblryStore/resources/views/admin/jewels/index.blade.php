@@ -90,5 +90,9 @@
                 </table>
             </div>
         </div>
+
+        <div class="d-flex justify-content-center mt-4">
+            {{ $viewData['jewels']->links() }}
+        </div>
     </div>
 @endsection

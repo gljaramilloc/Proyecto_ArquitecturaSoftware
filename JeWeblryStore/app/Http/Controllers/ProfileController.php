@@ -10,11 +10,9 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+    /**
+     * Display the authenticated user's profile form.
+     */
     public function edit(): View
     {
         $viewData = [];
@@ -24,6 +22,9 @@ class ProfileController extends Controller
         return view('profile.edit')->with('viewData', $viewData);
     }
 
+    /**
+     * Update the authenticated user's profile.
+     */
     public function update(UpdateProfileRequest $request): RedirectResponse
     {
         /** @var User $user */

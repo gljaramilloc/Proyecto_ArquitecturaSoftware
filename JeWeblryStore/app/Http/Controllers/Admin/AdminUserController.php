@@ -10,15 +10,21 @@ use Illuminate\View\View;
 
 class AdminUserController extends Controller
 {
+    /**
+     * Display the list of users for administration.
+     */
     public function index(): View
     {
         $viewData = [];
         $viewData['title'] = __('admin.manage_users');
-        $viewData['users'] = User::query()->orderBy('name')->get();
+        $viewData['users'] = User::query()->orderBy('name')->paginate(10);
 
         return view('admin.users.index')->with('viewData', $viewData);
     }
 
+    /**
+     * Update a user's role.
+     */
     public function updateRole(UpdateUserRoleRequest $request, int $id): RedirectResponse
     {
         $user = User::findOrFail($id);

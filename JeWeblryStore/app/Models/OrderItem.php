@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\DB;
  * @property int $quantity
  * @property float $unitPrice
  * @property int $jewelId
- * @property int $orderId
- * @property string $createdAt
- * @property string $updatedAt
+ * @property Order $order
+ * @property Jewel $jewel
  */
 class OrderItem extends Model
 {
@@ -79,25 +78,14 @@ class OrderItem extends Model
         return $this->created_at;
     }
 
-    // No strict typing or ': void' to respect Laravel's inheritance
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
 
-    // No strict typing or ': void' to respect Laravel's inheritance
-    public function setUpdatedAt($updatedAt)
+    public function getSubtotal(): float
     {
-        $this->updated_at = $updatedAt;
-
-        return $this;
+        return $this->getQuantity() * $this->getUnitPrice();
     }
 
     public static function getTopSold(int $limit = 3): Collection

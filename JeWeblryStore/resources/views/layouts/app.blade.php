@@ -67,6 +67,12 @@
                                 {{ __('navigation.categories') }}
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('alliedProducts.*') ? 'active fw-bold' : '' }}"
+                                href="{{ route('alliedProducts.index') }}">
+                                {{ __('navigation.allied_products') }}
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

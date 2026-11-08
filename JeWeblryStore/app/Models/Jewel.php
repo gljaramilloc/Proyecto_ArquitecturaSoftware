@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\HasActiveStatus;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,12 +19,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $material
  * @property string $image
  * @property int $categoryId
- * @property Carbon $createdAt
- * @property Carbon $updatedAt
+ * @property Collection $orderItems
+ * @property Category $category
  */
 class Jewel extends Model
 {
-    use HasActiveStatus, HasFactory;
+    use HasFactory;
 
     protected $fillable = [
         'name',
@@ -130,23 +128,9 @@ class Jewel extends Model
         return $this->created_at;
     }
 
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
-    }
-
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-
-        return $this;
     }
 
     // Relationships
@@ -194,6 +178,18 @@ class Jewel extends Model
     public function setOrderItems(Collection $orderItems): void
     {
         $this->orderItems = $orderItems;
+    }
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->whereHas('status', function (Builder $statusQuery) {
+            $statusQuery->where('name', 'Active');
+        });
+    }
+
+    public function isActive(): bool
+    {
+        return $this->getStatus()?->getName() === 'Active';
     }
 
     // ==========================================================

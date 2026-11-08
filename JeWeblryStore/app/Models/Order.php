@@ -14,8 +14,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $statusId
  * @property float $total
  * @property int $userId
- * @property string $createdAt
- * @property string $updatedAt
+ * @property Status $status
+ * @property User $user
+ * @property Payment $payment
+ * @property Collection $items
  */
 class Order extends Model
 {
@@ -68,25 +70,17 @@ class Order extends Model
         return $this->created_at;
     }
 
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
 
-    // Without strict typing or ': void' to respect Laravel's inheritance
-    public function setUpdatedAt($updatedAt)
+    // Sum of every item's subtotal (quantity x unit price)
+    public function calculateTotal(): float
     {
-        $this->updated_at = $updatedAt;
-
-        return $this;
+        return $this->getItems()->sum(function (OrderItem $item): float {
+            return $item->getSubtotal();
+        });
     }
 
     // Isolated collections to keep the Controller clean from raw Eloquent queries (Fat Model, Thin Controller)
