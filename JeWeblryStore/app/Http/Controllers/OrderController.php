@@ -8,11 +8,17 @@ use Illuminate\View\View;
 
 class OrderController extends Controller
 {
+    /**
+     * Require authentication for order actions.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Display the authenticated user's order history.
+     */
     public function index(): View
     {
         $orders = Order::with(['items.jewel', 'payment', 'status'])
@@ -27,6 +33,9 @@ class OrderController extends Controller
         return view('orders.index')->with('viewData', $viewData);
     }
 
+    /**
+     * Display the details of an order owned by the authenticated user.
+     */
     public function show(int $id): View
     {
         $order = Order::with(['items.jewel', 'payment', 'status'])->findOrFail($id);
