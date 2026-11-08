@@ -9,14 +9,6 @@ use Illuminate\View\View;
 class OrderController extends Controller
 {
     /**
-     * Require authentication for order actions.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display the authenticated user's order history.
      */
     public function index(): View

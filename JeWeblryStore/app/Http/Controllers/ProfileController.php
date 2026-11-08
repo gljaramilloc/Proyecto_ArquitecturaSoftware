@@ -11,14 +11,6 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
-     * Require authentication for profile actions.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display the authenticated user's profile form.
      */
     public function edit(): View

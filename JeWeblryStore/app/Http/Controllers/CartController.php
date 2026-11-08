@@ -10,12 +10,8 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    /**
-     * Require authentication and configure the order action.
-     */
     public function __construct(private readonly CreateOrderAction $createOrderAction)
     {
-        $this->middleware('auth');
     }
 
     /**
@@ -40,7 +36,7 @@ class CartController extends Controller
         }
 
         $viewData = [];
-        $viewData['title'] = __('cart.title').' - Online Store';
+        $viewData['title'] = __('cart.title');
         $viewData['subtitle'] = __('cart.your_cart');
         $viewData['total'] = $total;
         $viewData['jewels'] = $jewelsInCart;

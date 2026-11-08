@@ -11,12 +11,8 @@ use Illuminate\View\View;
 
 class PaymentController extends Controller
 {
-    /**
-     * Require authentication and configure the payment action.
-     */
     public function __construct(private readonly CreatePaymentAction $createPaymentAction)
     {
-        $this->middleware('auth');
     }
 
     /**
