@@ -1,53 +1,53 @@
 @extends('layouts.app')
 
-@push('styles')
-    <link href="{{ asset('css/pages/payments/create.css') }}" rel="stylesheet">
-@endpush
-
 @section('title', __('payment.title'))
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h1>{{ __('payment.title') }}</h1>
-            <p>{{ __('payment.order_number') }}: #{{ $viewData['order']->getId() }} — {{ __('payment.order_total') }}: ${{ $viewData['order']->getTotal() }}</p>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="h3 font-display mb-2">{{ __('payment.title') }}</h1>
+                <p class="text-muted mb-4">
+                    {{ __('payment.order_number') }} #{{ $viewData['order']->getId() }} —
+                    {{ __('payment.order_total') }}: <span class="fw-bold text-brand-gold">${{ number_format($viewData['order']->getTotal(), 2) }}</span>
+                </p>
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <form action="{{ route('payments.store', $viewData['order']->getId()) }}" method="POST">
+                            @csrf
+
+                            <fieldset class="mb-4">
+                                <legend class="h6 mb-3">{{ __('payment.method') }}</legend>
+
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input @error('method') is-invalid @enderror" type="radio" name="method" id="method-cheque" value="cheque" {{ old('method', 'cheque') === 'cheque' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="method-cheque">
+                                        <i class="bi bi-file-earmark-pdf me-1"></i>{{ __('payment.cheque') }}
+                                        <small class="d-block text-muted">{{ __('payment.cheque_hint') }}</small>
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input @error('method') is-invalid @enderror" type="radio" name="method" id="method-balance" value="balance" {{ old('method') === 'balance' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="method-balance">
+                                        <i class="bi bi-wallet2 me-1"></i>{{ __('payment.balance') }}
+                                        <small class="d-block text-muted">{{ __('payment.balance_hint', ['balance' => number_format($viewData['balance'], 2)]) }}</small>
+                                    </label>
+                                    @error('method')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </fieldset>
+
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('orders.show', $viewData['order']->getId()) }}" class="btn btn-outline-dark">{{ __('payment.back_to_order') }}</a>
+                                <button type="submit" class="btn btn-brand">{{ __('payment.save') }}</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            @endif
-
-            <form action="{{ route('payments.store', $viewData['order']->getId()) }}" method="POST">
-                @csrf
-
-                <div class="mb-3">
-                    <label>{{ __('payment.amount') }}</label>
-                    <input type="number" step="0.01" name="amount" class="form-control" value="{{ old('amount', $viewData['order']->getTotal()) }}" readonly>
-                </div>
-
-                <div class="mb-3">
-                    <label>{{ __('payment.method') }}</label>
-                    <select name="method" class="form-control">
-                        <option value="credit_card" {{ old('method') === 'credit_card' ? 'selected' : '' }}>{{ __('payment.credit_card') }}</option>
-                        <option value="debit_card" {{ old('method') === 'debit_card' ? 'selected' : '' }}>{{ __('payment.debit_card') }}</option>
-                        <option value="paypal" {{ old('method') === 'paypal' ? 'selected' : '' }}>{{ __('payment.paypal') }}</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label>{{ __('payment.date') }}</label>
-                    <input type="date" name="date" class="form-control" value="{{ old('date', date('Y-m-d')) }}">
-                </div>
-
-                <button type="submit" class="btn btn-primary">{{ __('payment.save') }}</button>
-            </form>
+            </div>
         </div>
     </div>
-</div>
 @endsection

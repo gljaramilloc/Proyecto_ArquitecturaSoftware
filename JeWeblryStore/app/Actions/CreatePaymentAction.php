@@ -9,17 +9,17 @@ use App\Models\Status;
 class CreatePaymentAction
 {
     /**
-     * Create a pending payment for an order.
+     * Create a payment for an order with the given status (pending by default).
      */
-    public function execute(Order $order, string $method, string $date): Payment
+    public function execute(Order $order, string $method, string $date, string $statusName = 'Pending'): Payment
     {
-        $pendingStatus = Status::where('name', 'Pending')->firstOrFail();
+        $paymentStatus = Status::findByName($statusName);
 
         $payment = new Payment;
         $payment->setAmount($order->getTotal());
         $payment->setMethod($method);
         $payment->setDate($date);
-        $payment->setStatusId($pendingStatus->getId());
+        $payment->setStatusId($paymentStatus->getId());
         $payment->setOrderId($order->getId());
         $payment->save();
 

@@ -20,6 +20,10 @@ class Payment extends Model
 {
     use HasFactory;
 
+    public const METHOD_CHEQUE = 'cheque';
+
+    public const METHOD_BALANCE = 'balance';
+
     protected $fillable = [
         'amount',
         'method',
@@ -92,6 +96,17 @@ class Payment extends Model
     public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
+    }
+
+    public function isCheque(): bool
+    {
+        return $this->getMethod() === self::METHOD_CHEQUE;
+    }
+
+    // Storage path (local disk) of the PDF cheque generated for this payment's order
+    public function getChequePath(): string
+    {
+        return 'cheques/order-'.$this->getOrderId().'.pdf';
     }
 
     // Relationships

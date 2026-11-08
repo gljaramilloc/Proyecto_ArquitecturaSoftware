@@ -83,6 +83,11 @@ class OrderItem extends Model
         return $this->updated_at;
     }
 
+    public function getSubtotal(): float
+    {
+        return $this->getQuantity() * $this->getUnitPrice();
+    }
+
     public static function getTopSold(int $limit = 3): Collection
     {
         return self::with('jewel')
