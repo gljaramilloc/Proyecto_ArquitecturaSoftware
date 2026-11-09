@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Jewel;
 use App\Models\Status;
+use Google\Cloud\Storage\StorageClient;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class DefaultJewelSeeder extends Seeder
 {
@@ -41,6 +41,9 @@ class DefaultJewelSeeder extends Seeder
         ],
     ];
 
+    /**
+     * Seed the jewels that must always exist in the catalog.
+     */
     public function run(): void
     {
         $status = Status::where('name', 'Active')->first() ?? Status::firstOrCreate(['name' => 'Active']);
@@ -67,14 +70,22 @@ class DefaultJewelSeeder extends Seeder
     }
 
     /**
-     * Copy the bundled seed image into the public disk so it survives fresh installs.
+     * Upload the bundled seed image into the GCS bucket so every replica can see it.
      */
     private function publishImage(string $fileName): string
     {
         $targetPath = 'jewels/'.$fileName;
 
-        if (! Storage::disk('public')->exists($targetPath)) {
-            Storage::disk('public')->put($targetPath, File::get(public_path('images/'.$fileName)));
+        $client = new StorageClient([
+            'projectId' => config('filesystems.disks.gcs.project_id'),
+        ]);
+        $bucket = $client->bucket(config('filesystems.disks.gcs.bucket'));
+
+        if (! $bucket->object($targetPath)->exists()) {
+            $bucket->upload(
+                File::get(public_path('images/'.$fileName)),
+                ['name' => $targetPath]
+            );
         }
 
         return $targetPath;
