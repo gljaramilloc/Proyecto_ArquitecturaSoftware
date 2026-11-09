@@ -9,13 +9,13 @@ class ImageUploadService
 {
     public function upload(UploadedFile $file, string $directory): string
     {
-        return $file->store($directory, 'public');
+        return $file->store($directory, 'gcs');
     }
 
     public function delete(?string $path): void
     {
-        if ($path && Storage::disk('public')->exists($path)) {
-            Storage::disk('public')->delete($path);
+        if ($path && Storage::disk('gcs')->exists($path)) {
+            Storage::disk('gcs')->delete($path);
         }
     }
 }
