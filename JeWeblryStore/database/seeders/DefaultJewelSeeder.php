@@ -8,6 +8,7 @@ use App\Models\Status;
 use Google\Cloud\Storage\StorageClient;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DefaultJewelSeeder extends Seeder
 {
@@ -70,22 +71,33 @@ class DefaultJewelSeeder extends Seeder
     }
 
     /**
-     * Upload the bundled seed image into the GCS bucket so every replica can see it.
+     * Publish the bundled seed image to the configured filesystem disk.
      */
     private function publishImage(string $fileName): string
     {
         $targetPath = 'jewels/'.$fileName;
+        $disk = config('filesystems.default');
 
-        $client = new StorageClient([
-            'projectId' => config('filesystems.disks.gcs.project_id'),
-        ]);
-        $bucket = $client->bucket(config('filesystems.disks.gcs.bucket'));
+        // Production (GCP): upload the image directly to the Cloud Storage bucket.
+        if ($disk === 'gcs') {
+            $client = new StorageClient([
+                'projectId' => config('filesystems.disks.gcs.project_id'),
+            ]);
+            $bucket = $client->bucket(config('filesystems.disks.gcs.bucket'));
 
-        if (! $bucket->object($targetPath)->exists()) {
-            $bucket->upload(
-                File::get(public_path('images/'.$fileName)),
-                ['name' => $targetPath]
-            );
+            if (! $bucket->object($targetPath)->exists()) {
+                $bucket->upload(
+                    File::get(public_path('images/'.$fileName)),
+                    ['name' => $targetPath]
+                );
+            }
+
+            return $targetPath;
+        }
+
+        // Local or other disks: use the Laravel filesystem (e.g. the public disk).
+        if (! Storage::disk($disk)->exists($targetPath)) {
+            Storage::disk($disk)->put($targetPath, File::get(public_path('images/'.$fileName)));
         }
 
         return $targetPath;

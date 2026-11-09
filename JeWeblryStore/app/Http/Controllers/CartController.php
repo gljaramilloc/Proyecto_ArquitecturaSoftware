@@ -10,9 +10,7 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    public function __construct(private readonly CreateOrderAction $createOrderAction)
-    {
-    }
+    public function __construct(private readonly CreateOrderAction $createOrderAction) {}
 
     /**
      * Display the current cart and its total.

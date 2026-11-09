@@ -17,9 +17,7 @@ class PaymentController extends Controller
     /**
      * Require an authenticated customer for every payment action.
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Display the payment form for an order owned by the authenticated user.
