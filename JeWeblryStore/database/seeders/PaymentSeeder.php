@@ -7,6 +7,7 @@ use App\Models\Payment;
 use App\Models\Status;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +24,7 @@ class PaymentSeeder extends Seeder
         $demoCustomer = User::where('email', 'customer@jeweblrystore.com')->first();
 
         if ($demoCustomer !== null) {
+            /** @var Collection<int, Order> $demoOrders */
             $demoOrders = Order::with('user')
                 ->where('user_id', $demoCustomer->getId())
                 ->orderBy('created_at')
@@ -51,6 +53,7 @@ class PaymentSeeder extends Seeder
             $unpaidOrdersQuery->where('user_id', '!=', $demoCustomer->getId());
         }
 
+        /** @var Collection<int, Order> $ordersToPay */
         $ordersToPay = $unpaidOrdersQuery->inRandomOrder()->take($remainingToPay)->get();
 
         foreach ($ordersToPay as $index => $order) {
