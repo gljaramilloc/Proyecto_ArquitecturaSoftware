@@ -24,7 +24,7 @@ class PaymentSeeder extends Seeder
         $demoCustomer = User::where('email', 'customer@jeweblrystore.com')->first();
 
         if ($demoCustomer !== null) {
-            /** @var Collection<int, Order> $demoOrders */
+            /** @var Collection<int, Order>|Order[] $demoOrders */
             $demoOrders = Order::with('user')
                 ->where('user_id', $demoCustomer->getId())
                 ->orderBy('created_at')
@@ -53,7 +53,7 @@ class PaymentSeeder extends Seeder
             $unpaidOrdersQuery->where('user_id', '!=', $demoCustomer->getId());
         }
 
-        /** @var Collection<int, Order> $ordersToPay */
+        /** @var Collection<int, Order>|Order[] $ordersToPay */
         $ordersToPay = $unpaidOrdersQuery->inRandomOrder()->take($remainingToPay)->get();
 
         foreach ($ordersToPay as $index => $order) {
