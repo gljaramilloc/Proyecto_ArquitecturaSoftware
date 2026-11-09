@@ -24,7 +24,14 @@
                                 <h5 class="card-title font-display mb-3">{{ $jewel->getName() }}</h5>
 
                                 <div class="mt-auto">
-                                    <p class="fw-bold fs-5 text-brand-gold mb-3">${{ number_format($jewel->getPrice(), 2) }}</p>
+                                    <p class="fw-bold fs-5 text-brand-gold mb-1">${{ number_format($jewel->getPrice(), 2) }}</p>
+                                    @if ($viewData['exchangeQuote'] !== null)
+                                        <p class="price-cop-hint mb-3">
+                                            {{ __('currency.approx_cop', ['amount' => number_format($viewData['exchangeQuote']->convert($jewel->getPrice()), 0)]) }}
+                                        </p>
+                                    @else
+                                        <div class="mb-2"></div>
+                                    @endif
                                     <a href="{{ route('jewels.show', $jewel->getId()) }}" class="btn btn-brand-outline w-100">{{ __('home.view_detail') }}</a>
                                 </div>
                             </div>

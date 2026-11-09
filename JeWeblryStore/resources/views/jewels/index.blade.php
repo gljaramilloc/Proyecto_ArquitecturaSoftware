@@ -9,6 +9,8 @@
             <p class="text-muted text-uppercase catalog-subtitle">{{ __('catalog.subtitle') }}</p>
         </div>
 
+        <x-exchange-rate-banner :quote="$viewData['exchangeQuote']" />
+
         {{-- Search form --}}
         <div class="card border-0 shadow-sm mb-4 bg-white search-card">
             <div class="card-body p-4">
@@ -51,7 +53,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
             @forelse ($viewData['jewels'] as $jewel)
                 <div class="col">
-                    <x-jewel-card :jewel="$jewel" />
+                    <x-jewel-card :jewel="$jewel" :exchange-quote="$viewData['exchangeQuote']" />
                 </div>
             @empty
                 <div class="col-12 w-100">

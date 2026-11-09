@@ -39,9 +39,30 @@
                         </span>
 
                         <h1 class="h3 font-display">{{ $viewData['jewel']->getName() }}</h1>
-                        <p class="fs-3 fw-bold mb-3 text-brand-gold">
+                        <p class="fs-3 fw-bold mb-2 text-brand-gold">
                             ${{ number_format($viewData['jewel']->getPrice(), 2) }}
                         </p>
+
+                        @if ($viewData['exchangeQuote'] !== null)
+                            <div class="jewel-detail__cop-box px-3 py-2 mb-3">
+                                <p class="small text-muted mb-0">{{ __('currency.estimated_cop_label') }}</p>
+                                <p class="fw-semibold text-dark mb-0">
+                                    {{ __('currency.approx_cop', ['amount' => number_format($viewData['exchangeQuote']->convert($viewData['jewel']->getPrice()), 0)]) }}
+                                    <span class="text-muted fw-normal small ms-1">
+                                        ({{ __('currency.rate_format', [
+                                            'base' => $viewData['exchangeQuote']->getBaseCurrency(),
+                                            'rate' => number_format($viewData['exchangeQuote']->getRate(), 2),
+                                            'target' => $viewData['exchangeQuote']->getTargetCurrency(),
+                                        ]) }})
+                                    </span>
+                                </p>
+                            </div>
+                        @else
+                            <p class="small text-muted mb-3">
+                                <i class="bi bi-cloud-slash me-1" aria-hidden="true"></i>{{ __('currency.unavailable_detail') }}
+                            </p>
+                        @endif
+
                         <p class="text-muted">{{ $viewData['jewel']->getDescription() }}</p>
 
                         <ul class="list-group list-group-flush mt-auto">

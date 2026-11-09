@@ -13,6 +13,7 @@
     @include('home.sections.about-store')
     @include('home.sections.promo-banner')
     @include('home.sections.trust-strip')
+    @include('home.sections.exchange-rate')
     @include('home.sections.featured-jewels')
 
     @push('scripts')

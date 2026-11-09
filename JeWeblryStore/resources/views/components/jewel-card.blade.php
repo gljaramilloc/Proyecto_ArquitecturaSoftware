@@ -1,4 +1,4 @@
-@props(['jewel'])
+@props(['jewel', 'exchangeQuote' => null])
 
 {{-- Shared jewel card for the storefront listings (catalog and category detail) --}}
 <div class="card h-100 border-0 shadow-sm jewel-card">
@@ -18,7 +18,14 @@
         </p>
 
         <div class="mt-auto">
-            <p class="fs-5 text-brand-gold mb-3">${{ number_format($jewel->getPrice(), 2) }}</p>
+            <p class="fs-5 text-brand-gold mb-1">${{ number_format($jewel->getPrice(), 2) }}</p>
+            @if ($exchangeQuote !== null)
+                <p class="price-cop-hint mb-3">
+                    {{ __('currency.approx_cop', ['amount' => number_format($exchangeQuote->convert($jewel->getPrice()), 0)]) }}
+                </p>
+            @else
+                <div class="mb-2"></div>
+            @endif
             <a href="{{ route('jewels.show', $jewel->getId()) }}" class="btn btn-brand-outline w-100">
                 {{ __('catalog.view_detail') }}
             </a>

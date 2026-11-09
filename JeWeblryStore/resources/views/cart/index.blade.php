@@ -21,6 +21,8 @@
                     @endif
                 </div>
 
+                <x-exchange-rate-banner :quote="$viewData['exchangeQuote']" />
+
                 <div class="card border shadow-sm bg-white rounded-0">
                     <div class="card-body p-4">
                         @if (count($viewData['jewels']) > 0)
@@ -59,6 +61,11 @@
                                             <th colspan="3" class="text-end fs-5 pt-3">{{ __('cart.total') }}:</th>
                                             <th class="text-end fs-5 text-brand-gold pt-3">
                                                 ${{ number_format($viewData['total'], 2) }}
+                                                @if ($viewData['exchangeQuote'] !== null)
+                                                    <div class="price-cop-hint fw-normal">
+                                                        {{ __('currency.approx_cop', ['amount' => number_format($viewData['exchangeQuote']->convert($viewData['total']), 0)]) }}
+                                                    </div>
+                                                @endif
                                             </th>
                                         </tr>
                                     </tfoot>

@@ -4,18 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreateOrderAction;
 use App\Models\Jewel;
+use App\Services\ExchangeRateService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    public function __construct(private readonly CreateOrderAction $createOrderAction)
-    {
-    }
+    /**
+     * Inject the order creation action and exchange rate service.
+     */
+    public function __construct(
+        private readonly CreateOrderAction $createOrderAction,
+        private readonly ExchangeRateService $exchangeRateService,
+    ) {}
 
     /**
-     * Display the current cart and its total.
+     * Display the current cart and its total in USD and estimated COP.
      */
     public function index(): View
     {
@@ -25,11 +30,9 @@ class CartController extends Controller
         $cartSession = session()->get('cart', []);
 
         if (! empty($cartSession)) {
-            // Get jewels whose IDs match the keys (jewel IDs) in the session
             $jewelsInCart = Jewel::with('category')->findMany(array_keys($cartSession));
 
             foreach ($jewelsInCart as $jewel) {
-                // Determine total by multiplying jewel price by quantity requested
                 $quantity = $cartSession[$jewel->getId()];
                 $total += $jewel->getPrice() * $quantity;
             }
@@ -41,6 +44,7 @@ class CartController extends Controller
         $viewData['total'] = $total;
         $viewData['jewels'] = $jewelsInCart;
         $viewData['cartSession'] = $cartSession;
+        $viewData['exchangeQuote'] = $this->exchangeRateService->getUsdToCopQuote();
 
         return view('cart.index')->with('viewData', $viewData);
     }
