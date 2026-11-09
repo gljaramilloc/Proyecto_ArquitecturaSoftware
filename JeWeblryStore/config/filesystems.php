@@ -68,11 +68,7 @@ return [
             'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI', null),
             'throw' => false,
             'report' => false,
-],
-
-],
-
-
+        ],
 
     ],
 
@@ -92,3 +88,4 @@ return [
     ],
 
 ];
+
