@@ -25,11 +25,11 @@
                     <table class="table align-middle mb-0">
                         <thead>
                             <tr class="text-uppercase small text-muted">
-                                <th>{{ __('admin.id') }}</th>
-                                <th>{{ __('admin.name') }}</th>
-                                <th>{{ __('admin.slug') }}</th>
-                                <th>{{ __('admin.status') }}</th>
-                                <th class="text-end">{{ __('admin.actions') }}</th>
+                                <th scope="col">{{ __('admin.id') }}</th>
+                                <th scope="col">{{ __('admin.name') }}</th>
+                                <th scope="col">{{ __('admin.slug') }}</th>
+                                <th scope="col">{{ __('admin.status') }}</th>
+                                <th scope="col" class="text-end">{{ __('admin.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>

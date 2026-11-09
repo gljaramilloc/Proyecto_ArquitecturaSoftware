@@ -69,4 +69,6 @@ return [
     'role_updated' => 'User role updated successfully.',
     'status_updated' => 'Status updated successfully.',
     'cannot_change_own_role' => 'You cannot change your own role.',
+    'cannot_delete_category_with_jewels' => 'Cannot delete this category because jewels are still assigned to it.',
+    'cannot_delete_jewel_with_orders' => 'Cannot delete this jewel because it belongs to existing orders. You may deactivate it instead.',
 ];

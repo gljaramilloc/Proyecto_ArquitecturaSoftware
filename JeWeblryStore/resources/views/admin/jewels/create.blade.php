@@ -97,7 +97,7 @@
 
                             <div class="mb-4">
                                 <label for="image" class="form-label fw-bold text-uppercase small text-muted">{{ __('admin.image') }}</label>
-                                <input id="image" type="file" name="image" aria-describedby="image-hint" class="form-control rounded-0 shadow-none @error('image') is-invalid @enderror" accept="image/*">
+                                <input id="image" type="file" name="image" aria-describedby="image-hint" class="form-control rounded-0 shadow-none @error('image') is-invalid @enderror" accept="image/*" required>
                                 @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

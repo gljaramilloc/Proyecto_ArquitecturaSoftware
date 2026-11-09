@@ -20,10 +20,10 @@
                     <table class="table align-middle mb-0">
                         <thead>
                             <tr class="text-uppercase small text-muted">
-                                <th>{{ __('admin.user_name') }}</th>
-                                <th>{{ __('admin.email') }}</th>
-                                <th>{{ __('admin.role') }}</th>
-                                <th class="text-end">{{ __('admin.actions') }}</th>
+                                <th scope="col">{{ __('admin.user_name') }}</th>
+                                <th scope="col">{{ __('admin.email') }}</th>
+                                <th scope="col">{{ __('admin.role') }}</th>
+                                <th scope="col" class="text-end">{{ __('admin.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>

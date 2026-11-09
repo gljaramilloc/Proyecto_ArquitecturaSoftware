@@ -26,4 +26,5 @@ return [
     'invalid_items' => 'Algunos productos de tu carrito ya no están disponibles.',
     'item_count' => '{1}:count producto en tu carrito|[2,*]:count productos en tu carrito',
     'confirm_remove_all' => '¿Seguro que deseas vaciar todos los productos de tu carrito?',
+    'cleared' => 'Se vació tu carrito de compras.',
 ];

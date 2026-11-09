@@ -24,13 +24,13 @@
                 <table class="table mb-0 align-middle">
                     <thead>
                         <tr class="text-uppercase small text-muted">
-                            <th>{{ __('admin.image') }}</th>
-                            <th>{{ __('admin.name') }}</th>
-                            <th>{{ __('admin.category') }}</th>
-                            <th>{{ __('admin.price') }}</th>
-                            <th>{{ __('admin.stock') }}</th>
-                            <th>{{ __('admin.status') }}</th>
-                            <th class="text-end">{{ __('admin.actions') }}</th>
+                            <th scope="col">{{ __('admin.image') }}</th>
+                            <th scope="col">{{ __('admin.name') }}</th>
+                            <th scope="col">{{ __('admin.category') }}</th>
+                            <th scope="col">{{ __('admin.price') }}</th>
+                            <th scope="col">{{ __('admin.stock') }}</th>
+                            <th scope="col">{{ __('admin.status') }}</th>
+                            <th scope="col" class="text-end">{{ __('admin.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,9 +50,7 @@
                                 <td>${{ number_format($jewel->getPrice(), 2) }}</td>
                                 <td>{{ $jewel->getStock() }}</td>
                                 <td>
-                                    <span class="badge {{ $jewel->isActive() ? 'bg-success' : 'bg-secondary' }}">
-                                        {{ $jewel->getStatus() ? __('status.'.$jewel->getStatus()->getName()) : __('admin.not_available') }}
-                                    </span>
+                                    <x-status-badge :status="$jewel->getStatus()" />
                                 </td>
                                 <td class="text-end">
                                     <a href="{{ route('admin.jewels.edit', $jewel->getId()) }}" class="btn btn-sm btn-outline-secondary">

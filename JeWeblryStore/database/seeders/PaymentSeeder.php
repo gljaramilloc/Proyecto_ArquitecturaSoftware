@@ -6,33 +6,34 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Status;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentSeeder extends Seeder
 {
     /**
-     * Seed approved payments for roughly seventy percent of orders while leaving pending ones testable.
+     * Seed realistic balance and cheque payments for roughly seventy percent of orders.
      */
     public function run(): void
     {
         $approvedStatus = Status::where('name', 'Approved')->first() ?? Status::firstOrCreate(['name' => 'Approved']);
+        $pendingStatus = Status::where('name', 'Pending')->first() ?? Status::firstOrCreate(['name' => 'Pending']);
         $demoCustomer = User::where('email', 'customer@jeweblrystore.com')->first();
 
         if ($demoCustomer !== null) {
-            $demoPaidCount = Order::where('user_id', $demoCustomer->getId())
-                ->whereHas('payment')
-                ->count();
+            $demoOrders = Order::with('user')
+                ->where('user_id', $demoCustomer->getId())
+                ->orderBy('created_at')
+                ->get();
 
-            if ($demoPaidCount < 2) {
-                $demoOrders = Order::where('user_id', $demoCustomer->getId())
-                    ->whereDoesntHave('payment')
-                    ->orderBy('created_at')
-                    ->take(2 - $demoPaidCount)
-                    ->get();
+            if ($demoOrders->count() >= 1 && $demoOrders[0]->getPayment() === null) {
+                $this->registerSeededPayment($demoOrders[0], Payment::METHOD_BALANCE, $approvedStatus->getId());
+            }
 
-                foreach ($demoOrders as $demoOrder) {
-                    $this->approveOrderWithPayment($demoOrder, $approvedStatus->getId(), Payment::METHOD_BALANCE);
-                }
+            if ($demoOrders->count() >= 2 && $demoOrders[1]->getPayment() === null) {
+                $this->registerSeededPayment($demoOrders[1], Payment::METHOD_CHEQUE, $pendingStatus->getId());
             }
         }
 
@@ -44,7 +45,7 @@ class PaymentSeeder extends Seeder
             return;
         }
 
-        $unpaidOrdersQuery = Order::whereDoesntHave('payment');
+        $unpaidOrdersQuery = Order::with('user')->whereDoesntHave('payment');
 
         if ($demoCustomer !== null) {
             $unpaidOrdersQuery->where('user_id', '!=', $demoCustomer->getId());
@@ -52,29 +53,63 @@ class PaymentSeeder extends Seeder
 
         $ordersToPay = $unpaidOrdersQuery->inRandomOrder()->take($remainingToPay)->get();
 
-        foreach ($ordersToPay as $order) {
-            $this->approveOrderWithPayment($order, $approvedStatus->getId());
+        foreach ($ordersToPay as $index => $order) {
+            $method = $index % 4 === 0 ? Payment::METHOD_CHEQUE : Payment::METHOD_BALANCE;
+            $statusId = $method === Payment::METHOD_CHEQUE ? $pendingStatus->getId() : $approvedStatus->getId();
+
+            $this->registerSeededPayment($order, $method, $statusId);
         }
     }
 
     /**
-     * Create an approved payment record for an order and synchronize the order status.
+     * Persist a balance or cheque payment with a valid date and synchronize order/PDF state.
      */
-    private function approveOrderWithPayment(Order $order, int $approvedStatusId, ?string $method = null): void
+    private function registerSeededPayment(Order $order, string $method, int $statusId): void
     {
-        $attributes = [
+        $paymentDate = $order->getCreatedAt() !== null
+            ? Carbon::parse($order->getCreatedAt())->format('Y-m-d')
+            : now()->toDateString();
+
+        $payment = Payment::factory()->create([
             'order_id' => $order->getId(),
             'amount' => $order->getTotal(),
-            'status_id' => $approvedStatusId,
-        ];
+            'method' => $method,
+            'date' => $paymentDate,
+            'status_id' => $statusId,
+        ]);
 
-        if ($method !== null) {
-            $attributes['method'] = $method;
+        if ($method === Payment::METHOD_BALANCE) {
+            $order->setStatusId($statusId);
+            $order->save();
+
+            return;
         }
 
-        Payment::factory()->create($attributes);
+        $this->storeSeededChequePdf($order, $payment);
+    }
 
-        $order->setStatusId($approvedStatusId);
-        $order->save();
+    /**
+     * Generate and store the downloadable cheque PDF for a seeded cheque payment.
+     */
+    private function storeSeededChequePdf(Order $order, Payment $payment): void
+    {
+        if (Storage::disk('local')->exists($payment->getChequePath())) {
+            return;
+        }
+
+        if (class_exists(Pdf::class)) {
+            $viewData = [
+                'order' => $order,
+                'payment' => $payment,
+                'customer' => $order->getUser() ?? User::find($order->getUserId()),
+            ];
+
+            $chequePdf = Pdf::loadView('payments.cheque', ['viewData' => $viewData]);
+            Storage::disk('local')->put($payment->getChequePath(), $chequePdf->output());
+
+            return;
+        }
+
+        Storage::disk('local')->put($payment->getChequePath(), "%PDF-1.4\n1 0 obj<<>>endobj\ntrailer<<>>\n%%EOF\n");
     }
 }

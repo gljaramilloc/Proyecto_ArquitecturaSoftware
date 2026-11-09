@@ -26,6 +26,7 @@ class CartController extends Controller
     {
         $total = 0;
         $jewelsInCart = [];
+        $subtotals = [];
 
         $cartSession = session()->get('cart', []);
 
@@ -33,8 +34,10 @@ class CartController extends Controller
             $jewelsInCart = Jewel::with('category')->findMany(array_keys($cartSession));
 
             foreach ($jewelsInCart as $jewel) {
-                $quantity = $cartSession[$jewel->getId()];
-                $total += $jewel->getPrice() * $quantity;
+                $quantity = (int) ($cartSession[$jewel->getId()] ?? 0);
+                $lineSubtotal = $jewel->getPrice() * $quantity;
+                $subtotals[$jewel->getId()] = $lineSubtotal;
+                $total += $lineSubtotal;
             }
         }
 
@@ -44,17 +47,18 @@ class CartController extends Controller
         $viewData['total'] = $total;
         $viewData['jewels'] = $jewelsInCart;
         $viewData['cartSession'] = $cartSession;
+        $viewData['subtotals'] = $subtotals;
         $viewData['exchangeQuote'] = $this->exchangeRateService->getUsdToCopQuote();
 
         return view('cart.index')->with('viewData', $viewData);
     }
 
     /**
-     * Add one jewel to the cart.
+     * Add one active jewel to the cart.
      */
     public function add(int $id): RedirectResponse
     {
-        $jewel = Jewel::findOrFail($id);
+        $jewel = Jewel::active()->findOrFail($id);
 
         if ($jewel->getStock() < 1) {
             return back()->with('error', __('cart.out_of_stock'));
@@ -74,11 +78,11 @@ class CartController extends Controller
     }
 
     /**
-     * Create an order with one jewel and redirect to payment.
+     * Create an order with one active jewel and redirect to payment.
      */
     public function buyNow(int $id): RedirectResponse
     {
-        $jewel = Jewel::findOrFail($id);
+        $jewel = Jewel::active()->findOrFail($id);
 
         if ($jewel->getStock() < 1) {
             return back()->with('error', __('cart.out_of_stock'));
@@ -96,7 +100,7 @@ class CartController extends Controller
     {
         session()->forget('cart');
 
-        return back();
+        return back()->with('status', __('cart.cleared'));
     }
 
     /**

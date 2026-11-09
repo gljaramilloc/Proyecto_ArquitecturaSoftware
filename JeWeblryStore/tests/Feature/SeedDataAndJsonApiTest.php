@@ -3,9 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\Payment;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\DummyDataSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -19,6 +23,7 @@ class SeedDataAndJsonApiTest extends TestCase
     public function test_json_service_returns_active_in_stock_seeded_jewels(): void
     {
         Storage::fake('public');
+        Storage::fake('local');
         $this->seed(DatabaseSeeder::class);
 
         $response = $this->getJson(route('api.jewels.index'));
@@ -39,11 +44,12 @@ class SeedDataAndJsonApiTest extends TestCase
     }
 
     /**
-     * Verify that seeded catalog, category detail, and admin tables span multiple pages.
+     * Verify that seeded catalog, category detail, payments, and admin tables are domain-consistent.
      */
-    public function test_seeded_data_populates_multiple_pages_across_storefront_and_admin(): void
+    public function test_seeded_data_populates_multiple_pages_and_valid_payments(): void
     {
         Storage::fake('public');
+        Storage::fake('local');
         $this->seed(DatabaseSeeder::class);
 
         $this->get(route('jewels.index', ['page' => 4]))->assertOk();
@@ -55,5 +61,24 @@ class SeedDataAndJsonApiTest extends TestCase
         $this->actingAs($admin)->get(route('admin.jewels.index', ['page' => 4]))->assertOk();
         $this->actingAs($admin)->get(route('admin.categories.index', ['page' => 2]))->assertOk();
         $this->actingAs($admin)->get(route('admin.users.index', ['page' => 2]))->assertOk();
+
+        $demoCustomer = User::where('email', 'customer@jeweblrystore.com')->firstOrFail();
+        $demoOrders = Order::with('payment')->where('user_id', $demoCustomer->getId())->get();
+        $this->assertCount(4, $demoOrders);
+
+        foreach (Payment::with('order')->get() as $payment) {
+            $this->assertContains($payment->getMethod(), [Payment::METHOD_BALANCE, Payment::METHOD_CHEQUE]);
+            $orderDay = Carbon::parse($payment->getOrder()->getCreatedAt())->format('Y-m-d');
+            $this->assertGreaterThanOrEqual($orderDay, $payment->getDate());
+
+            if ($payment->isCheque()) {
+                Storage::disk('local')->assertExists($payment->getChequePath());
+            }
+        }
+
+        $this->seed(DummyDataSeeder::class);
+        $orderCountAfterFirstDummyRun = Order::query()->count();
+        $this->seed(DummyDataSeeder::class);
+        $this->assertSame($orderCountAfterFirstDummyRun, Order::query()->count());
     }
 }

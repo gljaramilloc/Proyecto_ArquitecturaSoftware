@@ -15,6 +15,8 @@ return [
     'contact' => 'Contact',
     'footer_tagline' => 'Creating unforgettable moments through exceptional pieces. Design, quality, and elegance in every detail of our collections.',
     'address' => 'Bello, Antioquia, Colombia',
+    'contact_email' => 'contact@jewelstore.com',
+    'contact_phone' => '+57 300 123 4567',
     'copyright' => 'All rights reserved.',
     'logo' => 'Jewelry store logo',
     'instagram' => 'Instagram',

@@ -239,7 +239,7 @@ h1, h2, h3, h4, h5, h6,
 
 /* High-end typography (if using custom serif fonts) */
 .font-display {
-    font-family: var(--bs-body-font-family, serif);
+    font-family: var(--font-display);
 }
 
 /* ==========================================================

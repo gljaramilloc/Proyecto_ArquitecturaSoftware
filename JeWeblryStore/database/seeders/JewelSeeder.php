@@ -21,7 +21,7 @@ class JewelSeeder extends Seeder
         ['name' => 'Mirage Pear-Cut Aquamarine Ring', 'price' => 1950.00, 'material' => '18k White Gold', 'stock' => 13, 'image' => 'jewel-seed-1.jpg', 'category_slug' => 'engagement-rings', 'status' => 'Active', 'description' => 'Crystal-clear Santa Maria aquamarine set on a pavé split-shank white gold band.'],
         ['name' => 'Aria Twisted Pavé Solitaire Ring', 'price' => 2790.00, 'material' => '18k Rose Gold', 'stock' => 9, 'image' => 'jewel1.jpg', 'category_slug' => 'engagement-rings', 'status' => 'Active', 'description' => 'Intertwined ribbons of polished rose gold and micro-set diamonds leading to a brilliant center gem.'],
         ['name' => 'Capri Radiant Yellow Diamond Ring', 'price' => 5390.00, 'material' => '18k Yellow Gold', 'stock' => 3, 'image' => 'jewel-seed-2.jpg', 'category_slug' => 'engagement-rings', 'status' => 'Active', 'description' => 'Natural fancy-yellow radiant diamond set in an 18k yellow gold basket for intense warmth.'],
-        ['name' => 'camellia Petite Bezel Diamond Ring', 'price' => 1890.00, 'material' => '18k White Gold', 'stock' => 15, 'image' => 'jewel-seed-3.jpg', 'category_slug' => 'engagement-rings', 'status' => 'Active', 'description' => 'Low-profile modern bezel solitaire engineered for effortless daily wear and brilliance.'],
+        ['name' => 'Camellia Petite Bezel Diamond Ring', 'price' => 1890.00, 'material' => '18k White Gold', 'stock' => 15, 'image' => 'jewel-seed-3.jpg', 'category_slug' => 'engagement-rings', 'status' => 'Active', 'description' => 'Low-profile modern bezel solitaire engineered for effortless daily wear and brilliance.'],
         ['name' => 'Bellagio Asscher-Cut Collector Ring', 'price' => 5890.00, 'material' => '950 Platinum', 'stock' => 0, 'image' => 'jewel2.jpg', 'category_slug' => 'engagement-rings', 'status' => 'Active', 'description' => 'Architectural octagonal Asscher-cut diamond balanced by french-pavé platinum shoulders.'],
 
         // Wedding & Eternity Bands
@@ -33,7 +33,7 @@ class JewelSeeder extends Seeder
         ['name' => 'Lumina Graduated Diamond Riviera Collar', 'price' => 4980.00, 'material' => '18k White Gold', 'stock' => 4, 'image' => 'jewel-seed-1.jpg', 'category_slug' => 'fine-necklaces-pendants', 'status' => 'Active', 'description' => 'Fluid gala necklace draped with seamlessly graduated bezel-set diamonds.'],
 
         // Bracelets & Bangles
-        ['name' => 'florentine Hinged Gold Cuff Bangle', 'price' => 1740.00, 'material' => '18k Yellow Gold', 'stock' => 10, 'image' => 'jewel4.jpg', 'category_slug' => 'bracelets-bangles', 'status' => 'Active', 'description' => 'Hand-textured Italian silk-finish gold bangle with concealed push-button safety clasp.'],
+        ['name' => 'Florentine Hinged Gold Cuff Bangle', 'price' => 1740.00, 'material' => '18k Yellow Gold', 'stock' => 10, 'image' => 'jewel4.jpg', 'category_slug' => 'bracelets-bangles', 'status' => 'Active', 'description' => 'Hand-textured Italian silk-finish gold bangle with concealed push-button safety clasp.'],
         ['name' => 'Andean Emerald Station Chain Bracelet', 'price' => 1420.00, 'material' => '18k Yellow Gold', 'stock' => 12, 'image' => 'jewel-seed-2.jpg', 'category_slug' => 'bracelets-bangles', 'status' => 'Active', 'description' => 'Five bezel-set Colombian emeralds spaced evenly along a delicate double-link gold chain.'],
 
         // Diamond & Gemstone Earrings
@@ -84,11 +84,10 @@ class JewelSeeder extends Seeder
                 ? $activeStatus->getId()
                 : $inactiveStatus->getId();
 
-            $name = ucfirst($jewelData['name']);
             $timestamp = now()->subHours($index + 1);
 
             Jewel::updateOrCreate(
-                ['name' => $name],
+                ['name' => $jewelData['name']],
                 [
                     'price' => $jewelData['price'],
                     'description' => $jewelData['description'],

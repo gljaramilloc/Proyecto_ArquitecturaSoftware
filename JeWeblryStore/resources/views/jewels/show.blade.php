@@ -40,7 +40,7 @@
 
                         <h1 class="h3 font-display">{{ $viewData['jewel']->getName() }}</h1>
                         <p class="fs-3 fw-bold mb-2 text-brand-gold">
-                            ${{ number_format($viewData['jewel']->getPrice(), 2) }}
+                            ${{ number_format($viewData['jewel']->getPrice(), 2) }} <span class="fs-6 fw-normal text-muted">USD</span>
                         </p>
 
                         @if ($viewData['exchangeQuote'] !== null)

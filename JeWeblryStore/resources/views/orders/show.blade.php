@@ -33,9 +33,7 @@
                             </div>
                             <div>
                                 <span class="text-muted text-uppercase small d-block">{{ __('order.status') }}</span>
-                                <span class="badge bg-secondary">
-                                    {{ $viewData['order']->getStatus() ? __('status.'.$viewData['order']->getStatus()->getName()) : __('admin.not_available') }}
-                                </span>
+                                <x-status-badge :status="$viewData['order']->getStatus()" />
                             </div>
                         </div>
 
@@ -65,7 +63,7 @@
                                             </td>
                                             <td class="text-center">{{ $item->getQuantity() }}</td>
                                             <td class="text-end">${{ number_format($item->getUnitPrice(), 2) }}</td>
-                                            <td class="text-end fw-bold text-brand-gold">${{ number_format($item->getQuantity() * $item->getUnitPrice(), 2) }}</td>
+                                            <td class="text-end fw-bold text-brand-gold">${{ number_format($item->getSubtotal(), 2) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -98,9 +96,7 @@
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between px-0">
                                     <span class="text-muted">{{ __('payment.status') }}</span>
-                                    <span class="badge bg-success">
-                                        {{ $viewData['order']->getPayment()->getStatus() ? __('status.'.$viewData['order']->getPayment()->getStatus()->getName()) : __('admin.not_available') }}
-                                    </span>
+                                    <x-status-badge :status="$viewData['order']->getPayment()->getStatus()" />
                                 </li>
                             </ul>
 

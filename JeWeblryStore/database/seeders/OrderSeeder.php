@@ -34,11 +34,23 @@ class OrderSeeder extends Seeder
         }
 
         $remainingOrders = max(0, 20 - Order::query()->count());
+        if ($remainingOrders === 0) {
+            return;
+        }
 
-        if ($remainingOrders > 0) {
-            Order::factory()
-                ->count($remainingOrders)
-                ->create(['status_id' => $pendingStatus->getId()]);
+        $otherCustomerIds = User::where('role', 'customer')
+            ->when($demoCustomer !== null, fn ($query) => $query->where('id', '!=', $demoCustomer->getId()))
+            ->pluck('id')
+            ->all();
+
+        for ($i = 0; $i < $remainingOrders; $i++) {
+            $attributes = ['status_id' => $pendingStatus->getId()];
+
+            if ($otherCustomerIds !== []) {
+                $attributes['user_id'] = fake()->randomElement($otherCustomerIds);
+            }
+
+            Order::factory()->create($attributes);
         }
     }
 }

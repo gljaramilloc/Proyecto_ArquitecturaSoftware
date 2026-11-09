@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} @hasSection('title')
+    <title>{{ config('app.name', 'JeWeblryStore') }} @hasSection('title')
             — @yield('title')
         @endif
     </title>
@@ -111,7 +111,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle {{ request()->routeIs('profile.*', 'orders.*', 'admin.*') ? 'active fw-bold' : '' }}" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->getName() }}
                                 </a>
 
@@ -175,7 +175,7 @@
                 <div class="row">
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                         <h4 class="text-uppercase mb-4 font-display text-brand-gold">
-                            {{ config('app.name', 'Laravel') }}</h4>
+                            {{ config('app.name', 'JeWeblryStore') }}</h4>
                         <p class="text-white-50 footer-tagline">
                             {{ __('navigation.footer_tagline') }}
                         </p>
@@ -196,9 +196,9 @@
                         <h6 class="text-uppercase mb-4 fw-bold text-brand-gold footer-heading">
                             {{ __('navigation.contact') }}</h6>
                         <p class="text-white-50"><i
-                                class="bi bi-geo-alt-fill me-2"></i>{{ __('navigation.address') }}</p>
-                        <p class="text-white-50"><i class="bi bi-envelope-fill me-2"></i> contact@jewelstore.com</p>
-                        <p class="text-white-50"><i class="bi bi-telephone-fill me-2"></i> +57 300 123 4567</p>
+                                class="bi bi-geo-alt-fill me-2" aria-hidden="true"></i>{{ __('navigation.address') }}</p>
+                        <p class="text-white-50"><i class="bi bi-envelope-fill me-2" aria-hidden="true"></i>{{ __('navigation.contact_email') }}</p>
+                        <p class="text-white-50"><i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>{{ __('navigation.contact_phone') }}</p>
                     </div>
                 </div>
 
@@ -208,7 +208,7 @@
                     <div class="col-md-7 col-lg-8">
                         <p class="text-center text-md-start text-white-50 mb-0">
                             © {{ date('Y') }} {{ __('navigation.copyright') }} <span
-                                class="text-brand-gold">{{ config('app.name', 'Laravel') }}</span>
+                                class="text-brand-gold">{{ config('app.name', 'JeWeblryStore') }}</span>
                         </p>
                     </div>
                     <div class="col-md-5 col-lg-4">

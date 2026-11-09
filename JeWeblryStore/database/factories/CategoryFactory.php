@@ -24,7 +24,7 @@ class CategoryFactory extends Factory
         'Pearl & Bridal Suite' => 'South Sea and Akoya cultured pearl creations tailored for ceremonies and black-tie galas.',
         'Brooches & Lapel Pins' => 'Sculptural botanical and geometric pins crafted to elevate tailored outerwear.',
         'Men\'s Fine Jewelry' => 'Minimalist chains, onyx signet rings, and precious cufflinks with brushed finishes.',
-        'Bespoke Archive Pieces' => 'Limited-editionatelier creations and collector commissions preserved in our vault.',
+        'Bespoke Archive Pieces' => 'Limited-edition atelier creations and collector commissions preserved in our vault.',
         'Choker & Collar Necklaces' => 'Structured gold collars and graduated gemstone chokers that frame the neckline.',
         'Gemstone Solitaires' => 'Single-origin sapphires, rubies, and tourmalines mounted to maximize natural brilliance.',
         'Stackable Rings' => 'Slender pavé, milgrain, and twisted bands crafted for effortless personal layering.',

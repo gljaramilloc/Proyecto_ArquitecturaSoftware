@@ -50,6 +50,10 @@ class DummyDataSeeder extends Seeder
             ['name' => 'Classic Akoya Pearl Drop Earrings', 'price' => 980.00, 'material' => '18k Rose Gold', 'image' => 'jewel3.jpg', 'description' => 'Cultured Akoya pearl drops mounted on rose gold hooks.', 'quantity' => 5],
         ];
 
+        if (Order::where('user_id', $user->getId())->exists()) {
+            return;
+        }
+
         $order = new Order;
         $order->setUserId($user->getId());
         $order->setTotal(0.00);

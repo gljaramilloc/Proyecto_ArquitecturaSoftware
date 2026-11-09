@@ -18,6 +18,10 @@ class ExchangeRateService
 {
     private const CACHE_KEY = 'exchange_rate.usd_cop_quote';
 
+    private const FAILURE_SENTINEL = 'unavailable';
+
+    private const FAILURE_COOLDOWN_SECONDS = 60;
+
     /**
      * Retrieve the current USD to COP exchange rate quote or null when unavailable.
      */
@@ -36,6 +40,9 @@ class ExchangeRateService
             if ($cachedQuote instanceof ExchangeRateQuote) {
                 return $cachedQuote;
             }
+            if ($cachedQuote === self::FAILURE_SENTINEL) {
+                return null;
+            }
         }
 
         try {
@@ -45,6 +52,7 @@ class ExchangeRateService
                 ->throw();
         } catch (ConnectionException|RequestException|Throwable $exception) {
             Log::warning('Exchange rate service is not available.', ['message' => $exception->getMessage()]);
+            $this->rememberTemporaryFailure($cacheTtl);
 
             return null;
         }
@@ -52,12 +60,16 @@ class ExchangeRateService
         $payload = $response->json();
 
         if (! is_array($payload)) {
+            $this->rememberTemporaryFailure($cacheTtl);
+
             return null;
         }
 
         $copRate = $this->extractCopRate($payload);
 
         if ($copRate === null) {
+            $this->rememberTemporaryFailure($cacheTtl);
+
             return null;
         }
 
@@ -73,6 +85,17 @@ class ExchangeRateService
         }
 
         return $quote;
+    }
+
+    /**
+     * Cache a short-lived failure marker to prevent repeated timeouts on every page view.
+     */
+    private function rememberTemporaryFailure(int $cacheTtl): void
+    {
+        if ($cacheTtl > 0) {
+            $cooldown = min($cacheTtl, self::FAILURE_COOLDOWN_SECONDS);
+            Cache::put(self::CACHE_KEY, self::FAILURE_SENTINEL, now()->addSeconds($cooldown));
+        }
     }
 
     /**

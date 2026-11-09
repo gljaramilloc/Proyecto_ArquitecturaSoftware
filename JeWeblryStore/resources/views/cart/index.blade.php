@@ -51,7 +51,7 @@
                                                     </span>
                                                 </td>
                                                 <td class="text-end fw-bold text-brand-gold">
-                                                    ${{ number_format($jewel->getPrice() * $viewData['cartSession'][$jewel->getId()], 2) }}
+                                                    ${{ number_format($viewData['subtotals'][$jewel->getId()], 2) }}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -60,7 +60,7 @@
                                         <tr>
                                             <th colspan="3" class="text-end fs-5 pt-3">{{ __('cart.total') }}:</th>
                                             <th class="text-end fs-5 text-brand-gold pt-3">
-                                                ${{ number_format($viewData['total'], 2) }}
+                                                ${{ number_format($viewData['total'], 2) }} <span class="small fw-normal text-muted">USD</span>
                                                 @if ($viewData['exchangeQuote'] !== null)
                                                     <div class="price-cop-hint fw-normal">
                                                         {{ __('currency.approx_cop', ['amount' => number_format($viewData['exchangeQuote']->convert($viewData['total']), 0)]) }}

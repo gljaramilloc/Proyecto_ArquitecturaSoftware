@@ -50,15 +50,11 @@
                                         <td>{{ $order->getCreatedAt() }}</td>
                                         <td class="fw-bold text-brand-gold">${{ number_format($order->getTotal(), 2) }}</td>
                                         <td>
-                                            <span class="badge bg-secondary">
-                                                {{ $order->getStatus() ? __('status.'.$order->getStatus()->getName()) : __('admin.not_available') }}
-                                            </span>
+                                            <x-status-badge :status="$order->getStatus()" />
                                         </td>
                                         <td>
                                             @if ($order->getPayment())
-                                                <span class="badge bg-success">
-                                                    {{ $order->getPayment()->getStatus() ? __('status.'.$order->getPayment()->getStatus()->getName()) : __('admin.not_available') }}
-                                                </span>
+                                                <x-status-badge :status="$order->getPayment()->getStatus()" />
                                             @else
                                                 <span class="text-muted small">{{ __('order.no_payment') }}</span>
                                             @endif

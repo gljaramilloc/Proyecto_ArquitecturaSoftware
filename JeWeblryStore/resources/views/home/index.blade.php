@@ -16,8 +16,8 @@
     @include('home.sections.exchange-rate')
     @include('home.sections.featured-jewels')
 
-    @push('scripts')
-        <script src="{{ asset('js/home.js') }}" defer></script>
-    @endpush
-
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/home.js') }}" defer></script>
+@endpush

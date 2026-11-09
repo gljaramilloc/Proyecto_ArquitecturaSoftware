@@ -26,6 +26,7 @@ class UpdateCategoryRequest extends FormRequest
             'slug' => [
                 'required',
                 'string',
+                'alpha_dash',
                 'max:255',
                 Rule::unique('categories', 'slug')->ignore($this->route('id') ?? $this->route('category')),
             ],

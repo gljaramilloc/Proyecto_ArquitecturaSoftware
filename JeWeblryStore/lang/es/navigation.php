@@ -15,6 +15,8 @@ return [
     'contact' => 'Contacto',
     'footer_tagline' => 'Creamos momentos inolvidables con piezas excepcionales. Diseño, calidad y elegancia en cada detalle de nuestras colecciones.',
     'address' => 'Bello, Antioquia, Colombia',
+    'contact_email' => 'contact@jewelstore.com',
+    'contact_phone' => '+57 300 123 4567',
     'copyright' => 'Todos los derechos reservados.',
     'logo' => 'Logotipo de la joyería',
     'instagram' => 'Instagram',

@@ -69,4 +69,6 @@ return [
     'role_updated' => 'El rol del usuario se actualizó correctamente.',
     'status_updated' => 'El estado se actualizó correctamente.',
     'cannot_change_own_role' => 'No puedes cambiar tu propio rol.',
+    'cannot_delete_category_with_jewels' => 'No es posible eliminar esta categoría porque aún tiene joyas asociadas.',
+    'cannot_delete_jewel_with_orders' => 'No es posible eliminar esta joya porque forma parte de órdenes registradas. Puedes desactivarla en su lugar.',
 ];
