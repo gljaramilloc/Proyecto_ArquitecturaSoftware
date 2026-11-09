@@ -1,321 +1,194 @@
--- phpMyAdmin SQL Dump
--- version 5.2.3
--- https://www.phpmyadmin.net/
---
--- Host: localhost:8889
--- Generation Time: Sep 15, 2026 at 03:07 PM
--- Server version: 8.0.44
--- PHP Version: 8.3.30
+-- JeWeblryStore Seed Data Export
+-- Synchronized with Laravel migrations, factories, and seeders
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Dumping data for table `statuses`
 --
 
 INSERT INTO `statuses` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Active', '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(2, 'Inactive', '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(3, 'Pending', '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(4, 'Approved', '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(5, 'Rejected', '2026-09-15 19:49:16', '2026-09-15 19:49:16');
+(1, 'Active', '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(2, 'Inactive', '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(3, 'Pending', '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(4, 'Approved', '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(5, 'Rejected', '2026-11-08 23:50:22', '2026-11-08 23:50:22');
 
 --
-
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `description`, `slug`, `status_id`, `created_at`, `updated_at`) VALUES
-(1, 'Distinctio ipsa', 'Quis non qui optio ut et autem asperiores.', 'distinctio-ipsa', 1, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(2, 'Sed pariatur', 'Itaque dicta sed sunt quis alias eum.', 'sed-pariatur', 1, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(3, 'Facere earum', 'Earum deserunt temporibus in sit sed nemo.', 'facere-earum', 1, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(4, 'Officia eos', 'Maiores possimus libero provident qui qui aut occaecati.', 'officia-eos', 1, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(5, 'Sequi quas', 'Nostrum ullam a officiis libero.', 'sequi-quas', 1, '2026-09-15 19:49:16', '2026-09-15 19:49:16');
+(1, 'Engagement Rings', 'Hand-set solitaire, halo, and three-stone rings crafted to celebrate lifelong milestones.', 'engagement-rings', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(2, 'Wedding & Eternity Bands', 'Timeless precious-metal bands and diamond eternity rings designed for everyday elegance.', 'wedding-eternity-bands', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(3, 'Fine Necklaces & Pendants', 'Delicate chains, gemstone medallions, and heirloom collar necklaces in noble metals.', 'fine-necklaces-pendants', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(4, 'Bracelets & Bangles', 'Artisanal tennis bracelets, sculpted cuffs, and hinged bangles with refined clasps.', 'bracelets-bangles', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(5, 'Diamond & Gemstone Earrings', 'Luminous studs, chandelier drops, and classic hoops set with ethically sourced stones.', 'diamond-gemstone-earrings', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(6, 'Colombian Emerald Collection', 'Signature pieces showcasing vivid Muzo and Chivor emeralds in 18k gold settings.', 'colombian-emerald-collection', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(7, 'Luxury Timepieces', 'Swiss-movement dress watches finished with sapphire crystal and precious-metal cases.', 'luxury-timepieces', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(8, 'Signet & Cocktail Rings', 'Bold architectural silhouettes and hand-engraved signets with vibrant center stones.', 'signet-cocktail-rings', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(9, 'Pearl & Bridal Suite', 'South Sea and Akoya cultured pearl creations tailored for ceremonies and black-tie galas.', 'pearl-bridal-suite', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(10, 'Brooches & Lapel Pins', 'Sculptural botanical and geometric pins crafted to elevate tailored outerwear.', 'brooches-lapel-pins', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(11, 'Men''s Fine Jewelry', 'Minimalist chains, onyx signet rings, and precious cufflinks with brushed finishes.', 'mens-fine-jewelry', 1, '2026-11-08 23:50:22', '2026-11-08 23:50:22'),
+(12, 'Bespoke Archive Pieces', 'Limited-edition atelier creations and collector commissions preserved in our vault.', 'bespoke-archive-pieces', 2, '2026-11-08 23:50:22', '2026-11-08 23:50:22');
 
 --
-
 -- Dumping data for table `jewels`
 --
 
 INSERT INTO `jewels` (`id`, `name`, `price`, `description`, `status_id`, `stock`, `material`, `image`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'non sit beatae', 83.90, 'Repellat inventore deleniti provident quam.', 1, 23, 'Gold', 'placeholder.jpg', 3, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(2, 'laudantium id autem', 1564.39, 'Quisquam voluptatibus quibusdam neque ut aut quibusdam voluptatibus.', 1, 35, 'Gold', 'placeholder.jpg', 3, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(3, 'quae qui ratione', 965.23, 'Labore sed est molestias repellat sunt voluptas.', 1, 30, 'Gold', 'placeholder.jpg', 5, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(4, 'voluptatem modi similique', 752.48, 'Suscipit inventore porro odit perferendis ut ut.', 1, 0, 'Gold', 'placeholder.jpg', 2, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(5, 'iusto eligendi et', 839.72, 'Ut dolor tenetur esse vel aperiam libero dolor aut.', 1, 4, 'Platinum', 'placeholder.jpg', 1, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(6, 'rerum quisquam delectus', 186.56, 'Maiores sed odit sunt et asperiores libero.', 1, 8, 'Rose Gold', 'placeholder.jpg', 3, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(7, 'et voluptas in', 1060.95, 'Ipsum reiciendis sed dolore recusandae recusandae.', 1, 47, 'Platinum', 'placeholder.jpg', 3, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(8, 'animi autem ullam', 1843.43, 'Quisquam explicabo tempore odio voluptatem.', 1, 39, 'Gold', 'placeholder.jpg', 1, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(9, 'voluptatem sit et', 1610.24, 'Nulla consequatur ut laborum autem voluptate.', 1, 2, 'Silver', 'placeholder.jpg', 2, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(10, 'dolore rerum nisi', 391.24, 'Aut suscipit cum iure.', 1, 8, 'Rose Gold', 'placeholder.jpg', 4, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(11, 'accusamus quisquam qui', 658.18, 'Illum fugit assumenda aut porro recusandae.', 1, 8, 'Platinum', 'placeholder.jpg', 1, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(12, 'explicabo architecto et', 1473.57, 'Adipisci non minus voluptatem quo enim ut.', 1, 41, 'Gold', 'placeholder.jpg', 3, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(13, 'qui ipsum deserunt', 1154.49, 'Perferendis ea tempore a officiis.', 1, 24, 'Silver', 'placeholder.jpg', 5, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(14, 'fugit numquam et', 1309.95, 'Deleniti dignissimos quasi a totam rem quae.', 1, 32, 'Platinum', 'placeholder.jpg', 4, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(15, 'qui corrupti molestiae', 1472.20, 'Maxime eligendi eos esse officia voluptas ipsam accusamus.', 1, 10, 'Rose Gold', 'placeholder.jpg', 5, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(16, 'fuga dolorum atque', 1042.60, 'Inventore quos maxime provident non reprehenderit in ut eveniet.', 1, 26, 'Platinum', 'placeholder.jpg', 5, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(17, 'consequuntur ut perspiciatis', 1449.87, 'Eum et aliquam et.', 1, 20, 'Platinum', 'placeholder.jpg', 2, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(18, 'rerum in soluta', 235.41, 'Error eius possimus voluptatum perferendis occaecati est.', 1, 40, 'Silver', 'placeholder.jpg', 4, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(19, 'architecto rerum rem', 573.41, 'Aut aspernatur officiis quia aut sint.', 1, 3, 'Gold', 'placeholder.jpg', 3, '2026-09-15 19:49:16', '2026-09-15 19:49:16'),
-(20, 'voluptas quis deleniti', 1297.70, 'Perferendis explicabo ea error qui ut aliquam.', 1, 31, 'Silver', 'placeholder.jpg', 2, '2026-09-15 19:49:16', '2026-09-15 19:49:16');
+(1, 'Muzo Imperial Emerald Solitaire Ring', 3850, 'Cathedral-set Colombian emerald solitaire flanked by tapered diamond baguettes in hand-polished 18k yellow gold.', 1, 9, '18k Yellow Gold', 'jewels/jewel-seed-2.jpg', 6, '2026-11-08 23:43:25', '2026-11-08 23:43:25'),
+(2, 'Aurelia Pavé Tennis Bracelet', 2450, 'Articulated box-clasp bracelet set with sixty brilliant-cut diamonds in luminous 18k white gold.', 1, 14, '18k White Gold', 'jewels/jewel-seed-1.jpg', 4, '2026-11-08 23:44:25', '2026-11-08 23:44:25'),
+(3, 'Verona Interlocking Wedding Band Duo', 1620, 'Matched pair of comfort-fit ceremonial bands with subtle milgrain edges crafted in warm 18k yellow gold.', 1, 18, '18k Yellow Gold', 'jewels/jewel-seed-3.jpg', 2, '2026-11-08 23:45:25', '2026-11-08 23:45:25'),
+(4, 'Celestial Diamond Halo Engagement Ring', 4290, 'Round brilliant center stone encircled by a micro-pavé diamond halo on a slender 950 platinum band.', 1, 7, '950 Platinum', 'jewels/jewel1.jpg', 1, '2026-11-08 23:46:25', '2026-11-08 23:46:25'),
+(5, 'Riviera Ceylon Sapphire Pendant Necklace', 2890, 'Velvety royal-blue sapphire oval suspended from an adjustable diamond-cut cable chain in 18k white gold.', 1, 11, '18k White Gold', 'jewels/jewel2.jpg', 3, '2026-11-08 23:47:25', '2026-11-08 23:47:25'),
+(6, 'Seraphina South Sea Pearl Drop Earrings', 1780, 'Lustrous golden South Sea pearls suspended beneath marquise diamond clusters in 18k rose gold.', 1, 12, '18k Rose Gold', 'jewels/jewel3.jpg', 5, '2026-11-08 23:48:25', '2026-11-08 23:48:25'),
+(7, 'Sovereign Tourbillon Dress Timepiece', 6400, 'Ultra-thin mechanical dress watch featuring a sunray guilloché dial, sapphire caseback, and 18k rose gold bezel.', 1, 5, '18k Rose Gold', 'jewels/jewel4.jpg', 7, '2026-11-08 23:49:25', '2026-11-08 23:49:25'),
+(8, 'Solstice Oval Diamond Solitaire Ring', 3490, 'Elongated oval-cut diamond held in sleek claw prongs atop a whisper-thin platinum shank.', 1, 8, '950 Platinum', 'jewels/jewel-seed-2.jpg', 1, '2026-11-08 22:50:25', '2026-11-08 22:50:25'),
+(9, 'Lumiere Three-Stone Sapphire Engagement Ring', 3920, 'Cushion-cut cornflower sapphire framed by matching pear-shaped white diamonds.', 1, 6, '18k White Gold', 'jewels/jewel1.jpg', 1, '2026-11-08 21:50:25', '2026-11-08 21:50:25'),
+(10, 'Elysian Cushion Morganite Halo Ring', 2180, 'Blush-pink morganite center stone surrounded by a delicate diamond halo in warm rose gold.', 1, 10, '18k Rose Gold', 'jewels/jewel3.jpg', 1, '2026-11-08 20:50:25', '2026-11-08 20:50:25'),
+(11, 'Marquise Vintage Milgrain Engagement Ring', 3150, 'Art-Deco inspired marquise diamond setting finished with hand-engraved botanical filigree.', 1, 5, '18k Yellow Gold', 'jewels/jewel-seed-3.jpg', 1, '2026-11-08 19:50:25', '2026-11-08 19:50:25'),
+(12, 'Valencian Emerald-Cut Diamond Ring', 4750, 'Step-cut emerald diamond prized for hall-of-mirrors clarity in a minimalist bezel mount.', 1, 4, '950 Platinum', 'jewels/jewel2.jpg', 1, '2026-11-08 18:50:25', '2026-11-08 18:50:25'),
+(13, 'Heritage Cathedral Ruby Solitaire Ring', 3640, 'Pigeon-blood Burmese ruby elevated by sculpted cathedral shoulders and diamond accents.', 1, 7, '18k Yellow Gold', 'jewels/jewel4.jpg', 1, '2026-11-08 17:50:25', '2026-11-08 17:50:25'),
+(14, 'Mirage Pear-Cut Aquamarine Ring', 1950, 'Crystal-clear Santa Maria aquamarine set on a pavé split-shank white gold band.', 1, 13, '18k White Gold', 'jewels/jewel-seed-1.jpg', 1, '2026-11-08 16:50:25', '2026-11-08 16:50:25'),
+(15, 'Aria Twisted Pavé Solitaire Ring', 2790, 'Intertwined ribbons of polished rose gold and micro-set diamonds leading to a brilliant center gem.', 1, 9, '18k Rose Gold', 'jewels/jewel1.jpg', 1, '2026-11-08 15:50:25', '2026-11-08 15:50:25'),
+(16, 'Capri Radiant Yellow Diamond Ring', 5390, 'Natural fancy-yellow radiant diamond set in an 18k yellow gold basket for intense warmth.', 1, 3, '18k Yellow Gold', 'jewels/jewel-seed-2.jpg', 1, '2026-11-08 14:50:25', '2026-11-08 14:50:25'),
+(17, 'Camellia Petite Bezel Diamond Ring', 1890, 'Low-profile modern bezel solitaire engineered for effortless daily wear and brilliance.', 1, 15, '18k White Gold', 'jewels/jewel-seed-3.jpg', 1, '2026-11-08 13:50:26', '2026-11-08 13:50:26'),
+(18, 'Bellagio Asscher-Cut Collector Ring', 5890, 'Architectural octagonal Asscher-cut diamond balanced by french-pavé platinum shoulders.', 1, 0, '950 Platinum', 'jewels/jewel2.jpg', 1, '2026-11-08 12:50:26', '2026-11-08 12:50:26'),
+(19, 'Infinity Full-Circle Diamond Eternity Band', 2350, 'Continuous shared-prong circle of matched brilliant diamonds in hypoallergenic platinum.', 1, 11, '950 Platinum', 'jewels/jewel-seed-3.jpg', 2, '2026-11-08 11:50:26', '2026-11-08 11:50:26'),
+(20, 'Palazzo Brushed Gold Chevron Band', 890, 'Contoured V-shaped stacking band combining satin-brushed texture with high-polish bevels.', 1, 22, '18k Rose Gold', 'jewels/jewel1.jpg', 2, '2026-11-08 10:50:26', '2026-11-08 10:50:26'),
+(21, 'Solstice Compass Medallion Necklace', 1180, 'Octagonal gold talisman centered with a star-set diamond on an 18-inch belcher chain.', 1, 16, '18k Yellow Gold', 'jewels/jewel2.jpg', 3, '2026-11-08 09:50:26', '2026-11-08 09:50:26'),
+(22, 'Lumina Graduated Diamond Riviera Collar', 4980, 'Fluid gala necklace draped with seamlessly graduated bezel-set diamonds.', 1, 4, '18k White Gold', 'jewels/jewel-seed-1.jpg', 3, '2026-11-08 08:50:26', '2026-11-08 08:50:26'),
+(23, 'Florentine Hinged Gold Cuff Bangle', 1740, 'Hand-textured Italian silk-finish gold bangle with concealed push-button safety clasp.', 1, 10, '18k Yellow Gold', 'jewels/jewel4.jpg', 4, '2026-11-08 07:50:26', '2026-11-08 07:50:26'),
+(24, 'Andean Emerald Station Chain Bracelet', 1420, 'Five bezel-set Colombian emeralds spaced evenly along a delicate double-link gold chain.', 1, 12, '18k Yellow Gold', 'jewels/jewel-seed-2.jpg', 4, '2026-11-08 06:50:26', '2026-11-08 06:50:26'),
+(25, 'Classic Four-Prong Diamond Stud Earrings', 1560, 'Matched pair of fiery round-brilliant diamonds secured with screw-back platinum posts.', 1, 19, '950 Platinum', 'jewels/jewel3.jpg', 5, '2026-11-08 05:50:26', '2026-11-08 05:50:26'),
+(26, 'Alhambra Ruby Chandelier Drop Earrings', 2680, 'Articulated openwork gold drops set with faceted rubies that catch light with every movement.', 1, 6, '18k Yellow Gold', 'jewels/jewel4.jpg', 5, '2026-11-08 04:50:26', '2026-11-08 04:50:26'),
+(27, 'Chivor Jardin Emerald Pendant', 3120, 'Deep bluish-green Chivor emerald rectangular step-cut framed in warm 18k yellow gold.', 1, 7, '18k Yellow Gold', 'jewels/jewel-seed-2.jpg', 6, '2026-11-08 03:50:26', '2026-11-08 03:50:26'),
+(28, 'Cartagena Emerald & Diamond Ear Climbers', 1980, 'Botanical leaf silhouette sweeping up the ear with alternating marquise emeralds and diamonds.', 1, 0, '18k White Gold', 'jewels/jewel-seed-1.jpg', 6, '2026-11-08 02:50:26', '2026-11-08 02:50:26'),
+(29, 'Geneve Moonphase Mother-of-Pearl Watch', 5450, 'Iridescent mother-of-pearl dial with diamond hour markers and astronomical moonphase aperture.', 1, 5, '18k White Gold', 'jewels/jewel4.jpg', 7, '2026-11-08 01:50:26', '2026-11-08 01:50:26'),
+(30, 'Medici Lapis Lazuli Cocktail Ring', 1690, 'Cabochon royal-blue lapis lazuli tablet mounted in a bold ribbed 18k gold cocktail setting.', 1, 8, '18k Yellow Gold', 'jewels/jewel1.jpg', 8, '2026-11-08 00:50:26', '2026-11-08 00:50:26'),
+(31, 'Cannes London Blue Topaz Statement Ring', 1340, 'Oversized emerald-cut London Blue topaz set in rhodium-plated 925 sterling silver.', 1, 14, '925 Sterling Silver', 'jewels/jewel2.jpg', 8, '2026-11-07 23:50:26', '2026-11-07 23:50:26'),
+(32, 'Akoya Cultured Pearl Strand Necklace', 2240, 'Hand-knotted silk strand of matched Japanese Akoya pearls finished with a filigree diamond clasp.', 1, 9, '18k White Gold', 'jewels/jewel3.jpg', 9, '2026-11-07 22:50:26', '2026-11-07 22:50:26'),
+(33, 'Bridal Marquise Tiara Hair Comb', 1490, 'Heirloom bridal comb adorned with freshwater pearls and marquise-cut crystal blossoms.', 1, 11, '925 Sterling Silver', 'jewels/jewel-seed-1.jpg', 9, '2026-11-07 21:50:26', '2026-11-07 21:50:26'),
+(34, 'Orchid Pavé Botanical Brooch', 1260, 'Sculpted Cattleya orchid brooch celebrating Colombian flora in satin 24k gold vermeil.', 1, 10, '24k Gold Vermeil', 'jewels/jewel2.jpg', 10, '2026-11-07 20:50:26', '2026-11-07 20:50:26'),
+(35, 'Art Deco Onyx & Diamond Bar Pin', 1580, 'Geometric calibre-cut black onyx and diamond lapel pin with locking trombone clasp.', 1, 7, '18k White Gold', 'jewels/jewel-seed-3.jpg', 10, '2026-11-07 19:50:26', '2026-11-07 19:50:26'),
+(36, 'Obsidian Black Onyx Cushion Signet Ring', 1120, 'Flush-set matte black onyx signet tailored with tapered satin-finished gold shoulders.', 1, 13, '18k Yellow Gold', 'jewels/jewel4.jpg', 11, '2026-11-07 18:50:26', '2026-11-07 18:50:26'),
+(37, 'Imperial Archive Emerald Tiara Study', 8900, 'One-of-a-kind exhibition diadem preserved in the private atelier archive.', 2, 1, '18k Yellow Gold', 'jewels/jewel-seed-2.jpg', 12, '2026-11-07 17:50:26', '2026-11-07 17:50:26'),
+(38, 'Bespoke Platinum Chronograph Prototype', 9500, 'Numbered horological commission awaiting private client delivery.', 2, 1, '950 Platinum', 'jewels/jewel4.jpg', 12, '2026-11-07 16:50:26', '2026-11-07 16:50:26'),
+(39, 'Vault Pink Diamond Collector Solitaire', 7600, 'Seasonal high-jewelry capsule ring currently reserved for private trunk shows.', 2, 2, '18k Rose Gold', 'jewels/jewel3.jpg', 1, '2026-11-07 15:50:26', '2026-11-07 15:50:26'),
+(40, 'Royal Heritage Baroque Pearl Sautoir', 4100, 'Opera-length baroque pearl rope temporarily retired for clasp restoration.', 2, 3, '18k Yellow Gold', 'jewels/jewel2.jpg', 9, '2026-11-07 14:50:26', '2026-11-07 14:50:26');
 
 --
-
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `lastNames`, `email`, `phoneNumber`, `address`, `status_id`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Eula', 'Kihn', 'thegmann@example.com', '(801) 402-2367', '9595 Arno River Suite 972\nEast Jovaniview, AL 65691-6983', 1, 'customer', '2026-09-15 19:49:16', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'EWgEVP0Yr9', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(2, 'Dominic', 'Bradtke', 'jeanne.bernhard@example.com', '984.553.8508', '5668 Keara Crest Suite 186\nErnestostad, TX 87409-4079', 1, 'customer', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'OQG9ZAHruM', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(3, 'Mona', 'Kuhn', 'vickie.cummings@example.com', '1-949-957-1271', '676 Donavon Island Apt. 056\nNorth Christop, IN 22394-3681', 1, 'customer', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', '07XV0EiXEs', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(4, 'Dallin', 'Romaguera', 'klein.oscar@example.org', '+1 (385) 236-9991', '73997 Bins Neck Apt. 435\nEast Ima, GA 88090', 1, 'customer', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'GvlR5AEbLI', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(5, 'Janick', 'Bartoletti', 'colin.king@example.com', '(929) 760-3351', '2781 Toy Gardens\nEast Romanmouth, KS 97018-8238', 1, 'customer', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'LPWaV7Rj1O', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(6, 'Lenore', 'Okuneva', 'maritza.oconnell@example.com', '+1.531.395.3459', '753 Jamie Stravenue Suite 986\nNorth Rod, DE 10638-5809', 1, 'customer', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'QrFB5aNHCu', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(7, 'Bertha', 'Schuster', 'dandre19@example.com', '(872) 838-3030', '399 Turcotte Corner Apt. 106\nLake Richmondmouth, AZ 59651-5963', 1, 'customer', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'lXw3DD3WtA', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(8, 'London', 'Eichmann', 'qoconnell@example.net', '+1.878.500.7355', '4874 Brown Groves\nLake Geoffrey, SD 20551-0811', 1, 'customer', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'fRSYLuJGWx', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(9, 'Millie', 'Hamill', 'sydnie.frami@example.com', '(463) 945-9887', '68619 Norene Way Apt. 903\nLake Ninaton, WI 87230', 1, 'customer', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'toLZVgeTwc', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(10, 'Brenda', 'Reilly', 'asha.hintz@example.net', '1-463-973-9796', '925 Fisher Prairie\nWest Deshawnfurt, TX 02981', 1, 'customer', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'siq67n4FKu', '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(11, 'Admin', 'Test', 'admin@jeweblrystore.com', '1-404-410-5248', '98495 Dicki Ports Apt. 148\nAlfredview, WI 97691-4039', 1, 'admin', '2026-09-15 19:49:17', '$2y$12$JSQbo1DapmqPZmYbQDzEYOJXBM39YpfC24cf3BGetSc7i.zKpkJCq', 'EbJzofJJm2hUnEpnOmBDiDSyfM0QTHmRkBnKUoYUnqqav1jt2nEcgUOLb52V', '2026-09-15 19:49:17', '2026-09-15 19:49:17');
+INSERT INTO `users` (`id`, `name`, `lastNames`, `email`, `phoneNumber`, `address`, `status_id`, `role`, `balance`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'Atelier Director', 'admin@jeweblrystore.com', '+57 300 410 5248', 'Carrera 35 #8A-19, El Poblado, Medellin', 1, 'admin', 25000, '2026-11-08 23:50:26', '$2y$12$ntoU8V.R2SvD.bwIKpqMuea.KZKEmOztgZruMreY.AueZHHPyqIna', NULL, '2026-11-08 23:50:22', '2026-11-08 23:50:26'),
+(2, 'Valentina', 'Montoya Restrepo', 'customer@jeweblrystore.com', '+57 310 684 2190', 'Transversal Superior #12-45, El Poblado, Medellin', 1, 'customer', 18500, '2026-11-08 23:50:26', '$2y$12$vD4VcJObaunDb.X2xfwOceLKnqyqWsyq.j9.ljUosM3Hjmh8YEzWy', NULL, '2026-11-08 23:50:23', '2026-11-08 23:50:26'),
+(3, 'Jorge', 'Domínquez Blasco', 'pablo.bermejo@example.com', '+57 379 590 2534', 'Plaça Jorge, 19, Bajo 8º, Usaquen, Bogota', 1, 'customer', 9427.98, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'iFgrSob0B5', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(4, 'María Pilar', 'Cano Moral', 'polanco.anamaria@example.com', '+57 347 662 9119', 'Carrer Mar, 3, 2º, Chapinero Alto, Bogota', 1, 'customer', 3536.95, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', '26oRCxAdBC', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(5, 'Joel', 'Canales Menéndez', 'guerrero.victor@example.net', '+57 393 753 4964', 'Camiño Quintana, 24, 0º 2º, El Poblado, Medellin', 1, 'customer', 4847.74, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', '0By9QYVGms', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(6, 'Miguel Ángel', 'Fuentes Domenech', 'collado.aina@example.net', '+57 354 053 5864', 'Rúa Hurtado, 191, 3º A, Laureles, Medellin', 1, 'customer', 10969.43, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'QjgTl6m0ZG', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(7, 'Lucía', 'Soria Serrato', 'gfrias@example.net', '+57 332 898 2885', 'Carrer Abreu, 81, Bajo 7º, Chapinero Alto, Bogota', 1, 'customer', 2527.5, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'AeZVErjzQB', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(8, 'Claudia', 'Malave Torres', 'ariadna.ortiz@example.org', '+57 335 072 5633', 'Rúa Pau, 986, Ático 9º, Laureles, Medellin', 1, 'customer', 10174.8, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'dQvE39P9B6', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(9, 'Beatriz', 'Domenech Carranza', 'leo46@example.com', '+57 337 208 8497', 'Travesía Cristina, 4, 67º 1º, Laureles, Medellin', 1, 'customer', 11757.49, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'DtN8fyNHij', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(10, 'Elena', 'Pardo Rincón', 'adam68@example.com', '+57 384 834 4183', 'Avenida Bonilla, 33, 65º A, Chapinero Alto, Bogota', 1, 'customer', 6180.55, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'zD5lhxRG1L', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(11, 'Andrea', 'Monroy Montañez', 'vera.diego@example.com', '+57 336 360 0432', 'Camino Juan, 7, 39º A, El Poblado, Medellin', 1, 'customer', 2472.19, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'bMtzPiTAke', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(12, 'Eva', 'Requena Muro', 'alexia.beltran@example.org', '+57 354 556 4554', 'Camiño Raquel, 1, 47º F, Usaquen, Bogota', 1, 'customer', 7304.03, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'elbelsEeZI', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(13, 'Asier', 'Conde Tejeda', 'zamora.jorge@example.org', '+57 384 326 9323', 'Carrer Almaráz, 164, 6º A, Envigado, Antioquia', 1, 'customer', 9461.81, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', '8LtRTKCAwm', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(14, 'Rosario', 'Morán Gómez', 'beatriz95@example.org', '+57 366 690 7344', 'Plaza José Antonio, 1, Entre suelo 8º, El Poblado, Medellin', 1, 'customer', 9014.06, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'DxamLqjpYg', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(15, 'Abril', 'Arriaga Vásquez', 'gpereira@example.com', '+57 345 000 0125', 'Ronda Delgadillo, 7, Ático 5º, Envigado, Antioquia', 1, 'customer', 9963.12, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'dGVNsv9UKD', '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(16, 'Alba', 'Rolón Marrero', 'aguado.zoe@example.net', '+57 362 422 4793', 'Rúa Valdés, 7, 50º A, Bocagrande, Cartagena', 1, 'customer', 11901.77, '2026-11-08 23:50:23', '$2y$12$vozVFUfPFew2Vwys8dVPk.lwnig.nGeHch0aT0BDmjhnWzxdze70.', 'v3KaS1EJ8w', '2026-11-08 23:50:23', '2026-11-08 23:50:23');
 
 --
--- Indexes for dumped tables
---
-
---
--- Indexes for table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `categories_slug_unique` (`slug`),
-  ADD KEY `categories_status_id_foreign` (`status_id`);
-
---
--- Indexes for table `jewels`
---
-ALTER TABLE `jewels`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `jewels_status_id_foreign` (`status_id`),
-  ADD KEY `jewels_category_id_foreign` (`category_id`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `orders_status_id_foreign` (`status_id`),
-  ADD KEY `orders_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `order_items_jewel_id_foreign` (`jewel_id`),
-  ADD KEY `order_items_order_id_foreign` (`order_id`);
-
---
--- Indexes for table `payments`
---
-ALTER TABLE `payments`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `payments_order_id_unique` (`order_id`),
-  ADD KEY `payments_status_id_foreign` (`status_id`);
-
---
--- Indexes for table `statuses`
---
-ALTER TABLE `statuses`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `statuses_name_unique` (`name`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD KEY `users_status_id_foreign` (`status_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `jewels`
---
-ALTER TABLE `jewels`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `order_items`
---
-ALTER TABLE `order_items`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
---
--- AUTO_INCREMENT for table `payments`
---
-ALTER TABLE `payments`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `statuses`
---
-ALTER TABLE `statuses`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `categories`
---
-ALTER TABLE `categories`
-  ADD CONSTRAINT `categories_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE RESTRICT;
-
---
--- Constraints for table `jewels`
---
-ALTER TABLE `jewels`
-  ADD CONSTRAINT `jewels_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `jewels_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE RESTRICT;
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE RESTRICT,
-  ADD CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_jewel_id_foreign` FOREIGN KEY (`jewel_id`) REFERENCES `jewels` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `payments`
---
-ALTER TABLE `payments`
-  ADD CONSTRAINT `payments_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `payments_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE RESTRICT;
-
---
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE RESTRICT;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `status_id`, `total`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 3686.86, 5, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(2, 1, 1146.82, 3, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(3, 1, 5614.33, 11, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(4, 1, 6194.48, 9, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(5, 1, 19214.71, 9, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(6, 1, 13618.47, 5, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(7, 1, 3762.40, 8, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(8, 1, 1309.95, 8, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(9, 1, 12990.71, 3, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(10, 1, 3762.40, 4, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(11, 1, 1900.67, 1, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(12, 1, 7728.65, 11, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(13, 1, 470.82, 8, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(14, 1, 3822.68, 6, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(15, 1, 573.41, 7, '2026-09-15 19:49:17', '2026-09-15 19:49:17');
+(1, 4, 8900, 2, '2026-10-11 23:50:23', '2026-11-08 23:50:24'),
+(2, 3, 14830, 2, '2026-10-23 23:50:23', '2026-11-08 23:50:23'),
+(3, 3, 6220, 2, '2026-11-01 23:50:23', '2026-11-08 23:50:23'),
+(4, 3, 7900, 2, '2026-11-06 23:50:23', '2026-11-08 23:50:23'),
+(5, 3, 13250, 5, '2026-11-07 22:18:45', '2026-11-08 23:50:23'),
+(6, 4, 4900, 7, '2026-10-26 04:16:20', '2026-11-08 23:50:24'),
+(7, 4, 5360, 9, '2026-10-26 20:40:33', '2026-11-08 23:50:24'),
+(8, 4, 8260, 10, '2026-10-21 10:44:31', '2026-11-08 23:50:24'),
+(9, 4, 3240, 8, '2026-10-01 21:11:09', '2026-11-08 23:50:24'),
+(10, 3, 12480, 16, '2026-09-03 11:14:26', '2026-11-08 23:50:24'),
+(11, 4, 7840, 4, '2026-09-06 23:28:59', '2026-11-08 23:50:24'),
+(12, 3, 6240, 11, '2026-09-12 15:24:10', '2026-11-08 23:50:24'),
+(13, 4, 4480, 4, '2026-09-08 11:34:39', '2026-11-08 23:50:24'),
+(14, 4, 5830, 7, '2026-09-19 15:06:32', '2026-11-08 23:50:24'),
+(15, 4, 5230, 7, '2026-10-18 13:40:11', '2026-11-08 23:50:24'),
+(16, 4, 6380, 4, '2026-11-03 16:11:58', '2026-11-08 23:50:24'),
+(17, 4, 1740, 2, '2026-10-14 05:43:44', '2026-11-08 23:50:24'),
+(18, 4, 2240, 5, '2026-09-08 10:15:01', '2026-11-08 23:50:24'),
+(19, 4, 3660, 7, '2026-09-27 18:39:26', '2026-11-08 23:50:24'),
+(20, 4, 10570, 7, '2026-10-18 06:38:43', '2026-11-08 23:50:24');
 
 --
-
 -- Dumping data for table `order_items`
 --
 
-INSERT INTO `order_items` (`id`, `quantity`, `unitPrice`, `jewel_id`, `order_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 1843.43, 8, 1, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(2, 2, 573.41, 19, 2, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(3, 1, 1473.57, 12, 3, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(4, 2, 1610.24, 9, 3, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(5, 1, 752.48, 4, 3, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(6, 2, 83.90, 1, 3, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(7, 1, 1042.60, 16, 4, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(8, 3, 839.72, 5, 4, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(9, 4, 658.18, 11, 4, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(10, 5, 1472.20, 15, 5, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(11, 5, 1449.87, 17, 5, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(12, 2, 1042.60, 16, 5, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(13, 3, 839.72, 5, 5, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(14, 5, 83.90, 1, 6, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(15, 3, 1472.20, 15, 6, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(16, 5, 1154.49, 13, 6, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(17, 4, 752.48, 4, 6, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(18, 5, 752.48, 4, 7, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(19, 1, 1309.95, 14, 8, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(20, 5, 1309.95, 14, 9, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(21, 4, 1610.24, 9, 9, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(22, 5, 752.48, 4, 10, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(23, 1, 1060.95, 7, 11, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(24, 1, 839.72, 5, 11, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(25, 5, 1154.49, 13, 12, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(26, 5, 391.24, 10, 12, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(27, 2, 235.41, 18, 13, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(28, 2, 1060.95, 7, 14, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(29, 1, 658.18, 11, 14, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(30, 1, 1042.60, 16, 14, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(31, 1, 573.41, 19, 15, '2026-09-15 19:49:17', '2026-09-15 19:49:17');
+INSERT INTO `order_items` (`id`, `quantity`, `unit_price`, `jewel_id`, `order_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1620, 3, 1, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(2, 2, 3640, 13, 1, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(3, 2, 4290, 4, 2, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(4, 1, 890, 20, 2, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(5, 2, 2680, 26, 2, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(6, 1, 1740, 23, 3, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(7, 2, 2240, 32, 3, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(8, 1, 3150, 11, 4, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(9, 1, 4750, 12, 4, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(10, 1, 2350, 19, 5, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(11, 2, 5450, 29, 5, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(12, 2, 2450, 2, 6, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(13, 2, 2680, 26, 7, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(14, 2, 1890, 17, 8, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(15, 2, 2240, 32, 8, '2026-11-08 23:50:23', '2026-11-08 23:50:23'),
+(16, 2, 1620, 3, 9, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(17, 2, 3490, 8, 10, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(18, 2, 1490, 33, 10, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(19, 2, 1260, 34, 10, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(20, 2, 3920, 9, 11, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(21, 1, 4290, 4, 12, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(22, 1, 1950, 14, 12, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(23, 2, 2240, 32, 13, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(24, 1, 3150, 11, 14, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(25, 2, 1340, 31, 14, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(26, 1, 3490, 8, 15, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(27, 1, 1740, 23, 15, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(28, 1, 3150, 11, 16, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(29, 1, 1740, 23, 16, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(30, 1, 1490, 33, 16, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(31, 1, 1740, 23, 17, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(32, 2, 1120, 36, 18, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(33, 1, 1420, 24, 19, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(34, 1, 2240, 32, 19, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(35, 2, 1780, 6, 20, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(36, 1, 1560, 25, 20, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(37, 1, 5450, 29, 20, '2026-11-08 23:50:24', '2026-11-08 23:50:24');
 
 --
-
 -- Dumping data for table `payments`
 --
 
 INSERT INTO `payments` (`id`, `amount`, `method`, `status_id`, `date`, `order_id`, `created_at`, `updated_at`) VALUES
-(1, 1146.82, 'paypal', 1, '2026-08-10', 2, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(2, 3762.40, 'paypal', 1, '2026-09-15', 10, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(3, 470.82, 'credit_card', 1, '2026-08-29', 13, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(4, 6194.48, 'paypal', 1, '2026-08-07', 4, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(5, 19214.71, 'paypal', 1, '2026-07-28', 5, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(6, 3686.86, 'paypal', 1, '2026-08-17', 1, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(7, 12990.71, 'credit_card', 1, '2026-09-15', 9, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(8, 3762.40, 'credit_card', 1, '2026-08-08', 7, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(9, 13618.47, 'debit_card', 1, '2026-08-31', 6, '2026-09-15 19:49:17', '2026-09-15 19:49:17'),
-(10, 573.41, 'credit_card', 1, '2026-06-28', 15, '2026-09-15 19:49:17', '2026-09-15 19:49:17');
+(1, 8900, 'balance', 4, '2026-09-29', 1, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(2, 1740, 'balance', 4, '2026-10-04', 17, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(3, 10570, 'balance', 4, '2026-10-02', 20, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(4, 7840, 'credit_card', 4, '2026-11-07', 11, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(5, 4900, 'balance', 4, '2026-10-01', 6, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(6, 3660, 'paypal', 4, '2026-10-28', 19, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(7, 4480, 'paypal', 4, '2026-09-12', 13, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(8, 8260, 'paypal', 4, '2026-10-13', 8, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(9, 2240, 'balance', 4, '2026-09-20', 18, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(10, 3240, 'credit_card', 4, '2026-10-07', 9, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(11, 5830, 'credit_card', 4, '2026-10-10', 14, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(12, 5230, 'paypal', 4, '2026-10-03', 15, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(13, 6380, 'debit_card', 4, '2026-10-12', 16, '2026-11-08 23:50:24', '2026-11-08 23:50:24'),
+(14, 5360, 'credit_card', 4, '2026-10-08', 7, '2026-11-08 23:50:24', '2026-11-08 23:50:24');
 
---
-
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+COMMIT;
