@@ -3,26 +3,34 @@
 @section('title', $viewData['title'])
 
 @section('content')
-    <div class="container py-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="h3 mb-0">{{ __('admin.manage_jewels') }}</h1>
-            <a href="{{ route('admin.jewels.create') }}" class="btn btn-brand">
-                <i class="bi bi-plus-lg"></i> {{ __('admin.new_jewel') }}
-            </a>
+    <div class="container py-5">
+        @include('admin.partials.nav')
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+            <div>
+                <p class="text-brand-gold text-uppercase fw-bold small mb-1">{{ __('admin.administration') }}</p>
+                <h1 class="h2 font-display text-dark mb-0">{{ __('admin.manage_jewels') }}</h1>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ route('admin.index') }}" class="btn btn-brand-outline">{{ __('admin.back_to_dashboard') }}</a>
+                <a href="{{ route('admin.jewels.create') }}" class="btn btn-brand">
+                    <i class="bi bi-plus-lg me-1"></i>{{ __('admin.new_jewel') }}
+                </a>
+            </div>
         </div>
 
-        <div class="card border-0 shadow-sm">
-            <div class="table-responsive">
-                <table class="table table-striped mb-0 align-middle">
+        <div class="card border shadow-sm rounded-0 bg-white">
+            <div class="table-responsive p-3">
+                <table class="table mb-0 align-middle">
                     <thead>
-                        <tr>
-                            <th>{{ __('admin.image') }}</th>
-                            <th>{{ __('admin.name') }}</th>
-                            <th>{{ __('admin.category') }}</th>
-                            <th>{{ __('admin.price') }}</th>
-                            <th>{{ __('admin.stock') }}</th>
-                            <th>{{ __('admin.status') }}</th>
-                            <th class="text-end">{{ __('admin.actions') }}</th>
+                        <tr class="text-uppercase small text-muted">
+                            <th scope="col">{{ __('admin.image') }}</th>
+                            <th scope="col">{{ __('admin.name') }}</th>
+                            <th scope="col">{{ __('admin.category') }}</th>
+                            <th scope="col">{{ __('admin.price') }}</th>
+                            <th scope="col">{{ __('admin.stock') }}</th>
+                            <th scope="col">{{ __('admin.status') }}</th>
+                            <th scope="col" class="text-end">{{ __('admin.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,9 +50,7 @@
                                 <td>${{ number_format($jewel->getPrice(), 2) }}</td>
                                 <td>{{ $jewel->getStock() }}</td>
                                 <td>
-                                    <span class="badge {{ $jewel->isActive() ? 'bg-success' : 'bg-secondary' }}">
-                                        {{ $jewel->getStatus() ? __('status.'.$jewel->getStatus()->getName()) : __('admin.not_available') }}
-                                    </span>
+                                    <x-status-badge :status="$jewel->getStatus()" />
                                 </td>
                                 <td class="text-end">
                                     <a href="{{ route('admin.jewels.edit', $jewel->getId()) }}" class="btn btn-sm btn-outline-secondary">

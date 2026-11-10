@@ -9,8 +9,16 @@
                 <h1 class="h3 font-display mb-2">{{ __('payment.title') }}</h1>
                 <p class="text-muted mb-4">
                     {{ __('payment.order_number') }} #{{ $viewData['order']->getId() }} —
-                    {{ __('payment.order_total') }}: <span class="fw-bold text-brand-gold">${{ number_format($viewData['order']->getTotal(), 2) }}</span>
+                    {{ __('payment.order_total') }}:
+                    <span class="fw-bold text-brand-gold">${{ number_format($viewData['order']->getTotal(), 2) }} {{ __('currency.usd_code') }}</span>
+                    @if (($viewData['exchangeQuote'] ?? null) !== null)
+                        <span class="price-cop-hint ms-1">
+                            ({{ __('currency.approx_cop', ['amount' => number_format($viewData['exchangeQuote']->convert($viewData['order']->getTotal()), 0)]) }})
+                        </span>
+                    @endif
                 </p>
+
+                <x-exchange-rate-banner :quote="$viewData['exchangeQuote'] ?? null" />
 
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-4">

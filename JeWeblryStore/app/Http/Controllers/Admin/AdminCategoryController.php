@@ -15,6 +15,9 @@ use Illuminate\View\View;
 
 class AdminCategoryController extends Controller
 {
+    /**
+     * Create the controller with its category management actions.
+     */
     public function __construct(
         private readonly CreateCategoryAction $createCategoryAction,
         private readonly UpdateCategoryAction $updateCategoryAction,
@@ -82,11 +85,18 @@ class AdminCategoryController extends Controller
     }
 
     /**
-     * Delete a category.
+     * Delete a category when no jewels depend on it.
      */
     public function destroy(int $id): RedirectResponse
     {
         $category = Category::findOrFail($id);
+
+        if ($category->jewels()->exists()) {
+            return redirect()
+                ->route('admin.categories.index')
+                ->with('error', __('admin.cannot_delete_category_with_jewels'));
+        }
+
         $category->delete();
 
         return redirect()->route('admin.categories.index')->with('status', __('admin.category_deleted'));

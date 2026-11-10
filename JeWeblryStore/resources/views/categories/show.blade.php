@@ -16,12 +16,14 @@
             <p>{{ $viewData['category']->getDescription() }}</p>
         </div>
 
+        <x-exchange-rate-banner :quote="$viewData['exchangeQuote']" />
+
         <h2 class="h4 mb-4">{{ __('catalog.jewels_in_category') }}</h2>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
             @forelse ($viewData['jewels'] as $jewel)
                 <div class="col">
-                    <x-jewel-card :jewel="$jewel" />
+                    <x-jewel-card :jewel="$jewel" :exchange-quote="$viewData['exchangeQuote']" />
                 </div>
             @empty
                 <div class="col-12 w-100">

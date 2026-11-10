@@ -22,12 +22,17 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-3. Ejecuta las migraciones y el seeder inicial de estados:
+3. Ejecuta las migraciones, los seeders y enlaza el almacenamiento público de imágenes:
 
 ```bash
-php artisan migrate
-php artisan db:seed --class=StatusSeeder
+php artisan migrate:fresh --seed
+php artisan storage:link
 ```
+
+### Credenciales de demostración (generadas por `DatabaseSeeder`)
+
+- **Administrador:** `admin@jeweblrystore.com` / `password`
+- **Cliente:** `customer@jeweblrystore.com` / `password`
 
 4. Inicia el servidor local:
 
@@ -84,7 +89,7 @@ Exponemos las joyas activas y con stock disponible para que otro equipo las cons
 |------------|---------|-----------------------------------------------|
 | `id`       | integer | Identificador de la joya                      |
 | `name`     | string  | Nombre de la joya                             |
-| `price`    | number  | Precio en pesos                               |
+| `price`    | number  | Precio base en dólares estadounidenses (`USD`) |
 | `material` | string  | Material principal                            |
 | `stock`    | integer | Unidades disponibles (siempre mayor que 0)    |
 | `image`    | string  | URL absoluta de la imagen                     |
@@ -96,11 +101,11 @@ Exponemos las joyas activas y con stock disponible para que otro equipo las cons
 [
     {
         "id": 1,
-        "name": "Pulsera de plata refinada.",
-        "price": 1250,
-        "material": "Oro Blanco",
-        "stock": 15,
-        "image": "http://localhost:8000/storage/jewels/jewel-seed-1.jpg",
+        "name": "Muzo Imperial Emerald Solitaire Ring",
+        "price": 3850,
+        "material": "18k Yellow Gold",
+        "stock": 9,
+        "image": "http://localhost:8000/storage/jewels/jewel-seed-2.jpg",
         "link": "http://localhost:8000/jewels/1"
     }
 ]
@@ -127,6 +132,18 @@ El servicio responde un objeto con la lista de vehículos en `data`. De cada veh
 | `detail_url`                   | Enlace al detalle en la tienda aliada    |
 
 Si la URL no está configurada o el servicio no responde, la vista muestra un mensaje de "servicio no disponible" en lugar de fallar.
+
+## API de un tercero: Tasa de Cambio (TRM USD → COP)
+
+La tienda consulta en tiempo real la tasa representativa del mercado (`USD → COP`) mediante el servicio público gratuito `ExchangeRate-API` (sin clave de API), cachea la cotización durante 1 hora y muestra el equivalente informativo en pesos colombianos (`COP`) en inicio, catálogo, categorías, detalle, carrito y pago:
+
+```bash
+EXCHANGE_RATE_API_URL=https://open.er-api.com/v6/latest/USD
+EXCHANGE_RATE_API_TIMEOUT=5
+EXCHANGE_RATE_CACHE_TTL=3600
+```
+
+Si el servicio externo falla o se deja `EXCHANGE_RATE_API_URL=""`, la aplicación opera normalmente en `USD` mostrando un aviso traducido de disponibilidad y aplica un enfriamiento corto en caché para evitar tiempos de espera repetidos.
 
 ## Licencia
 

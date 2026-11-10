@@ -18,6 +18,8 @@ return [
     'item_unit_price' => 'Precio Unitario',
     'item_subtotal' => 'Subtotal',
     'payment_title' => 'Pago',
-    'my_orders' => 'Mis ordenes',
+    'my_orders' => 'Mis órdenes',
+    'back_to_orders' => 'Volver a mis compras',
+    'explore_catalog' => 'Explorar catálogo',
 
 ];

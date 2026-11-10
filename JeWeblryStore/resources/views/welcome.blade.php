@@ -89,7 +89,7 @@
                             <span>
                                 {{ __('home.welcome_watch') }}
                                 <a href="https://laracasts.com" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
-                                    <span>Laracasts</span>
+                                    <span>{{ __('home.welcome_laracasts') }}</span>
                                     <svg
                                         width="10"
                                         height="11"

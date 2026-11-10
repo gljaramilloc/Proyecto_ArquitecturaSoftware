@@ -19,5 +19,7 @@ return [
     'item_subtotal' => 'Subtotal',
     'payment_title' => 'Payment',
     'my_orders' => 'My orders',
+    'back_to_orders' => 'Back to my purchases',
+    'explore_catalog' => 'Explore catalog',
 
 ];

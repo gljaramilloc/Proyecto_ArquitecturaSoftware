@@ -8,81 +8,82 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Status;
 use App\Models\User;
+use Database\Factories\JewelFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DummyDataSeeder extends Seeder
 {
+    /**
+     * Seed standalone showcase jewels and ranked order items to test top-selling queries.
+     */
     public function run(): void
     {
-        // Ensure there is at least one status (normally created by StatusSeeder)
-        $status = Status::firstOrCreate(['id' => 1], ['name' => 'Pending']);
+        $activeStatus = Status::where('name', 'Active')->first() ?? Status::firstOrCreate(['name' => 'Active']);
+        $approvedStatus = Status::where('name', 'Approved')->first() ?? Status::firstOrCreate(['name' => 'Approved']);
 
-        // Pick or create a generic user to attach the mock order to
-        $user = User::firstOrCreate([
-            'email' => 'testuser@jewelstore.com',
-        ], [
-            'name' => 'Test User',
-            'password' => bcrypt('password123'),
-            'balance' => 0,
-            'role' => 'client',
-        ]);
+        $user = User::firstOrCreate(
+            ['email' => 'showcase@jeweblrystore.com'],
+            [
+                'name' => 'Showcase',
+                'lastNames' => 'Collector',
+                'password' => Hash::make('password'),
+                'balance' => 10000.00,
+                'role' => 'customer',
+                'status_id' => $activeStatus->getId(),
+            ]
+        );
 
-        $category = new Category;
-        $category->setName('Anillos Premium');
-        $category->setDescription('Colección exclusiva de anillos premium.');
-        $category->setSlug('anillos-premium');
-        $category->setStatusId($status->getId());
-        $category->save();
+        $category = Category::firstOrCreate(
+            ['slug' => 'high-jewelry-showcase'],
+            [
+                'name' => 'High Jewelry Showcase',
+                'description' => 'Exclusive collector pieces curated to highlight top-selling fine jewelry.',
+                'status_id' => $activeStatus->getId(),
+            ]
+        );
 
-        // MOCK JEWELS
         $jewels = [
-            ['name' => '💍 Anillo de Compromiso Oro Blanco', 'price' => 3500.00, 'material' => 'Oro Blanco', 'image' => 'anillo.jpg', 'desc' => 'Anillo 18k premium.'],
-            ['name' => '💎 Collar de Zafiro Oceánico', 'price' => 5200.00, 'material' => 'Plata/Zafiro', 'image' => 'collar.jpg', 'desc' => 'Collar elegante.'],
-            ['name' => '✨ Pulsera Esmeralda Elegancia', 'price' => 1250.00, 'material' => 'Esmeralda', 'image' => 'pulsera.jpg', 'desc' => 'Pulsera importada.'],
-            ['name' => '👑 Pendientes Perla Clásica', 'price' => 850.00, 'material' => 'Perla', 'image' => 'perla.jpg', 'desc' => 'Perlas cultivadas.'],
+            ['name' => 'White Gold Engagement Solitaire', 'price' => 3500.00, 'material' => '18k White Gold', 'image' => 'jewel1.jpg', 'description' => 'Hand-forged 18k white gold engagement ring with brilliant diamond.', 'quantity' => 15],
+            ['name' => 'Oceanic Ceylon Sapphire Collar', 'price' => 5200.00, 'material' => '950 Platinum', 'image' => 'jewel2.jpg', 'description' => 'Statement collar necklace set with velvety blue sapphires.', 'quantity' => 40],
+            ['name' => 'Muzo Emerald Tennis Bracelet', 'price' => 2450.00, 'material' => '18k Yellow Gold', 'image' => 'jewel-seed-1.jpg', 'description' => 'Articulated gold bracelet featuring matched Colombian emeralds.', 'quantity' => 30],
+            ['name' => 'Classic Akoya Pearl Drop Earrings', 'price' => 980.00, 'material' => '18k Rose Gold', 'image' => 'jewel3.jpg', 'description' => 'Cultured Akoya pearl drops mounted on rose gold hooks.', 'quantity' => 5],
         ];
 
-        $jewelModels = [];
-        foreach ($jewels as $j) {
+        if (Order::where('user_id', $user->getId())->exists()) {
+            return;
+        }
+
+        $order = new Order;
+        $order->setUserId($user->getId());
+        $order->setTotal(0.00);
+        $order->setStatusId($approvedStatus->getId());
+        $order->save();
+
+        foreach ($jewels as $jewelData) {
             $jewel = Jewel::firstOrCreate(
-                ['name' => $j['name']],
+                ['name' => $jewelData['name']],
                 [
-                    'price' => $j['price'],
-                    'description' => $j['desc'],
-                    'status_id' => $status->getId(),
-                    'stock' => 50,
-                    'material' => $j['material'],
-                    'image' => $j['image'],
+                    'price' => $jewelData['price'],
+                    'description' => $jewelData['description'],
+                    'status_id' => $activeStatus->getId(),
+                    'stock' => 25,
+                    'material' => $jewelData['material'],
+                    'image' => JewelFactory::publishBundledImage($jewelData['image']),
                     'category_id' => $category->getId(),
                 ]
             );
-            $jewelModels[] = $jewel;
-        }
 
-        // MOCK ORDER (to simulate they were purchased heavily)
-        $order = new Order;
-        $order->setUserId($user->getId());
-        // Random total, just a mock
-        $order->setTotal(50000.00);
-        $order->setStatusId($status->getId());
-        $order->save();
-
-        // MOCK ORDER ITEMS to satisfy the top 3 logic.
-        // We will "sell" differing quantities so the order is obvious:
-        // 1st place: Zafiro (40 units)
-        // 2nd place: Pulsera (30 units)
-        // 3rd place: Anillo (15 units)
-        // 4th place (wont show in top3): Pendientes (5 units)
-
-        $quantities = [15, 40, 30, 5]; // matches the array order above
-
-        foreach ($jewelModels as $index => $jewelModel) {
             $orderItem = new OrderItem;
-            $orderItem->setQuantity($quantities[$index]);
-            $orderItem->setUnitPrice($jewelModel->getPrice());
-            $orderItem->setJewelId($jewelModel->getId());
+            $orderItem->setQuantity($jewelData['quantity']);
+            $orderItem->setUnitPrice($jewel->getPrice());
+            $orderItem->setJewelId($jewel->getId());
             $orderItem->setOrderId($order->getId());
             $orderItem->save();
         }
+
+        $refreshedOrder = Order::with('items')->findOrFail($order->getId());
+        $refreshedOrder->setTotal(round($refreshedOrder->calculateTotal(), 2));
+        $refreshedOrder->save();
     }
 }

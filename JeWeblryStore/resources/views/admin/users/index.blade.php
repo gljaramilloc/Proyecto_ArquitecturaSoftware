@@ -4,12 +4,14 @@
 
 @section('content')
     <div class="container py-5">
+        @include('admin.partials.nav')
+
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
             <div>
                 <p class="text-brand-gold text-uppercase fw-bold small mb-1">{{ __('admin.administration') }}</p>
                 <h1 class="h2 font-display text-dark mb-0">{{ __('admin.manage_users') }}</h1>
             </div>
-            <a href="{{ route('admin.index') }}" class="btn btn-outline-dark rounded-0">{{ __('admin.back_to_dashboard') }}</a>
+            <a href="{{ route('admin.index') }}" class="btn btn-brand-outline">{{ __('admin.back_to_dashboard') }}</a>
         </div>
 
         <div class="card border shadow-sm rounded-0 bg-white">
@@ -18,10 +20,10 @@
                     <table class="table align-middle mb-0">
                         <thead>
                             <tr class="text-uppercase small text-muted">
-                                <th>{{ __('admin.user_name') }}</th>
-                                <th>{{ __('admin.email') }}</th>
-                                <th>{{ __('admin.role') }}</th>
-                                <th class="text-end">{{ __('admin.actions') }}</th>
+                                <th scope="col">{{ __('admin.user_name') }}</th>
+                                <th scope="col">{{ __('admin.email') }}</th>
+                                <th scope="col">{{ __('admin.role') }}</th>
+                                <th scope="col" class="text-end">{{ __('admin.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>

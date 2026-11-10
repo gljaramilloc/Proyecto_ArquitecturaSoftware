@@ -6,6 +6,7 @@ use App\Exceptions\InsufficientBalanceException;
 use App\Http\Requests\StorePaymentRequest;
 use App\Interfaces\PaymentProcessor;
 use App\Models\Order;
+use App\Services\ExchangeRateService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,11 +16,9 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class PaymentController extends Controller
 {
     /**
-     * Require an authenticated customer for every payment action.
+     * Inject the exchange rate service for checkout currency reference.
      */
-    public function __construct()
-    {
-    }
+    public function __construct(private readonly ExchangeRateService $exchangeRateService) {}
 
     /**
      * Display the payment form for an order owned by the authenticated user.
@@ -34,6 +33,7 @@ class PaymentController extends Controller
         $viewData['title'] = __('payment.title');
         $viewData['order'] = $order;
         $viewData['balance'] = Auth::user()->getBalance();
+        $viewData['exchangeQuote'] = $this->exchangeRateService->getUsdToCopQuote();
 
         return view('payments.create')->with('viewData', $viewData);
     }

@@ -239,7 +239,7 @@ h1, h2, h3, h4, h5, h6,
 
 /* High-end typography (if using custom serif fonts) */
 .font-display {
-    font-family: var(--bs-body-font-family, serif);
+    font-family: var(--font-display);
 }
 
 /* ==========================================================
@@ -336,4 +336,73 @@ h1, h2, h3, h4, h5, h6,
     width: 50px;
     height: 50px;
     object-fit: cover;
+}
+
+/* ==========================================================
+   Admin Sub-Navigation & Consistent Form Cards
+========================================================== */
+.admin-subnav {
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+}
+
+.admin-subnav__link {
+    color: var(--brand-dark);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.admin-subnav__link:hover {
+    background-color: var(--brand-gray);
+    color: var(--brand-dark);
+}
+
+.admin-subnav__link--active {
+    background-color: var(--brand-dark);
+    color: var(--brand-primary) !important;
+    font-weight: 600;
+}
+
+/* ==========================================================
+   Exchange Rate (TRM USD -> COP) Banner & Converted Hints
+========================================================== */
+.exchange-rate-banner {
+    background-color: #ffffff;
+    border: 1px solid rgba(197, 160, 89, 0.45);
+    border-left: 4px solid var(--brand-primary);
+    border-radius: 4px;
+}
+
+.exchange-rate-banner--offline {
+    background-color: var(--brand-gray);
+    border: 1px solid #dcd8ce;
+    border-left: 4px solid #6c757d;
+    border-radius: 4px;
+}
+
+.exchange-rate-badge {
+    background-color: var(--brand-dark);
+    color: var(--brand-primary);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.price-cop-hint {
+    font-size: 0.85rem;
+    color: #5f5b52;
+}
+
+.jewel-detail__cop-box {
+    background-color: var(--brand-gray);
+    border-left: 3px solid var(--brand-primary);
+    border-radius: 3px;
 }

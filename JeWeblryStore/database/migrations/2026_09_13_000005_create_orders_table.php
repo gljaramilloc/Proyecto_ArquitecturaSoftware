@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
 
-            // Replacing the string with the foreign key linked to statuses          
+            // Replacing the string with the foreign key linked to statuses
             // We assume that ID 1 could be an initial state, such as 'Pending'.
             $table->foreignId('status_id')->default(1)->constrained('statuses')->restrictOnDelete();
 
