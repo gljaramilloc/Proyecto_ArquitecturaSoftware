@@ -2,6 +2,7 @@
 
 return [
     'administration' => 'Administración',
+    'navigation_label' => 'Navegación de administración',
     'dashboard' => 'Panel de administración',
     'back_to_store' => 'Volver a la tienda',
     'back_to_dashboard' => 'Volver al panel',
@@ -32,7 +33,10 @@ return [
     'stock' => 'Existencias',
     'material' => 'Material',
     'image' => 'Imagen',
+    'current_image' => 'Imagen actual',
     'replace_image' => 'Reemplazar imagen (opcional)',
+    'image_hint' => 'Formatos permitidos: JPG, PNG o WEBP (máximo 2 MB).',
+    'slug_placeholder' => 'ej. anillos-de-compromiso',
     'save' => 'Guardar',
     'update' => 'Actualizar',
     'cancel' => 'Cancelar',
@@ -65,4 +69,6 @@ return [
     'role_updated' => 'El rol del usuario se actualizó correctamente.',
     'status_updated' => 'El estado se actualizó correctamente.',
     'cannot_change_own_role' => 'No puedes cambiar tu propio rol.',
+    'cannot_delete_category_with_jewels' => 'No es posible eliminar esta categoría porque aún tiene joyas asociadas.',
+    'cannot_delete_jewel_with_orders' => 'No es posible eliminar esta joya porque forma parte de órdenes registradas. Puedes desactivarla en su lugar.',
 ];

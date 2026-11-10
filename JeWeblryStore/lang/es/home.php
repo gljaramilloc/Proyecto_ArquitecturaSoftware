@@ -60,6 +60,7 @@ return [
     'welcome_intro' => 'Con tantas opciones disponibles, te sugerimos comenzar por lo siguiente:',
     'welcome_read' => 'Lee la',
     'welcome_documentation' => 'Documentación',
+    'welcome_laracasts' => 'Laracasts',
     'welcome_watch' => 'Mira tutoriales en video en',
     'welcome_deploy' => 'Implementar ahora',
     'welcome_changelog' => 'Ver registro de cambios',
@@ -68,5 +69,11 @@ return [
     'previous_slide' => 'Diapositiva anterior',
     'next_slide' => 'Diapositiva siguiente',
     'go_to_slide' => 'Ir a la diapositiva :number',
+    'top_banner_message' => 'Envío asegurado sin costo en todos los pedidos nacionales • Alta joyería certificada',
+    'promo_banner_kicker' => 'Edición limitada de temporada',
+    'promo_banner_title' => 'Brilla con luz propia en cada ocasión',
+    'promo_banner_subtitle' => 'Descubre nuestra selección especial de piezas de autor elaboradas en oro de 18k y gemas naturales con certificado de autenticidad.',
+    'promo_banner_cta' => 'Ver colección especial',
+    'promo_banner_secondary_cta' => 'Explorar categorías',
 
 ];

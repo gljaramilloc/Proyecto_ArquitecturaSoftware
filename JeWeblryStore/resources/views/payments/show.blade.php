@@ -14,7 +14,7 @@
                             <p><strong>{{ __('payment.amount') }}:</strong> ${{ number_format($viewData['payment']->getAmount(), 2) }}</p>
                             <p><strong>{{ __('payment.method') }}:</strong> {{ __('payment.'.$viewData['payment']->getMethod()) }}</p>
                             <p><strong>{{ __('payment.date') }}:</strong> {{ $viewData['payment']->getDate() }}</p>
-                            <p><strong>{{ __('payment.status') }}:</strong> {{ $viewData['payment']->getStatus() ? __('status.'.$viewData['payment']->getStatus()->getName()) : __('admin.not_available') }}</p>
+                            <p><strong>{{ __('payment.status') }}:</strong> <x-status-badge :status="$viewData['payment']->getStatus()" /></p>
 
                             @if ($viewData['payment']->isCheque())
                                 <a href="{{ route('payments.cheque', $viewData['order']->getId()) }}" class="btn btn-brand">

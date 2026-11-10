@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Jewel;
+use App\Services\ExchangeRateService;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
+    /**
+     * Inject the exchange rate service for category jewel listings.
+     */
+    public function __construct(private readonly ExchangeRateService $exchangeRateService) {}
+
     /**
      * List the active categories for the storefront.
      */
@@ -21,7 +27,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show an active category and its active jewels.
+     * Show an active category and its active jewels with COP conversion.
      */
     public function show(int $id): View
     {
@@ -34,6 +40,7 @@ class CategoryController extends Controller
             ->active()
             ->search(null, $category->getId())
             ->paginate(9);
+        $viewData['exchangeQuote'] = $this->exchangeRateService->getUsdToCopQuote();
 
         return view('categories.show')->with('viewData', $viewData);
     }

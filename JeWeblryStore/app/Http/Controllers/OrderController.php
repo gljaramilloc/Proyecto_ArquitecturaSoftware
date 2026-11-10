@@ -13,7 +13,7 @@ class OrderController extends Controller
      */
     public function index(): View
     {
-        $orders = Order::with(['items.jewel', 'payment', 'status'])
+        $orders = Order::with(['items.jewel', 'payment.status', 'status'])
             ->where('user_id', Auth::id())
             ->orderByDesc('created_at')
             ->get();
@@ -30,9 +30,9 @@ class OrderController extends Controller
      */
     public function show(int $id): View
     {
-        $order = Order::with(['items.jewel', 'payment', 'status'])->findOrFail($id);
+        $order = Order::with(['items.jewel', 'payment.status', 'status'])->findOrFail($id);
 
-        abort_if($order->getUser()->getId() !== Auth::id(), 403);
+        abort_if($order->getUserId() !== Auth::id(), 403);
 
         $viewData = [];
         $viewData['title'] = __('order.details_title');

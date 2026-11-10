@@ -4,32 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreateOrderAction;
 use App\Models\Jewel;
+use App\Services\ExchangeRateService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    public function __construct(private readonly CreateOrderAction $createOrderAction) {}
+    /**
+     * Inject the order creation action and exchange rate service.
+     */
+    public function __construct(
+        private readonly CreateOrderAction $createOrderAction,
+        private readonly ExchangeRateService $exchangeRateService,
+    ) {}
 
     /**
-     * Display the current cart and its total.
+     * Display the current cart and its total in USD and estimated COP.
      */
     public function index(): View
     {
         $total = 0;
         $jewelsInCart = [];
+        $subtotals = [];
 
         $cartSession = session()->get('cart', []);
 
         if (! empty($cartSession)) {
-            // Get jewels whose IDs match the keys (jewel IDs) in the session
             $jewelsInCart = Jewel::with('category')->findMany(array_keys($cartSession));
 
             foreach ($jewelsInCart as $jewel) {
-                // Determine total by multiplying jewel price by quantity requested
-                $quantity = $cartSession[$jewel->getId()];
-                $total += $jewel->getPrice() * $quantity;
+                $quantity = (int) ($cartSession[$jewel->getId()] ?? 0);
+                $lineSubtotal = $jewel->getPrice() * $quantity;
+                $subtotals[$jewel->getId()] = $lineSubtotal;
+                $total += $lineSubtotal;
             }
         }
 
@@ -39,16 +47,18 @@ class CartController extends Controller
         $viewData['total'] = $total;
         $viewData['jewels'] = $jewelsInCart;
         $viewData['cartSession'] = $cartSession;
+        $viewData['subtotals'] = $subtotals;
+        $viewData['exchangeQuote'] = $this->exchangeRateService->getUsdToCopQuote();
 
         return view('cart.index')->with('viewData', $viewData);
     }
 
     /**
-     * Add one jewel to the cart.
+     * Add one active jewel to the cart.
      */
     public function add(int $id): RedirectResponse
     {
-        $jewel = Jewel::findOrFail($id);
+        $jewel = Jewel::active()->findOrFail($id);
 
         if ($jewel->getStock() < 1) {
             return back()->with('error', __('cart.out_of_stock'));
@@ -68,11 +78,11 @@ class CartController extends Controller
     }
 
     /**
-     * Create an order with one jewel and redirect to payment.
+     * Create an order with one active jewel and redirect to payment.
      */
     public function buyNow(int $id): RedirectResponse
     {
-        $jewel = Jewel::findOrFail($id);
+        $jewel = Jewel::active()->findOrFail($id);
 
         if ($jewel->getStock() < 1) {
             return back()->with('error', __('cart.out_of_stock'));
@@ -90,7 +100,7 @@ class CartController extends Controller
     {
         session()->forget('cart');
 
-        return back();
+        return back()->with('status', __('cart.cleared'));
     }
 
     /**

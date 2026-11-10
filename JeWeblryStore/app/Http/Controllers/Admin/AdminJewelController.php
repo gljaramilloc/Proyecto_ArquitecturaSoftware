@@ -85,31 +85,49 @@ class AdminJewelController extends Controller
     }
 
     /**
-     * Update an existing jewel.
+     * Update an existing jewel and safely replace its image when uploaded.
      */
     public function update(UpdateJewelRequest $request, int $id): RedirectResponse
     {
         $jewel = Jewel::findOrFail($id);
         $jewelData = $request->validated();
+        $previousImage = null;
 
         if ($request->hasFile('image')) {
-            $this->imageUploadService->delete($jewel->getImage());
+            $previousImage = $jewel->getImage();
             $jewelData['image'] = $this->imageUploadService->upload($request->file('image'), 'jewels');
+        } else {
+            unset($jewelData['image']);
         }
 
         $this->updateJewelAction->execute($jewel, $jewelData);
+
+        if ($previousImage !== null && Jewel::where('image', $previousImage)->where('id', '!=', $jewel->getId())->doesntExist()) {
+            $this->imageUploadService->delete($previousImage);
+        }
 
         return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_updated'));
     }
 
     /**
-     * Delete a jewel.
+     * Delete a jewel when no order items reference it and clean up unshared images.
      */
     public function destroy(int $id): RedirectResponse
     {
         $jewel = Jewel::findOrFail($id);
-        $this->imageUploadService->delete($jewel->getImage());
+
+        if ($jewel->orderItems()->exists()) {
+            return redirect()
+                ->route('admin.jewels.index')
+                ->with('error', __('admin.cannot_delete_jewel_with_orders'));
+        }
+
+        $imagePath = $jewel->getImage();
         $jewel->delete();
+
+        if ($imagePath !== '' && Jewel::where('image', $imagePath)->doesntExist()) {
+            $this->imageUploadService->delete($imagePath);
+        }
 
         return redirect()->route('admin.jewels.index')->with('status', __('admin.jewel_deleted'));
     }

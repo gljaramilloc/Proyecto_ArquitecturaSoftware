@@ -4,12 +4,11 @@
 
 @section('content')
     <div class="container py-5">
-        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-            <div>
-                <p class="text-brand-gold text-uppercase fw-bold small mb-1">{{ __('admin.administration') }}</p>
-                <h1 class="h2 font-display text-dark mb-0">{{ __('admin.dashboard') }}</h1>
-            </div>
-            <a href="{{ route('home.index') }}" class="btn btn-outline-dark rounded-0">{{ __('admin.back_to_store') }}</a>
+        @include('admin.partials.nav')
+
+        <div class="mb-4">
+            <p class="text-brand-gold text-uppercase fw-bold small mb-1">{{ __('admin.administration') }}</p>
+            <h1 class="h2 font-display text-dark mb-0">{{ __('admin.dashboard') }}</h1>
         </div>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 mb-5">

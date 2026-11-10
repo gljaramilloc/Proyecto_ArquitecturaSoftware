@@ -34,6 +34,13 @@ return [
         'timeout' => env('ALLIED_SERVICE_TIMEOUT', 5),
     ],
 
+    // External exchange rate API (USD to COP TRM)
+    'exchange_rate' => [
+        'url' => env('EXCHANGE_RATE_API_URL', 'https://open.er-api.com/v6/latest/USD'),
+        'timeout' => env('EXCHANGE_RATE_API_TIMEOUT', 5),
+        'cache_ttl' => env('EXCHANGE_RATE_CACHE_TTL', 3600),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
