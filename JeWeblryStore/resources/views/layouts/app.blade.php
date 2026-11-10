@@ -68,9 +68,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('alliedProducts.*') ? 'active fw-bold' : '' }}"
-                                href="{{ route('alliedProducts.index') }}">
-                                {{ __('navigation.allied_products') }}
+                            <a class="nav-link {{ request()->routeIs('alliedVehicles.*') ? 'active fw-bold' : '' }}"
+                                href="{{ route('alliedVehicles.index') }}">
+                                {{ __('navigation.allied_vehicles') }}
                             </a>
                         </li>
                     </ul>

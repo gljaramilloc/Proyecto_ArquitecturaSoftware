@@ -106,14 +106,25 @@ Exponemos las joyas activas y con stock disponible para que otro equipo las cons
 ]
 ```
 
-## Productos aliados (servicio que consumimos)
+## Vehículos aliados (servicio que consumimos)
 
-La ruta `/productos-aliados` muestra los productos del servicio JSON del equipo aliado. Configura su URL en el `.env`:
+La ruta `/vehiculos-aliados` muestra los vehículos de alquiler que publica el equipo aliado en su servicio JSON. Configura su URL en el `.env`:
 
 ```bash
-ALLIED_SERVICE_URL=https://url-del-equipo-aliado/api/productos
+ALLIED_SERVICE_URL=http://34.72.8.240/api/vehiculos
 ALLIED_SERVICE_TIMEOUT=5
 ```
+
+El servicio responde un objeto con la lista de vehículos en `data`. De cada vehículo usamos:
+
+| Campo                          | Uso en la vista                          |
+|--------------------------------|------------------------------------------|
+| `make`, `model`                | Nombre del vehículo                      |
+| `category`                     | Etiqueta de categoría                    |
+| `location.name`, `location.city` | Sede donde se recoge                   |
+| `daily_rate`, `currency`       | Tarifa por día                           |
+| `availability`                 | Disponible / no disponible hoy           |
+| `detail_url`                   | Enlace al detalle en la tienda aliada    |
 
 Si la URL no está configurada o el servicio no responde, la vista muestra un mensaje de "servicio no disponible" en lugar de fallar.
 
