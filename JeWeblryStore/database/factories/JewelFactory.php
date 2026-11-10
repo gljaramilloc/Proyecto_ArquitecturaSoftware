@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Category;
 use App\Models\Jewel;
 use App\Models\Status;
+use Google\Cloud\Storage\StorageClient;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -121,15 +122,36 @@ class JewelFactory extends Factory
     }
 
     /**
-     * Ensure a bundled image from public/images is copied to the public storage disk.
+     * Ensure a bundled image from public/images is published to the configured disk.
      */
     public static function publishBundledImage(string $fileName): string
     {
         $targetPath = 'jewels/'.$fileName;
         $sourcePath = public_path('images/'.$fileName);
 
-        if (File::exists($sourcePath) && ! Storage::disk('public')->exists($targetPath)) {
-            Storage::disk('public')->put($targetPath, File::get($sourcePath));
+        if (! File::exists($sourcePath)) {
+            return $targetPath;
+        }
+
+        $disk = config('filesystems.default');
+
+        // Production (GCP): upload the image directly to the Cloud Storage bucket.
+        if ($disk === 'gcs') {
+            $client = new StorageClient([
+                'projectId' => config('filesystems.disks.gcs.project_id'),
+            ]);
+            $bucket = $client->bucket(config('filesystems.disks.gcs.bucket'));
+
+            if (! $bucket->object($targetPath)->exists()) {
+                $bucket->upload(File::get($sourcePath), ['name' => $targetPath]);
+            }
+
+            return $targetPath;
+        }
+
+        // Local or other disks: use the Laravel filesystem (e.g. the public disk).
+        if (! Storage::disk($disk)->exists($targetPath)) {
+            Storage::disk($disk)->put($targetPath, File::get($sourcePath));
         }
 
         return $targetPath;
