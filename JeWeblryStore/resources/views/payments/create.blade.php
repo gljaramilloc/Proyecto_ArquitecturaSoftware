@@ -10,7 +10,7 @@
                 <p class="text-muted mb-4">
                     {{ __('payment.order_number') }} #{{ $viewData['order']->getId() }} —
                     {{ __('payment.order_total') }}:
-                    <span class="fw-bold text-brand-gold">${{ number_format($viewData['order']->getTotal(), 2) }} USD</span>
+                    <span class="fw-bold text-brand-gold">${{ number_format($viewData['order']->getTotal(), 2) }} {{ __('currency.usd_code') }}</span>
                     @if (($viewData['exchangeQuote'] ?? null) !== null)
                         <span class="price-cop-hint ms-1">
                             ({{ __('currency.approx_cop', ['amount' => number_format($viewData['exchangeQuote']->convert($viewData['order']->getTotal()), 0)]) }})

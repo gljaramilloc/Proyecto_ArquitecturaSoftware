@@ -60,6 +60,7 @@ return [
     'welcome_intro' => 'With so many options available to you, we suggest you start with the following:',
     'welcome_read' => 'Read the',
     'welcome_documentation' => 'Documentation',
+    'welcome_laracasts' => 'Laracasts',
     'welcome_watch' => 'Watch video tutorials at',
     'welcome_deploy' => 'Deploy now',
     'welcome_changelog' => 'View changelog',

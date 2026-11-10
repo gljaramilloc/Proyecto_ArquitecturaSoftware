@@ -25,7 +25,7 @@
 
                                 <div class="mt-auto">
                                     <p class="fw-bold fs-5 text-brand-gold mb-1">
-                                        ${{ number_format($jewel->getPrice(), 2) }} <span class="small fw-normal text-muted">USD</span>
+                                        ${{ number_format($jewel->getPrice(), 2) }} <span class="small fw-normal text-muted">{{ __('currency.usd_code') }}</span>
                                     </p>
                                     @if ($viewData['exchangeQuote'] !== null)
                                         <p class="price-cop-hint mb-3">

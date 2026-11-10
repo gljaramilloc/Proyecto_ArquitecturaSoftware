@@ -2,6 +2,7 @@
 
 return [
     'badge_label' => 'TRM del día',
+    'usd_code' => 'USD',
     'rate_format' => '1 :base = $:rate :target',
     'updated_date' => 'Actualizado: :date',
     'approx_cop' => '≈ $:amount COP',

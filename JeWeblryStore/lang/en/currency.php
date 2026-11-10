@@ -2,6 +2,7 @@
 
 return [
     'badge_label' => 'Daily Exchange Rate (TRM)',
+    'usd_code' => 'USD',
     'rate_format' => '1 :base = $:rate :target',
     'updated_date' => 'Updated: :date',
     'approx_cop' => '≈ $:amount COP',

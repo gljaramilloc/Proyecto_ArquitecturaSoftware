@@ -1,15 +1,5 @@
 /* Styles specific to the home page (resources/views/home/index.blade.php) */
 
-.top-promo-bar {
-    background-color: var(--brand-dark);
-    border-bottom: 1px solid rgba(197, 160, 89, 0.35);
-    color: var(--brand-gray);
-}
-
-.top-promo-bar__text {
-    letter-spacing: 0.08em;
-}
-
 .promo-banner {
     background: linear-gradient(135deg, #1c1c1c 0%, #2c261e 50%, #1c1c1c 100%);
     position: relative;

@@ -4,7 +4,7 @@
     <link href="{{ asset('css/pages/auth/passwords/email.css') }}" rel="stylesheet">
 @endpush
 
-@section('title', __('Reset Password'))
+@section('title', __('auth.reset_password'))
 
 @section('content')
     <div class="container py-5">
@@ -13,7 +13,7 @@
                 <div class="card border shadow-sm bg-white rounded-0">
                     <div class="card-body p-4 p-md-5">
                         <div class="text-center mb-4">
-                            <h1 class="font-display h3 text-dark mb-0">{{ __('Reset Password') }}</h1>
+                            <h1 class="font-display h3 text-dark mb-0">{{ __('auth.reset_password') }}</h1>
                         </div>
 
                         @if (session('status'))
@@ -26,7 +26,7 @@
                             @csrf
 
                             <div class="mb-4">
-                                <label for="email" class="form-label fw-bold text-uppercase small text-muted">{{ __('Email Address') }}</label>
+                                <label for="email" class="form-label fw-bold text-uppercase small text-muted">{{ __('auth.email_address') }}</label>
                                 <input id="email" type="email" maxlength="255" class="form-control rounded-0 shadow-none @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -36,7 +36,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-brand w-100 py-2">
-                                {{ __('Send Password Reset Link') }}
+                                {{ __('auth.send_reset_link') }}
                             </button>
                         </form>
 

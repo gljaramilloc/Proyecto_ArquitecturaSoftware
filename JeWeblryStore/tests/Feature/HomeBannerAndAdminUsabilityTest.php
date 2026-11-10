@@ -17,7 +17,7 @@ class HomeBannerAndAdminUsabilityTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Verify that the home page renders the top announcement and promotional banners in Spanish and English.
+     * Verify that the home page renders the footer slogan and promotional banners in Spanish and English.
      */
     public function test_home_page_renders_promotional_banners_in_both_locales(): void
     {
@@ -27,7 +27,7 @@ class HomeBannerAndAdminUsabilityTest extends TestCase
             $response = $this->get(route('home.index'));
 
             $response->assertOk();
-            $response->assertSee(__('home.top_banner_message'));
+            $response->assertSee(__('navigation.footer_slogan'));
             $response->assertSee(__('home.promo_banner_kicker'));
             $response->assertSee(__('home.promo_banner_title'));
             $response->assertSee(__('home.promo_banner_cta'));

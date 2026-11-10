@@ -43,7 +43,7 @@
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    aria-expanded="false" aria-label="{{ __('navigation.toggle_navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -99,13 +99,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('login') ? 'active fw-bold' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link {{ request()->routeIs('login') ? 'active fw-bold' : '' }}" href="{{ route('login') }}">{{ __('auth.login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('register') ? 'active fw-bold' : '' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link {{ request()->routeIs('register') ? 'active fw-bold' : '' }}" href="{{ route('register') }}">{{ __('auth.register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -178,6 +178,9 @@
                             {{ config('app.name', 'JeWeblryStore') }}</h4>
                         <p class="text-white-50 footer-tagline">
                             {{ __('navigation.footer_tagline') }}
+                        </p>
+                        <p class="text-white-50 footer-tagline mb-0">
+                            {{ __('navigation.footer_slogan') }}
                         </p>
                     </div>
 
