@@ -7,6 +7,7 @@ use App\Http\Requests\StorePaymentRequest;
 use App\Interfaces\PaymentProcessor;
 use App\Models\Order;
 use App\Services\ExchangeRateService;
+use Google\Cloud\Storage\StorageClient;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -86,10 +87,25 @@ class PaymentController extends Controller
 
         abort_if($payment === null || ! $payment->isCheque(), 404);
 
-        $disk = config('filesystems.default');
-        abort_unless(Storage::disk($disk)->exists($payment->getChequePath()), 404);
+        $path = $payment->getChequePath();
+        $fileName = 'cheque-order-'.$order->getId().'.pdf';
 
-        return Storage::disk($disk)->download($payment->getChequePath(), 'cheque-order-'.$order->getId().'.pdf');
+        if (config('filesystems.default') === 'gcs') {
+            $client = new StorageClient([
+                'projectId' => config('filesystems.disks.gcs.project_id'),
+            ]);
+            $object = $client->bucket(config('filesystems.disks.gcs.bucket'))->object($path);
+
+            abort_unless($object->exists(), 404);
+
+            return response()->streamDownload(function () use ($object) {
+                echo $object->downloadAsString();
+            }, $fileName, ['Content-Type' => 'application/pdf']);
+        }
+
+        abort_unless(Storage::disk(config('filesystems.default'))->exists($path), 404);
+
+        return Storage::disk(config('filesystems.default'))->download($path, $fileName);
     }
 
     /**
