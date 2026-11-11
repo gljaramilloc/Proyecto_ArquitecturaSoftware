@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminJewelController;
 use App\Http\Controllers\Admin\AdminUserController;
-use App\Http\Controllers\AlliedProductController;
+use App\Http\Controllers\AlliedVehicleController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -63,8 +63,8 @@ Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categ
 Route::get('/jewels', [JewelController::class, 'index'])->name('jewels.index');
 Route::get('/jewels/{id}', [JewelController::class, 'show'])->name('jewels.show');
 
-// Products consumed from the allied team's JSON service
-Route::get('/productos-aliados', [AlliedProductController::class, 'index'])->name('alliedProducts.index');
+// Rental vehicles consumed from the allied team's JSON service
+Route::get('/vehiculos-aliados', [AlliedVehicleController::class, 'index'])->name('alliedVehicles.index');
 
 // Administration section (fully separated from the storefront)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

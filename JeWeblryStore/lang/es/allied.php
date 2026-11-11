@@ -1,10 +1,14 @@
 <?php
 
 return [
-    'title' => 'Productos Aliados',
-    'subtitle' => 'Productos de nuestra tienda aliada',
-    'view_product' => 'Ver en la tienda aliada',
-    'empty' => 'La tienda aliada no tiene productos disponibles en este momento.',
+    'title' => 'Vehículos Aliados',
+    'subtitle' => 'Alquila un vehículo con nuestro equipo aliado',
+    'view_vehicle' => 'Ver en la tienda aliada',
+    'daily_rate' => ':price :currency / día',
+    'available' => 'Disponible hoy',
+    'not_available' => 'No disponible hoy',
+    'empty' => 'La tienda aliada no tiene vehículos disponibles en este momento.',
     'unavailable' => 'La tienda aliada no está disponible',
     'unavailable_hint' => 'No pudimos conectarnos con nuestra tienda aliada. Inténtalo de nuevo más tarde.',
+    'log_unavailable' => 'El servicio aliado no está disponible.',
 ];

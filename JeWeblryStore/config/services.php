@@ -28,8 +28,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    // JSON service published by the allied team (consumed in /productos-aliados)
-    'allied_store' => [
+    // Vehicle rental JSON service published by the allied team (consumed in /vehiculos-aliados)
+    'allied_vehicles' => [
         'url' => env('ALLIED_SERVICE_URL'),
         'timeout' => env('ALLIED_SERVICE_TIMEOUT', 5),
     ],
