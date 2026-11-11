@@ -30,7 +30,7 @@ return [
 
     // Vehicle rental JSON service published by the allied team (consumed in /vehiculos-aliados)
     'allied_vehicles' => [
-        'url' => env('ALLIED_SERVICE_URL'),
+        'url' => env('ALLIED_SERVICE_URL', 'http://34.72.8.240/api/cars'),
         'timeout' => env('ALLIED_SERVICE_TIMEOUT', 5),
     ],
 

@@ -16,6 +16,8 @@ services:
       DB_USERNAME: root
       DB_PASSWORD: secret
       FILESYSTEM_DISK: public
+      ALLIED_SERVICE_URL: http://34.72.8.240/api/cars
+      ALLIED_SERVICE_TIMEOUT: 5
     depends_on:
       db:
         condition: service_healthy
