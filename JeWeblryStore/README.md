@@ -116,7 +116,7 @@ Exponemos las joyas activas y con stock disponible para que otro equipo las cons
 La ruta `/vehiculos-aliados` muestra los vehículos de alquiler que publica el equipo aliado en su servicio JSON. Configura su URL en el `.env`:
 
 ```bash
-ALLIED_SERVICE_URL=http://34.72.8.240/api/vehiculos
+ALLIED_SERVICE_URL=http://34.72.8.240/api/cars
 ALLIED_SERVICE_TIMEOUT=5
 ```
 
