@@ -29,7 +29,7 @@ class ChequePdfPaymentProcessor implements PaymentProcessor
             $viewData['customer'] = $order->getUser();
 
             $chequePdf = Pdf::loadView('payments.cheque', ['viewData' => $viewData]);
-            Storage::disk('local')->put($payment->getChequePath(), $chequePdf->output());
+            Storage::disk(config('filesystems.default'))->put($payment->getChequePath(), $chequePdf->output());
 
             return $payment;
         });

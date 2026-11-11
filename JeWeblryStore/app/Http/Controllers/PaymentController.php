@@ -85,9 +85,11 @@ class PaymentController extends Controller
         $payment = $order->getPayment();
 
         abort_if($payment === null || ! $payment->isCheque(), 404);
-        abort_unless(Storage::disk('local')->exists($payment->getChequePath()), 404);
 
-        return Storage::disk('local')->download($payment->getChequePath(), 'cheque-order-'.$order->getId().'.pdf');
+        $disk = config('filesystems.default');
+        abort_unless(Storage::disk($disk)->exists($payment->getChequePath()), 404);
+
+        return Storage::disk($disk)->download($payment->getChequePath(), 'cheque-order-'.$order->getId().'.pdf');
     }
 
     /**
