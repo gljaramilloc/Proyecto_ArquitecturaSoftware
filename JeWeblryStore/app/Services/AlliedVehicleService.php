@@ -31,7 +31,7 @@ class AlliedVehicleService
                 ->get($serviceUrl)
                 ->throw();
         } catch (ConnectionException|RequestException $exception) {
-            Log::warning('Allied service is not available.', ['message' => $exception->getMessage()]);
+            Log::warning(__('allied.log_unavailable'), ['message' => $exception->getMessage()]);
 
             return null;
         }

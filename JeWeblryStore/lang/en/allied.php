@@ -10,4 +10,5 @@ return [
     'empty' => 'The allied store has no vehicles available right now.',
     'unavailable' => 'The allied store is not available',
     'unavailable_hint' => 'We could not connect to our allied store. Please try again later.',
+    'log_unavailable' => 'Allied service is not available.',
 ];

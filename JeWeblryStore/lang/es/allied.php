@@ -10,4 +10,5 @@ return [
     'empty' => 'La tienda aliada no tiene vehículos disponibles en este momento.',
     'unavailable' => 'La tienda aliada no está disponible',
     'unavailable_hint' => 'No pudimos conectarnos con nuestra tienda aliada. Inténtalo de nuevo más tarde.',
+    'log_unavailable' => 'El servicio aliado no está disponible.',
 ];
